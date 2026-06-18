@@ -1,0 +1,24 @@
+# Architecture Decision Records
+
+Decisions are recorded using the [Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions). Status is updated in-place when a decision is superseded.
+
+## Index
+
+| # | Title | Status | Date |
+|---|---|---|---|
+| [0001](0001-documentation-practice.md) | Documentation practice | Accepted | 2026-06-18 |
+| [0002](0002-react-vite-typescript-stack.md) | React + TypeScript + Vite as tech stack | Accepted | 2026-06-18 |
+| [0003](0003-tennisstats-api-approach.md) | Consume tennisstats.be API directly | Accepted | 2026-06-18 |
+
+## Template
+
+```markdown
+# ADR-NNNN: Title
+
+**Status:** Accepted  
+**Date:** YYYY-MM-DD
+
+## Context
+## Decision
+## Consequences
+```
