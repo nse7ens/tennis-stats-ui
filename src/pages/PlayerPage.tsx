@@ -67,8 +67,16 @@ export function PlayerPage() {
   const [data, setData] = useState<UIPlayerData | null | 'loading'>('loading');
 
   useEffect(() => {
+    if (!id) { setData(null); return; }
+    const numId = Number(id);
+    if (isNaN(numId) || numId <= 0) { setData(null); return; }
+
+    const controller = new AbortController();
     setData('loading');
-    fetchPlayer(Number(id)).then(setData);
+    fetchPlayer(numId, controller.signal).then(result => {
+      if (!controller.signal.aborted) setData(result);
+    });
+    return () => controller.abort();
   }, [id]);
 
   if (data === 'loading') {

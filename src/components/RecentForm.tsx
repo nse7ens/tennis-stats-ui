@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 import type { UIRecentMatch, Disc } from '../types';
 import { fmtDate } from '../utils';
 import { WLBadge } from './WLBadge';
 import { DiscToggle } from './DiscToggle';
+import { PlayerLink } from './PlayerLink';
 
 const Card = styled.div`
   background: #fff;
@@ -105,11 +105,6 @@ const OppNameBold = styled.span`
   color: #26261f;
 `;
 
-const OppLink = styled(Link)`
-  color: inherit;
-  text-decoration: none;
-  &:hover { text-decoration: underline; }
-`;
 
 const RankChip = styled.span`
   font-family: 'JetBrains Mono', monospace;
@@ -156,7 +151,7 @@ export function RecentForm({ singles, doubles }: Props) {
           <StripItem key={i}>
             <WLBadge win={m.win} size="lg" />
             {m.opp[0]?.user_id != null
-              ? <OppLink to={`/player/${m.opp[0].user_id}`}><OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName></OppLink>
+              ? <PlayerLink to={`/player/${m.opp[0].user_id}`}><OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName></PlayerLink>
               : <OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName>
             }
             <DateLabel>{fmtDate(m.date)}</DateLabel>
@@ -173,7 +168,7 @@ export function RecentForm({ singles, doubles }: Props) {
                 {m.opp.map((o, j) => (
                   <span key={j} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                     {o.user_id != null
-                      ? <OppLink to={`/player/${o.user_id}`}><OppNameBold>{o.name}</OppNameBold></OppLink>
+                      ? <PlayerLink to={`/player/${o.user_id}`}><OppNameBold>{o.name}</OppNameBold></PlayerLink>
                       : <OppNameBold>{o.name}</OppNameBold>
                     }
                     <RankChip>{o.rank}pts</RankChip>

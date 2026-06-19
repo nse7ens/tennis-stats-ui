@@ -80,13 +80,17 @@ function transform(raw: RawPlayerData): UIPlayerData {
   };
 }
 
-export async function fetchPlayer(userId: number): Promise<UIPlayerData | null> {
+export async function fetchPlayer(userId: number, signal?: AbortSignal): Promise<UIPlayerData | null> {
   try {
-    const res = await fetch(`/api/get_user_report/${userId}`, { headers: { Accept: 'application/json' } });
+    const res = await fetch(`/api/get_user_report/${userId}`, {
+      headers: { Accept: 'application/json' },
+      signal,
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const raw: RawPlayerData = await res.json();
     return transform(raw);
-  } catch {
+  } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') return null;
     return null;
   }
 }

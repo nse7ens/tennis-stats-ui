@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 import type { UIResult } from '../types';
 import { fmtNum, hexA, WIN_GREEN, LOSS_RED } from '../utils';
 import { useTheme } from '../theme';
 import { MatchRow } from './MatchRow';
+import { PlayerLink } from './PlayerLink';
 
 const CardHeader = styled.div`
   display: flex;
@@ -139,11 +139,6 @@ const CalcTotal = styled.div`
   padding-top: 10px;
 `;
 
-const PartnerLink = styled(Link)`
-  color: inherit;
-  text-decoration: none;
-  &:hover { text-decoration: underline; }
-`;
 
 interface Props { result: UIResult; }
 
@@ -179,7 +174,7 @@ export function TournamentCard({ result: r }: Props) {
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 11, background: hexA(theme.doubles, 0.08), border: `1px solid ${hexA(theme.doubles, 0.28)}`, padding: '4px 10px', borderRadius: 7 }}>
           <span style={{ fontSize: '9.5px', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: hexA(theme.doubles, 0.85), fontWeight: 600 }}>With</span>
           {r.p_id != null
-            ? <PartnerLink to={`/player/${r.p_id}`} style={{ fontSize: '12.5px', fontWeight: 600, color: theme.doubles }}>{r.partner}</PartnerLink>
+            ? <PlayerLink to={`/player/${r.p_id}`} style={{ fontSize: '12.5px', fontWeight: 600, color: theme.doubles }}>{r.partner}</PlayerLink>
             : <span style={{ fontSize: '12.5px', fontWeight: 600, color: theme.doubles }}>{r.partner}</span>
           }
         </div>

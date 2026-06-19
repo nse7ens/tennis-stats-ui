@@ -142,10 +142,14 @@ const EXAMPLE_ID = '1606891';
 export function LandingPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
+  const [error, setError] = useState('');
 
   function go(id: string) {
     const trimmed = id.trim();
-    if (trimmed) navigate(`/player/${trimmed}`);
+    if (!trimmed) { setError('Please enter a player ID.'); return; }
+    if (!/^\d+$/.test(trimmed)) { setError('Player ID must be a number.'); return; }
+    setError('');
+    navigate(`/player/${trimmed}`);
   }
 
   function handleSubmit(e: FormEvent) {
@@ -172,11 +176,12 @@ export function LandingPage() {
               inputMode="numeric"
               placeholder="e.g. 1606891"
               value={value}
-              onChange={e => setValue(e.target.value)}
+              onChange={e => { setValue(e.target.value); if (error) setError(''); }}
               autoFocus
             />
             <SearchButton type="submit">Search</SearchButton>
           </InputRow>
+          {error && <div style={{ fontSize: 12.5, color: '#d6453d', marginTop: 6, fontFamily: "'Archivo', sans-serif" }}>{error}</div>}
         </form>
 
         <Divider />
