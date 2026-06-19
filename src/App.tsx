@@ -7,6 +7,7 @@ import { PlayerHeader } from './components/PlayerHeader';
 import { RankingChart } from './components/RankingChart';
 import { PerformancePanel } from './components/PerformancePanel';
 import { UpcomingSection } from './components/UpcomingSection';
+import { TournamentResults } from './components/TournamentResults';
 
 const Page = styled.div`
   background: #f3f3ee;
@@ -54,6 +55,7 @@ export default function App() {
             recentSingles={data.recent.singles} recentDoubles={data.recent.doubles}
           />
           <UpcomingSection singles={data.upcoming.singles} doubles={data.upcoming.doubles} />
+          <TournamentResults singles={data.singles} doubles={data.doubles} />
         </Inner>
       </Page>
     </ThemeContext.Provider>
