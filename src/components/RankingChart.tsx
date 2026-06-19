@@ -68,7 +68,7 @@ interface Props { history: UIHistoryEntry[]; }
 export function RankingChart({ history }: Props) {
   const theme = useTheme();
   const n = history.length;
-  const xAt = (i: number) => PAD_L + (i * pw / (n - 1));
+  const xAt = (i: number) => n < 2 ? PAD_L + pw / 2 : PAD_L + (i * pw / (n - 1));
   const yAt = (v: number) => PAD_T + (1 - v / Y_MAX) * ph;
 
   const sP = history.map((h, i) => ({ x: xAt(i), y: yAt(h.s), v: h.s }));
@@ -110,8 +110,12 @@ export function RankingChart({ history }: Props) {
           <svg viewBox={`0 0 ${W} ${Ht}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
             {[0, 10, 20, 30, 40].map(v => <line key={v} x1={PAD_L} y1={yAt(v)} x2={W - PAD_R} y2={yAt(v)} stroke="#ededdf" strokeWidth={1} />)}
             {history.map((h, i) => h.l !== '' ? <line key={i} x1={xAt(i)} y1={PAD_T} x2={xAt(i)} y2={PAD_T + ph} stroke="#f4f4ea" strokeWidth={1} /> : null)}
-            <path d={seg(dP[lastSolid], dP[n - 1])} fill="none" stroke={theme.doubles} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
-            <path d={seg(sP[lastSolid], sP[n - 1])} fill="none" stroke={theme.singles} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
+            {history[n - 1]?.p && (
+              <>
+                <path d={seg(dP[lastSolid], dP[n - 1])} fill="none" stroke={theme.doubles} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
+                <path d={seg(sP[lastSolid], sP[n - 1])} fill="none" stroke={theme.singles} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
+              </>
+            )}
             <path d={path(dP.slice(0, lastSolid + 1))} fill="none" stroke={theme.doubles} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
             <path d={path(sP.slice(0, lastSolid + 1))} fill="none" stroke={theme.singles} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
             {dP.slice(0, lastSolid + 1).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={2.4} fill={theme.doubles} />)}

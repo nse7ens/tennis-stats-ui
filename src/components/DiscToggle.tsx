@@ -35,8 +35,8 @@ interface Props {
 export function DiscToggle({ value, onChange, variant = 'light', size = 'sm' }: Props) {
   return (
     <Wrapper variant={variant}>
-      <Tab active={value === 'singles'} size={size} onClick={() => onChange('singles')}>Singles</Tab>
-      <Tab active={value === 'doubles'} size={size} onClick={() => onChange('doubles')}>Doubles</Tab>
+      <Tab active={value === 'singles'} size={size} type="button" onClick={() => onChange('singles')}>Singles</Tab>
+      <Tab active={value === 'doubles'} size={size} type="button" onClick={() => onChange('doubles')}>Doubles</Tab>
     </Wrapper>
   );
 }

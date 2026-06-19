@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import type { UIDisc } from '../types';
 import { fmtNum } from '../utils';
 
-const TIERS = [30, 35, 40, 45, 50];
+const TIERS = [3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 
 const ToggleBtn = styled.button`
   display: flex;
@@ -83,7 +83,7 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
 
   return (
     <>
-      <ToggleBtn onClick={() => setOpen(o => !o)} style={{ color }}>
+      <ToggleBtn type="button" onClick={() => setOpen(o => !o)} style={{ color }}>
         {open ? 'Hide calculation' : "How it's calculated"}
         <Chevron open={open}>▾</Chevron>
       </ToggleBtn>

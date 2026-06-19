@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import type { UIResult } from '../types';
-import { fmtNum, hexA } from '../utils';
+import { fmtNum, hexA, WIN_GREEN, LOSS_RED } from '../utils';
 import { useTheme } from '../theme';
 import { MatchRow } from './MatchRow';
-
-const WIN_DOT = '#1f9d55';
-const LOSS_DOT = '#d6453d';
 
 const CardHeader = styled.div`
   display: flex;
@@ -180,8 +177,8 @@ export function TournamentCard({ result: r }: Props) {
       <DotsRow>
         {r.WL.map((x, i) => (
           <span key={i} style={
-            x === 'W' ? { display: 'inline-block', flex: 'none', width: 13, height: 13, borderRadius: '50%', background: WIN_DOT } :
-            x === 'L' ? { display: 'inline-block', flex: 'none', width: 13, height: 13, borderRadius: '50%', background: LOSS_DOT } :
+            x === 'W' ? { display: 'inline-block', flex: 'none', width: 13, height: 13, borderRadius: '50%', background: WIN_GREEN } :
+            x === 'L' ? { display: 'inline-block', flex: 'none', width: 13, height: 13, borderRadius: '50%', background: LOSS_RED } :
             { display: 'inline-block', flex: 'none', width: 9, height: 9, borderRadius: '50%', background: 'transparent', border: '1.5px solid #d3d3cb' }
           } />
         ))}
@@ -196,7 +193,7 @@ export function TournamentCard({ result: r }: Props) {
 
       {r.subscores.length > 0 && (
         <>
-          <ToggleBtn onClick={() => setOpen(o => !o)} style={{ color: theme.singles }}>
+          <ToggleBtn type="button" onClick={() => setOpen(o => !o)} style={{ color: theme.singles }}>
             {open ? 'Hide point calculation' : 'How these points are calculated'}
             <span style={{ display: 'inline-block', transition: 'transform .18s', transform: open ? 'rotate(180deg)' : 'none', fontSize: 10 }}>▾</span>
           </ToggleBtn>

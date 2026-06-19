@@ -78,11 +78,13 @@ export function RadarChart({ singles, doubles }: Props) {
   const theme = useTheme();
   const S = singles.stats, D = doubles.stats;
 
+  const safeDiv = (a: number, b: number) => b ? a / b : 0;
+
   const axes = [
-    { t: 'Match win', sv: S.nw / S.nm,   dv: D.nw / D.nm },
-    { t: 'Set win',   sv: S.nsw / S.nsp, dv: D.nsw / D.nsp },
-    { t: 'Game win',  sv: S.ngw / S.ngp, dv: D.ngw / D.ngp },
-    { t: 'Title rate', sv: S.ntw / S.ntp, dv: D.ntw / D.ntp },
+    { t: 'Match win', sv: safeDiv(S.nw, S.nm),   dv: safeDiv(D.nw, D.nm) },
+    { t: 'Set win',   sv: safeDiv(S.nsw, S.nsp), dv: safeDiv(D.nsw, D.nsp) },
+    { t: 'Game win',  sv: safeDiv(S.ngw, S.ngp), dv: safeDiv(D.ngw, D.ngp) },
+    { t: 'Title rate', sv: safeDiv(S.ntw, S.ntp), dv: safeDiv(D.ntw, D.ntp) },
     { t: 'ELO',       sv: Math.min(1, singles.elo / 50), dv: Math.min(1, doubles.elo / 50) },
   ];
 

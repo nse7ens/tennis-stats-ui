@@ -1,11 +1,8 @@
 import styled from '@emotion/styled';
 import type { UIDisc } from '../types';
-import { fmtNum } from '../utils';
+import { fmtNum, WIN_GREEN, LOSS_RED } from '../utils';
 import { useTheme } from '../theme';
 import { PredictionPanel } from './PredictionPanel';
-
-const WIN_GREEN = '#1f9d55';
-const LOSS_RED = '#d6453d';
 
 const Card = styled.div`
   position: relative;
