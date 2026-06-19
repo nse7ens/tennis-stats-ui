@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+- **Fixed** AbortController cleanup in PlayerPage: stale fetches are now aborted on navigation/re-render; `fetchPlayer` accepts an optional `AbortSignal`; NaN/non-positive id guard prevents broken API calls
+- **Fixed** LandingPage: non-numeric input now shows an inline error instead of navigating to a broken route
+- **Refactored** Shared `PlayerLink` styled component extracted from `MatchRow`, `RecentForm`, `TournamentCard`, and `UpcomingSection` — removes four identical `styled(Link)` definitions
+- **Docs** ADR-0005: documents react-router-dom v7 routing decision including dev `historyApiFallback` and production rewrite requirement
+
 - **Added** Task 8: opponent and partner names now render as router links (`/player/:id`) in MatchRow, TournamentCard, RecentForm, and UpcomingSection when a player ID is available; falls back to plain text when no ID is present
 
 - **Added** Tasks 5-6-7: react-router-dom v7 routing — App.tsx replaced with a thin BrowserRouter shell; LandingPage (player ID search form, terracotta "Search" button, chip quick-link) at `/`; PlayerPage (URL param `:id`, loading/not-found/data states, ← Back link) at `/player/:id`
