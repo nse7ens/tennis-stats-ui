@@ -50,19 +50,6 @@ const StripItem = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 7px;
-  width: 62px;
-`;
-
-const OppName = styled.span`
-  font-size: 10.5px;
-  color: #54544c;
-  text-align: center;
-  line-height: 1.15;
-  max-width: 62px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
 `;
 
 const DateLabel = styled.span`
@@ -134,7 +121,7 @@ export function RecentForm({ singles, doubles }: Props) {
   const [disc, setDisc] = useState<Disc>('singles');
   const rec = disc === 'singles' ? singles : doubles;
   const strip = rec.slice(0, 6);
-  const list = rec.slice(0, 4);
+  const list = rec.slice(0, 6);
 
   return (
     <Card>
@@ -150,10 +137,6 @@ export function RecentForm({ singles, doubles }: Props) {
         {strip.map((m, i) => (
           <StripItem key={i}>
             <WLBadge win={m.win} size="lg" />
-            {m.opp[0]?.user_id != null
-              ? <PlayerLink to={`/player/${m.opp[0].user_id}`}><OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName></PlayerLink>
-              : <OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName>
-            }
             <DateLabel>{fmtDate(m.date)}</DateLabel>
           </StripItem>
         ))}

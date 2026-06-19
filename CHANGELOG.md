@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- **Fixed** RecentForm: removed opponent name from badge strip (date is sufficient); aligned match-list count with strip count (both now show up to 6)
+
 - **Refactored** Rank tiers extracted to a single `RANK_TIERS` constant in `utils.ts` — `PredictionPanel` and `RankingChart` now share one definition; also fixed the stale list which was missing 45, 60, 70, 80, 90, 100, 110
 
 - **Added** Player search on landing page: free-text search box replaces the numeric ID input; queries `/api/list_users?s=…` at 5+ characters, caches the result, filters in-memory for longer queries, and navigates immediately on result click — results show player name, club, and singles/doubles rank
