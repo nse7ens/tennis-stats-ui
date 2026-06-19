@@ -77,7 +77,7 @@ export interface RawPlayerData {
 
 // ---- UI types (used by components) ----
 
-export interface Opponent { name: string; rank: number; }
+export interface Opponent { name: string; rank: number; user_id?: number; }
 
 export interface UIMatch {
   round: string; score: string; did_win: 0 | 1; opp: Opponent[];
@@ -90,7 +90,7 @@ export interface UISubscore {
 export interface UIResult {
   title: string; series: string; subtitle: string;
   score: number; WL: string[]; selected: 0 | 1;
-  partner: string; matches: UIMatch[]; subscores: UISubscore[];
+  partner: string; p_id?: number; matches: UIMatch[]; subscores: UISubscore[];
 }
 
 export interface UIStats {
@@ -111,12 +111,12 @@ export interface UIHistoryEntry {
 
 export interface UIRecentMatch {
   title: string; cat: string; round?: string; date: string;
-  win: boolean; score: string; opp: Opponent[]; partner: string;
+  win: boolean; score: string; opp: Opponent[]; partner: string; p_id?: number;
 }
 
 export interface UIUpcomingMatch {
   tid: number; sid: number; rn: string; cat: string; title: string;
-  p_name: string; p_pts: number; my_pts: number; url?: string;
+  p_name: string; p_pts: number; my_pts: number; url?: string; p_id?: number;
 }
 
 export interface UIPlayerData {
