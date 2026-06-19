@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import type { UIUpcomingMatch } from '../types';
 
 const Section = styled.section`
@@ -81,6 +82,12 @@ const PartnerPts = styled.span`
   color: #9a7c34;
 `;
 
+const PartnerLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+`;
+
 interface Props { singles: UIUpcomingMatch[]; doubles: UIUpcomingMatch[]; }
 
 export function UpcomingSection({ singles, doubles }: Props) {
@@ -104,7 +111,13 @@ export function UpcomingSection({ singles, doubles }: Props) {
             {u.p_name && (
               <PartnerBlock>
                 <PartnerLabel>Partner</PartnerLabel>
-                <PartnerName>{u.p_name} <PartnerPts>{u.p_pts}pts</PartnerPts></PartnerName>
+                <PartnerName>
+                  {u.p_id != null
+                    ? <PartnerLink to={`/player/${u.p_id}`}>{u.p_name}</PartnerLink>
+                    : u.p_name
+                  }
+                  {' '}<PartnerPts>{u.p_pts}pts</PartnerPts>
+                </PartnerName>
               </PartnerBlock>
             )}
           </Item>

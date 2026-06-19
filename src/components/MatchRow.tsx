@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import type { UIMatch } from '../types';
 import { WLBadge } from './WLBadge';
 
@@ -28,6 +29,12 @@ const OppName = styled.span`
   font-size: 13px;
   font-weight: 600;
   color: #26261f;
+`;
+
+const OppLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
 `;
 
 const RankChip = styled.span`
@@ -68,7 +75,10 @@ export function MatchRow({ match }: Props) {
         <OppRow>
           {match.opp.map((o, i) => (
             <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <OppName>{o.name}</OppName>
+              {o.user_id != null
+                ? <OppLink to={`/player/${o.user_id}`}><OppName>{o.name}</OppName></OppLink>
+                : <OppName>{o.name}</OppName>
+              }
               <RankChip>{o.rank}pts</RankChip>
             </span>
           ))}

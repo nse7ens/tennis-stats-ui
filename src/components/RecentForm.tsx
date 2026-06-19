@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import type { UIRecentMatch, Disc } from '../types';
 import { fmtDate } from '../utils';
 import { WLBadge } from './WLBadge';
@@ -104,6 +105,12 @@ const OppNameBold = styled.span`
   color: #26261f;
 `;
 
+const OppLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+`;
+
 const RankChip = styled.span`
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
@@ -148,7 +155,10 @@ export function RecentForm({ singles, doubles }: Props) {
         {strip.map((m, i) => (
           <StripItem key={i}>
             <WLBadge win={m.win} size="lg" />
-            <OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName>
+            {m.opp[0]?.user_id != null
+              ? <OppLink to={`/player/${m.opp[0].user_id}`}><OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName></OppLink>
+              : <OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName>
+            }
             <DateLabel>{fmtDate(m.date)}</DateLabel>
           </StripItem>
         ))}
@@ -162,7 +172,10 @@ export function RecentForm({ singles, doubles }: Props) {
               <OppRow>
                 {m.opp.map((o, j) => (
                   <span key={j} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                    <OppNameBold>{o.name}</OppNameBold>
+                    {o.user_id != null
+                      ? <OppLink to={`/player/${o.user_id}`}><OppNameBold>{o.name}</OppNameBold></OppLink>
+                      : <OppNameBold>{o.name}</OppNameBold>
+                    }
                     <RankChip>{o.rank}pts</RankChip>
                   </span>
                 ))}
