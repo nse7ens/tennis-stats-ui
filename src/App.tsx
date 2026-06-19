@@ -5,6 +5,7 @@ import type { UIPlayerData } from './types';
 import { ThemeContext, THEMES, type ThemeName } from './theme';
 import { PlayerHeader } from './components/PlayerHeader';
 import { RankingChart } from './components/RankingChart';
+import { PerformancePanel } from './components/PerformancePanel';
 
 const Page = styled.div`
   background: #f3f3ee;
@@ -47,6 +48,10 @@ export default function App() {
         <Inner>
           <PlayerHeader data={data} />
           <RankingChart history={data.history} />
+          <PerformancePanel
+            singles={data.singles} doubles={data.doubles}
+            recentSingles={data.recent.singles} recentDoubles={data.recent.doubles}
+          />
         </Inner>
       </Page>
     </ThemeContext.Provider>
