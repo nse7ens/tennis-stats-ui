@@ -9,6 +9,7 @@ Decisions are recorded using the [Nygard format](https://cognitect.com/blog/2011
 | [0001](0001-documentation-practice.md) | Documentation practice | Accepted | 2026-06-18 |
 | [0002](0002-react-vite-typescript-stack.md) | React + TypeScript + Vite as tech stack | Accepted | 2026-06-18 |
 | [0003](0003-tennisstats-api-approach.md) | Consume tennisstats.be API directly | Accepted | 2026-06-18 |
+| [0004](0004-player-profile-component-architecture.md) | Player Profile Component Architecture | Accepted | 2026-06-18 |
 
 ## Template
 

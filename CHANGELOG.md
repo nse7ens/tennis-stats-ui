@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Full player profile page: header, ranking cards, evolution chart, radar + recent form, upcoming matches, tournament results
+- `@emotion/styled` for component styles
+- Shared `WLBadge` (3 sizes) and `DiscToggle` (2 variants) components
+- Static data fallback + API fetch via Vite proxy at `/api/get_user_report/{userId}`
+- 4 court themes (Clay/Hard/Grass/Night) via React context
+
 ## 2026-06-19
 - **Added** Task 10: TournamentResults section with MatchRow, TournamentCard (accordion score panel, W/L dots, selected/unselected card styling), and TournamentResults (DiscToggle tab, grid layout, footnote) — wired into App.tsx after UpcomingSection
 - **Added** Task 9: UpcomingSection for displaying upcoming singles and doubles matches with yellow theme (#f9efd7 bg, #ecd49a border), merges both match types into single list with kind labels, renders null when empty
