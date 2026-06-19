@@ -188,7 +188,7 @@ function fmtSet(set: [number, number, number?]): string {
 
 function transformRecent(m: RawRecentMatch): UIRecentMatch {
   const sets = ([m.m_score?.set1, m.m_score?.set2, m.m_score?.set3] as Array<[number, number, number?] | undefined>)
-    .filter((s): s is [number, number, number?] => s != null)
+    .filter((s): s is [number, number, number?] => s != null && s[0] != null && s[1] != null)
     .map(fmtSet).join(' - ');
   return { title: '', cat: m.cat, date: m.date, win: (m.m_score?.winner ?? 1) === 0, score: sets, opp: [{ name: m.o_name, rank: m.o_pts }], partner: '' };
 }

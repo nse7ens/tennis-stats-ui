@@ -147,7 +147,7 @@ export function TournamentCard({ result: r }: Props) {
 
   const cardStyle = sel
     ? { borderRadius: 16, padding: '18px 18px 16px', border: `1.5px solid ${theme.singles}`, background: '#fff', boxShadow: `0 1px 2px ${hexA(theme.singles, 0.1)}` }
-    : { borderRadius: 16, padding: '18px 18px 16px', border: '1px solid #e6e6df', background: '#fbfbf8', opacity: 0.64 };
+    : { borderRadius: 16, padding: '18px 18px 16px', border: '1px solid #e6e6df', background: '#fbfbf8' };
 
   return (
     <div style={cardStyle}>

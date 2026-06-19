@@ -155,7 +155,7 @@ export function RecentForm({ singles, doubles }: Props) {
         {strip.map((m, i) => (
           <StripItem key={i}>
             <WLBadge win={m.win} size="lg" />
-            <OppName>{m.opp[0]?.name.split(' ')[0]}</OppName>
+            <OppName>{m.opp[0]?.name?.split(' ')[0] ?? ''}</OppName>
             <DateLabel>{fmtDate(m.date)}</DateLabel>
           </StripItem>
         ))}

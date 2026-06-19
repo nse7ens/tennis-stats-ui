@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import type { UIDisc } from '../types';
 import { fmtNum } from '../utils';
 
-const TIERS = [3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+const FULL_TIERS = [3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+const WINDOW_SIZE = 5;
 
 const ToggleBtn = styled.button`
   display: flex;
@@ -75,8 +76,16 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
   const factor = disc.factor != null ? disc.factor : (avg ? disc.score / avg : 0);
   const range = disc.ma - disc.mi;
   const within = range > 0 ? Math.max(0, Math.min(1, (disc.score - disc.mi) / range)) : 0;
+
+  // Show a 5-tier window that includes both predicted and current ranks
+  const minRank = Math.min(disc.current, disc.predicted);
+  const minRankIdx = FULL_TIERS.findIndex(t => t >= minRank);
+  const windowStart = Math.max(0, Math.min(minRankIdx < 0 ? 0 : minRankIdx, FULL_TIERS.length - WINDOW_SIZE));
+  const TIERS = FULL_TIERS.slice(windowStart, windowStart + WINDOW_SIZE);
+
+  const globalCurIdx = FULL_TIERS.indexOf(disc.current);
+  const idx = Math.max(0, globalCurIdx < 0 ? 0 : globalCurIdx - windowStart);
   const gap = 100 / (TIERS.length - 1);
-  const idx = Math.max(0, TIERS.indexOf(disc.current));
   const fillPct = Math.min(100, idx * gap + within * gap);
 
   const mono = { fontFamily: "'JetBrains Mono',monospace", fontWeight: 700 };
