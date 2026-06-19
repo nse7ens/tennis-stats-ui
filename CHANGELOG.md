@@ -1,6 +1,9 @@
 # Changelog
 
 ## 2026-06-19
+- **Added** Task 2: TypeScript types (RawPlayerData/UIPlayerData), theme context (four court variants), and utilities (fmtNum, fmtDate, pct, hexA, color constants) — foundation for all subsequent component tasks
+
+## 2026-06-19
 - **Added** @emotion/styled and @emotion/react as production dependencies for component styling
 - **Added** Google Fonts integration (Archivo, JetBrains Mono) with global stylesheet
 - **Added** Vite dev server proxy for /api/* routes to https://tennisstats.be
