@@ -52,7 +52,7 @@ function transformRecent(m: RawRecentMatch): UIRecentMatch {
     .join(' - ');
   const score = ms?.wo ? 'Walk-over'
     : ms?.forfait ? 'Forfait'
-    : ms?.surrender ? (sets ? `${sets} · Opgave` : 'Opgave')
+    : ms?.surrender ? (sets ? `${sets} opgave` : 'opgave')
     : sets;
   const opp = m.o1_name != null
     ? [
