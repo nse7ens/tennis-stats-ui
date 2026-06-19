@@ -4,6 +4,7 @@ import { fetchPlayer } from './api';
 import type { UIPlayerData } from './types';
 import { ThemeContext, THEMES, type ThemeName } from './theme';
 import { PlayerHeader } from './components/PlayerHeader';
+import { RankingChart } from './components/RankingChart';
 
 const Page = styled.div`
   background: #f3f3ee;
@@ -45,6 +46,7 @@ export default function App() {
       <Page>
         <Inner>
           <PlayerHeader data={data} />
+          <RankingChart history={data.history} />
         </Inner>
       </Page>
     </ThemeContext.Provider>
