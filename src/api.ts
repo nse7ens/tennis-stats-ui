@@ -43,9 +43,16 @@ function fmtSetTuple(s: unknown): string | null {
   return typeof tb === 'number' ? `${s0}/${s1} (${tb})` : `${s0}/${s1}`;
 }
 
+function fmtSpecialScore(ms: RawRecentMatch['m_score']): string | null {
+  if (ms?.wo) return 'Walk-over';
+  if (ms?.forfait) return 'Forfait';
+  if (ms?.surrender) return 'Opgave';
+  return null;
+}
+
 function transformRecent(m: RawRecentMatch): UIRecentMatch {
   const ms = m.m_score;
-  const score = [ms?.set1, ms?.set2, ms?.set3]
+  const score = fmtSpecialScore(ms) ?? [ms?.set1, ms?.set2, ms?.set3]
     .map(fmtSetTuple)
     .filter((s): s is string => s !== null)
     .join(' - ');
