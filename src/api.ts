@@ -1,6 +1,7 @@
 import type {
   UIPlayerData, UIDisc, UIResult, UIMatch, UIRecentMatch, UIUpcomingMatch,
-  RawPlayerData, RawDisc, RawResult, RawMatch, RawRecentMatch, RawUpcomingMatch
+  RawPlayerData, RawDisc, RawResult, RawMatch, RawRecentMatch, RawUpcomingMatch,
+  PlayerSearchResult
 } from './types';
 
 function transformMatch(m: RawMatch): UIMatch {
@@ -78,6 +79,16 @@ function transform(raw: RawPlayerData): UIPlayerData {
       doubles: (raw.activity_recent?.doubles ?? []).map(transformRecent)
     }
   };
+}
+
+export async function searchPlayers(query: string, signal: AbortSignal): Promise<PlayerSearchResult[]> {
+  try {
+    const res = await fetch(`/api/list_users?s=${encodeURIComponent(query)}`, { signal });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
 }
 
 export async function fetchPlayer(userId: number, signal?: AbortSignal): Promise<UIPlayerData | null> {

@@ -1,15 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
-  appType: 'spa',
+  appType: "spa",
   server: {
     proxy: {
-      '/api': {
-        target: 'https://tennisstats.be',
+      "/api": {
+        target: "https://tennisstats.be",
         changeOrigin: true,
       },
     },
   },
-})
+});

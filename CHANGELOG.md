@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+- **Added** Player search on landing page: free-text search box replaces the numeric ID input; queries `/api/list_users?s=…` at 5+ characters, caches the result, filters in-memory for longer queries, and navigates immediately on result click — results show player name, club, and singles/doubles rank
+- **Fixed** Player search debounce: rapid typing no longer starves results; fetch is deferred 300 ms after the last keystroke, query is trimmed before cache lookup so trailing spaces (e.g. "pieter ") reuse cached results without re-fetching
+
 - **Fixed** AbortController cleanup in PlayerPage: stale fetches are now aborted on navigation/re-render; `fetchPlayer` accepts an optional `AbortSignal`; NaN/non-positive id guard prevents broken API calls
 - **Fixed** LandingPage: non-numeric input now shows an inline error instead of navigating to a broken route
 - **Refactored** Shared `PlayerLink` styled component extracted from `MatchRow`, `RecentForm`, `TournamentCard`, and `UpcomingSection` — removes four identical `styled(Link)` definitions

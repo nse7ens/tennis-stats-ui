@@ -128,3 +128,12 @@ export interface UIPlayerData {
 }
 
 export type Disc = 'singles' | 'doubles';
+
+export interface PlayerSearchResult {
+  id: number;
+  name: string;
+  name_club: string;
+  singles: number;
+  doubles: number;
+  category: string;
+}

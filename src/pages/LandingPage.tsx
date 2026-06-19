@@ -1,6 +1,7 @@
-import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { usePlayerSearch } from '../usePlayerSearch';
+import { PlayerSearchInput } from '../components/PlayerSearchInput';
 
 const Shell = styled.div`
   background: #edede5;
@@ -44,118 +45,9 @@ const Subtitle = styled.p`
   margin: 0 0 28px;
 `;
 
-const FieldLabel = styled.label`
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-variant: small-caps;
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #7a7a70;
-  margin-bottom: 6px;
-`;
-
-const InputRow = styled.div`
-  display: flex;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const SearchInput = styled.input`
-  flex: 1;
-  min-width: 0;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 15px;
-  color: #1a1a17;
-  background: #fff;
-  border: 1.5px solid #d4d4c8;
-  border-right: none;
-  border-radius: 10px 0 0 10px;
-  padding: 11px 14px;
-  outline: none;
-
-  &::placeholder {
-    color: #b0b0a4;
-  }
-
-  &:focus {
-    border-color: #c8502a;
-  }
-`;
-
-const SearchButton = styled.button`
-  font-family: 'Archivo', system-ui, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  background: #c8502a;
-  border: 1.5px solid #c8502a;
-  border-radius: 0 10px 10px 0;
-  padding: 11px 20px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s, border-color 0.15s;
-
-  &:hover {
-    background: #b04424;
-    border-color: #b04424;
-  }
-`;
-
-const Divider = styled.hr`
-  border: none;
-  border-top: 1px solid #d4d4c8;
-  margin: 0 0 16px;
-`;
-
-const TryRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-`;
-
-const TryLabel = styled.span`
-  font-size: 13px;
-  color: #7a7a70;
-`;
-
-const ChipButton = styled.button`
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  color: #c8502a;
-  background: transparent;
-  border: 1.5px solid #c8502a;
-  border-radius: 20px;
-  padding: 4px 14px;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-
-  &:hover {
-    background: #c8502a;
-    color: #fff;
-  }
-`;
-
-const EXAMPLE_ID = '1606891';
-
 export function LandingPage() {
   const navigate = useNavigate();
-  const [value, setValue] = useState('');
-  const [error, setError] = useState('');
-
-  function go(id: string) {
-    const trimmed = id.trim();
-    if (!trimmed) { setError('Please enter a player ID.'); return; }
-    if (!/^\d+$/.test(trimmed)) { setError('Player ID must be a number.'); return; }
-    setError('');
-    navigate(`/player/${trimmed}`);
-  }
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    go(value);
-  }
+  const { query, setQuery, results, loading } = usePlayerSearch();
 
   return (
     <Shell>
@@ -163,35 +55,16 @@ export function LandingPage() {
         <Kicker>Tennis Vlaanderen</Kicker>
         <Heading>Find a player</Heading>
         <Subtitle>
-          Enter a player ID to open their ranking profile — singles &amp; doubles points,
-          evolution, form and full tournament history.
+          Zoek op naam of club om het spelersprofiel te openen — punten,
+          evolutie, recentste vorm en volledige toernooigeschiedenis.
         </Subtitle>
-
-        <form onSubmit={handleSubmit}>
-          <FieldLabel htmlFor="player-id-input">Player ID</FieldLabel>
-          <InputRow>
-            <SearchInput
-              id="player-id-input"
-              type="text"
-              inputMode="numeric"
-              placeholder="e.g. 1606891"
-              value={value}
-              onChange={e => { setValue(e.target.value); if (error) setError(''); }}
-              autoFocus
-            />
-            <SearchButton type="submit">Search</SearchButton>
-          </InputRow>
-          {error && <div style={{ fontSize: 12.5, color: '#d6453d', marginTop: 6, fontFamily: "'Archivo', sans-serif" }}>{error}</div>}
-        </form>
-
-        <Divider />
-
-        <TryRow>
-          <TryLabel>Try this player:</TryLabel>
-          <ChipButton type="button" onClick={() => go(EXAMPLE_ID)}>
-            {EXAMPLE_ID}
-          </ChipButton>
-        </TryRow>
+        <PlayerSearchInput
+          query={query}
+          setQuery={setQuery}
+          results={results}
+          loading={loading}
+          onSelect={id => navigate(`/player/${id}`)}
+        />
       </Card>
     </Shell>
   );
