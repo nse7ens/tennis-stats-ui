@@ -37,18 +37,23 @@ function fmtSetTuple(s: unknown): string | null {
     s1 = o.score_b ?? o[1];
     tb = o.tiebreak ?? o[2];
   }
-  // Match tie-breaker: both set scores are null, tiebreak holds the loser's points
-  if (s0 == null && s1 == null) return typeof tb === 'number' ? `10/${tb}` : null;
+  // Match tie-breaker: both set scores are null, tiebreak holds the loser's points.
+  // Winner score: first to 10, win by 2, so max(10, loser+2).
+  if (s0 == null && s1 == null) return typeof tb === 'number' ? `${Math.max(10, (tb as number) + 2)}/${tb}` : null;
   if (typeof s0 !== 'number' || typeof s1 !== 'number') return null;
   return typeof tb === 'number' ? `${s0}/${s1} (${tb})` : `${s0}/${s1}`;
 }
 
 function transformRecent(m: RawRecentMatch): UIRecentMatch {
   const ms = m.m_score;
-  const score = [ms?.set1, ms?.set2, ms?.set3]
+  const sets = [ms?.set1, ms?.set2, ms?.set3]
     .map(fmtSetTuple)
     .filter((s): s is string => s !== null)
     .join(' - ');
+  const score = ms?.wo ? 'Walk-over'
+    : ms?.forfait ? 'Forfait'
+    : ms?.surrender ? (sets ? `${sets} opgave` : 'opgave')
+    : sets;
   const opp = m.o1_name != null
     ? [
         { name: m.o1_name, rank: m.o1_pts ?? 0, user_id: m.o1_id },

@@ -20,6 +20,7 @@ When writing an ADR, copy the template from `.docs/adr/README.md`.
 
 **After every task or change, no exceptions:**
 - Add a `CHANGELOG.md` entry describing what changed and why (one line minimum).
+- `CHANGELOG.md` uses date-based headers (`## YYYY-MM-DD`, newest first). There is no `[Unreleased]` section — add entries directly under today's date header, creating it if it doesn't exist yet.
 
 **When a tech or architectural decision is made** (new library, approach, pattern, infra choice):
 - Write a new ADR in `.docs/adr/` and add it to the index in `.docs/adr/README.md`.

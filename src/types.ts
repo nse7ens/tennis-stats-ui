@@ -38,7 +38,7 @@ export interface RawHistoryEntry {
 }
 
 export interface RawMScore {
-  winner: number; wo?: boolean; forfait?: boolean;
+  winner: number; wo?: boolean; forfait?: boolean; surrender?: boolean;
   set1?: [number, number, number?];
   set2?: [number, number, number?];
   set3?: [number, number, number?];
