@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- **Added** Deployment pipeline: multi-stage Dockerfile (node build → nginx), nginx API proxy for `/api/` → `tennisstats.be`, GitHub Actions workflow pushing to ACR and deploying to Azure Container Apps on every push to `main` (ADR-0006)
+
 - **Fixed** RecentForm: removed opponent name from badge strip (date is sufficient); aligned match-list count with strip count (both now show up to 6)
 
 - **Refactored** Rank tiers extracted to a single `RANK_TIERS` constant in `utils.ts` — `PredictionPanel` and `RankingChart` now share one definition; also fixed the stale list which was missing 45, 60, 70, 80, 90, 100, 110
