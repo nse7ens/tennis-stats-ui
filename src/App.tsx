@@ -22,15 +22,23 @@ const Inner = styled.div`
   gap: clamp(22px, 3vw, 34px);
 `;
 
+const LoadingPage = styled(Page)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b8b80;
+  font-size: 16px;
+`;
+
 const DEFAULT_PLAYER = 1606891;
 
 export default function App() {
   const [data, setData] = useState<UIPlayerData | null>(null);
-  const [themeName] = useState<ThemeName>('Clay court');
+  const themeName: ThemeName = 'Clay court';
 
   useEffect(() => { fetchPlayer(DEFAULT_PLAYER).then(setData); }, []);
 
-  if (!data) return <Page style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8b8b80', fontSize: 16 }}>Loading…</Page>;
+  if (!data) return <LoadingPage>Loading…</LoadingPage>;
 
   return (
     <ThemeContext.Provider value={THEMES[themeName]}>
