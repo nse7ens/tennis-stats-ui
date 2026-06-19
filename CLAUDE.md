@@ -88,7 +88,7 @@ Returns a JSON blob — not a REST API but a single page-load payload. Example p
 
 | Field | Type | Notes |
 |---|---|---|
-| `current_rank` | number | Current rank (lower = better; scale: 3 5 10 15 20 25 30 35 40 50 55 65 75 85 95 105 115) |
+| `current_rank` | number | Current rank (lower = better; scale: 3 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 105 110 115) |
 | `predicted_rank` | number | Predicted next-period rank |
 | `elo_rank` | number | ELO score |
 | `sub_category` | string | e.g. "M" for men |

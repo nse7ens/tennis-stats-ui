@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import type { UIHistoryEntry } from '../types';
 import { useTheme } from '../theme';
+import { RANK_TIERS } from '../utils';
 
 const Section = styled.section`
   background: #fff;
@@ -61,7 +62,7 @@ const ChartWrap = styled.div`
 
 const W = 1000, PAD_L = 44, PAD_R = 70, PAD_T = 30, PAD_B = 40, Ht = 240;
 const pw = W - PAD_L - PAD_R, ph = Ht - PAD_T - PAD_B;
-const RANK_TIERS = [3, 5, 10, 15, 20, 25, 30, 35, 40, 50, 55, 65, 75, 85, 95, 105, 115];
+
 
 interface Props { history: UIHistoryEntry[]; }
 

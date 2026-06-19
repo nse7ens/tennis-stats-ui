@@ -30,7 +30,7 @@ No authentication required. The schema is undocumented and may change without no
 
 | Field            | Type   | Notes                                                                 |
 | ---------------- | ------ | --------------------------------------------------------------------- |
-| `current_rank`   | number | Current rank — **lower = better**. Scale: 3 5 10 15 20 25 30 35 40 50 |
+| `current_rank`   | number | Current rank — **lower = better**. Scale: 3 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 105 110 115 |
 | `predicted_rank` | number | Predicted next-period rank                                            |
 | `elo_rank`       | number | ELO score                                                             |
 | `sub_category`   | string | `"M"` = men, `"V"` = women                                            |
