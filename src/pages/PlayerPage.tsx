@@ -1,0 +1,104 @@
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import styled from '@emotion/styled';
+import { fetchPlayer } from '../api';
+import type { UIPlayerData } from '../types';
+import { PlayerHeader } from '../components/PlayerHeader';
+import { RankingChart } from '../components/RankingChart';
+import { PerformancePanel } from '../components/PerformancePanel';
+import { UpcomingSection } from '../components/UpcomingSection';
+import { TournamentResults } from '../components/TournamentResults';
+
+const Page = styled.div`
+  background: #f3f3ee;
+  min-height: 100vh;
+  font-family: 'Archivo', system-ui, sans-serif;
+  color: #1a1a17;
+  padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) 64px;
+  -webkit-font-smoothing: antialiased;
+`;
+
+const Inner = styled.div`
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(22px, 3vw, 34px);
+`;
+
+const Loading = styled(Page)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #8b8b80;
+`;
+
+const NotFound = styled(Page)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 16px;
+  color: #8b8b80;
+`;
+
+const BackLink = styled(Link)`
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #8b8b80;
+  text-decoration: none;
+  align-self: flex-start;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const SearchLink = styled(Link)`
+  color: #c8502a;
+  font-size: 14px;
+`;
+
+export function PlayerPage() {
+  const { id } = useParams<{ id: string }>();
+  const [data, setData] = useState<UIPlayerData | null | 'loading'>('loading');
+
+  useEffect(() => {
+    setData('loading');
+    fetchPlayer(Number(id)).then(setData);
+  }, [id]);
+
+  if (data === 'loading') {
+    return <Loading>Loading…</Loading>;
+  }
+
+  if (data === null) {
+    return (
+      <NotFound>
+        <span>Player not found.</span>
+        <SearchLink to="/">← Search for another player</SearchLink>
+      </NotFound>
+    );
+  }
+
+  return (
+    <Page>
+      <Inner>
+        <BackLink to="/">← Back</BackLink>
+        <PlayerHeader data={data} />
+        <RankingChart history={data.history} />
+        <PerformancePanel
+          singles={data.singles}
+          doubles={data.doubles}
+          recentSingles={data.recent.singles}
+          recentDoubles={data.recent.doubles}
+        />
+        <UpcomingSection singles={data.upcoming.singles} doubles={data.upcoming.doubles} />
+        <TournamentResults singles={data.singles} doubles={data.doubles} />
+      </Inner>
+    </Page>
+  );
+}
