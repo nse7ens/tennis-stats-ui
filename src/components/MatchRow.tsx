@@ -6,6 +6,7 @@ import { PlayerLink } from './PlayerLink';
 const Row = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 11px;
   padding: 9px 11px;
   background: rgba(255, 255, 255, 0.6);
@@ -58,6 +59,7 @@ const ScorePill = styled.span`
   padding: 4px 9px;
   border-radius: 7px;
   white-space: nowrap;
+  @media (max-width: 480px) { width: 100%; }
 `;
 
 interface Props { match: UIMatch; }

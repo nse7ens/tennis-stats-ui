@@ -4,6 +4,10 @@ import type { UIDisc } from '../types';
 import { fmtNum, RANK_TIERS } from '../utils';
 const WINDOW_SIZE = 5;
 
+const PtsSuffix = styled.span`
+  @media (max-width: 480px) { display: none; }
+`;
+
 const ToggleBtn = styled.button`
   display: flex;
   align-items: center;
@@ -125,7 +129,7 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
               const on = i <= idx;
               return (
                 <div key={t} style={{ position: 'absolute', top: 0, left: `${i * gap}%`, transform: `translateX(${tx})`, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 6, whiteSpace: 'nowrap', background: on ? '#23456f' : '#e3ebf8', color: on ? '#fff' : '#7d97c6' }}>
-                  {t} pts
+                  {t}<PtsSuffix> pts</PtsSuffix>
                 </div>
               );
             })}

@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import type { UIHistoryEntry } from '../types';
 import { useTheme } from '../theme';
@@ -68,6 +69,10 @@ interface Props { history: UIHistoryEntry[]; }
 
 export function RankingChart({ history }: Props) {
   const theme = useTheme();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+  }, []);
   const n = history.length;
 
   const maxRank = Math.max(...history.map(h => Math.max(h.s ?? 0, h.d ?? 0)));
@@ -116,7 +121,7 @@ export function RankingChart({ history }: Props) {
           <LegendItem><span style={{ width: 22, height: 0, borderTop: '2px dashed #b7b7ad', display: 'inline-block' }} />Predicted</LegendItem>
         </Legend>
       </ChartHeader>
-      <ScrollWrap>
+      <ScrollWrap ref={scrollRef}>
         <ChartWrap>
           <svg viewBox={`0 0 ${W} ${Ht}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
             {gridLines.map(v => <line key={v} x1={PAD_L} y1={yAt(v)} x2={W - PAD_R} y2={yAt(v)} stroke="#ededdf" strokeWidth={1} />)}
