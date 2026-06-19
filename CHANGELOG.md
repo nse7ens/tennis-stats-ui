@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-06-19
+- **Added** Task 4: WLBadge and DiscToggle shared components — Win/Loss badge (sm/md/lg sizes) and Singles/Doubles toggle (light/outlined variants) using @emotion/styled
 - **Added** Task 3: Data layer with static fallback dataset (verbatim from design reference) and transform functions (RawPlayerData → UIPlayerData) — fetchPlayer() now queries /api/get_user_report/{userId} with fallback to STATIC_DATA
 
 ## 2026-06-19
