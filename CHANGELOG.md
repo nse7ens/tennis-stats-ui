@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-06-19
+- **Added** @emotion/styled and @emotion/react as production dependencies for component styling
+- **Added** Google Fonts integration (Archivo, JetBrains Mono) with global stylesheet
+- **Added** Vite dev server proxy for /api/* routes to https://tennisstats.be
+- **Changed** index.html language to Dutch (nl), updated title, added font preconnects and base styles
+
 ## 2026-06-18
 - **Changed** `CLAUDE.md` and `.docs/README.md` to include explicit, trigger-based documentation update rules so AI agents update docs automatically without being asked
 
