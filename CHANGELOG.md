@@ -4,6 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-19
 
+- **Added** Favicon: tennis ball SVG (yellow-green circle with two white seam arcs) added to `public/favicon.svg` and linked in `index.html`
+
 - **Fixed** Last matches blade: walk-over, forfait, and surrender results now display the correct label ("Walk-over", "Forfait", "opgave") in the score pill instead of rendering empty; surrender now shows any partial sets played before the retirement (e.g. `6/2 - 3/1 opgave`), aligned with the tournament results format; `RawMScore` type extended with `surrender` flag
 - **Fixed** Last matches blade: super-tiebreak winner score was hardcoded to 10 — extended matches (12/10, 15/13, 11/9, …) now compute winner score as `max(10, loser + 2)`
 - **Fixed** Mobile layout: resolved horizontal scroll on iPhone 16 caused by `minmax(420px, 1fr)` grid in tournament results (replaced with `min(420px, 100%)`); added `overflow-x: hidden` safety net to `html, body`; score calculation bar strips "pts" suffix on ≤480px; ranking chart auto-scrolls to the right on mount to show current/predicted year; match score pills in "Last matches" and tournament result cards wrap to a new line below the opponent name on ≤480px
