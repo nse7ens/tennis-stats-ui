@@ -46,8 +46,17 @@ export interface RawMScore {
 
 export interface RawRecentMatch {
   m_score?: RawMScore;
-  o_name: string; o_pts: number; date: string;
-  url?: string; tid?: number; sid?: number; cat: string; fmt?: string;
+  // singles opponent
+  o_name?: string; o_pts?: number; o_id?: number; o_name_club?: string;
+  // doubles opponents
+  o1_name?: string; o1_pts?: number; o1_id?: number;
+  o2_name?: string; o2_pts?: number; o2_id?: number;
+  // doubles partner
+  p_name?: string; p_id?: number; p_pts?: number;
+  // common
+  rn?: string; title?: string; cat: string; fmt?: string;
+  date: string; url?: string; tid?: number; sid?: number;
+  my_id?: number; my_pts?: number; my_name?: string;
 }
 
 export interface RawUpcomingMatch {

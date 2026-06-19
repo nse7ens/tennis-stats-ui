@@ -35,6 +35,7 @@ const MetricsTable = styled.div`
 const MetricHeader = styled.div`
   display: flex;
   align-items: center;
+  gap: 10px;
   padding: 0 4px 6px;
   font-size: 10px;
   letter-spacing: 0.1em;
@@ -45,6 +46,7 @@ const MetricHeader = styled.div`
 const MetricRow = styled.div`
   display: flex;
   align-items: center;
+  gap: 10px;
   padding: 7px 4px;
   border-top: 1px solid #f0f0e8;
 `;

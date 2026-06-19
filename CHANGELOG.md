@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+- **Fixed** Ranking tier scale corrected to 115 (was 50): updated `FULL_TIERS` in PredictionPanel, `Y_MAX` and grid lines in RankingChart, and CLAUDE.md schema docs
+- **Fixed** TournamentCard: non-counted results now use the same background (#fff) and colors as counted results — only the border differs
+- **Fixed** PredictionPanel: bar window now starts one tier below min(current, predicted) so the player's better rank is always in view, and `idx` now tracks the predicted rank instead of current
+- **Fixed** RankingChart: Y_MAX is now dynamic — set to the next tier above the worst historical rank, with grid lines that follow
+- **Fixed** `transformRecent`: set parsing now uses `Array.isArray` + `typeof === 'number'` guards, preventing null/null display for 2-set matches and fixing 3rd-set (match tie-breaker) omission for doubles
+
 ### Added
 - Full player profile page: header, ranking cards, evolution chart, radar + recent form, upcoming matches, tournament results
 - `@emotion/styled` for component styles

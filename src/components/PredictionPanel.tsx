@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import type { UIDisc } from '../types';
 import { fmtNum } from '../utils';
 
-const FULL_TIERS = [3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+const FULL_TIERS = [3, 5, 10, 15, 20, 25, 30, 35, 40, 50, 55, 65, 75, 85, 95, 105, 115];
 const WINDOW_SIZE = 5;
 
 const ToggleBtn = styled.button`
@@ -77,14 +77,15 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
   const range = disc.ma - disc.mi;
   const within = range > 0 ? Math.max(0, Math.min(1, (disc.score - disc.mi) / range)) : 0;
 
-  // Show a 5-tier window that includes both predicted and current ranks
+  // Show a 5-tier window: start one tier below the better of current/predicted
   const minRank = Math.min(disc.current, disc.predicted);
   const minRankIdx = FULL_TIERS.findIndex(t => t >= minRank);
-  const windowStart = Math.max(0, Math.min(minRankIdx < 0 ? 0 : minRankIdx, FULL_TIERS.length - WINDOW_SIZE));
+  const baseIdx = minRankIdx < 0 ? 0 : minRankIdx;
+  const windowStart = Math.max(0, Math.min(baseIdx > 0 ? baseIdx - 1 : 0, FULL_TIERS.length - WINDOW_SIZE));
   const TIERS = FULL_TIERS.slice(windowStart, windowStart + WINDOW_SIZE);
 
-  const globalCurIdx = FULL_TIERS.indexOf(disc.current);
-  const idx = Math.max(0, globalCurIdx < 0 ? 0 : globalCurIdx - windowStart);
+  const globalPredIdx = FULL_TIERS.indexOf(disc.predicted);
+  const idx = Math.max(0, globalPredIdx < 0 ? 0 : globalPredIdx - windowStart);
   const gap = 100 / (TIERS.length - 1);
   const fillPct = Math.min(100, idx * gap + within * gap);
 

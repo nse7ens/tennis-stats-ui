@@ -61,13 +61,23 @@ const ChartWrap = styled.div`
 
 const W = 1000, PAD_L = 44, PAD_R = 70, PAD_T = 30, PAD_B = 40, Ht = 240;
 const pw = W - PAD_L - PAD_R, ph = Ht - PAD_T - PAD_B;
-const Y_MAX = 40;
+const RANK_TIERS = [3, 5, 10, 15, 20, 25, 30, 35, 40, 50, 55, 65, 75, 85, 95, 105, 115];
 
 interface Props { history: UIHistoryEntry[]; }
 
 export function RankingChart({ history }: Props) {
   const theme = useTheme();
   const n = history.length;
+
+  const maxRank = Math.max(...history.map(h => Math.max(h.s ?? 0, h.d ?? 0)));
+  const nextIdx = RANK_TIERS.findIndex(t => t > maxRank);
+  const Y_MAX = nextIdx >= 0 ? RANK_TIERS[nextIdx] : RANK_TIERS[RANK_TIERS.length - 1];
+
+  const gridStep = Y_MAX <= 40 ? 10 : Y_MAX <= 80 ? 20 : 25;
+  const gridLines: number[] = [];
+  for (let v = 0; v <= Y_MAX; v += gridStep) gridLines.push(v);
+  if (gridLines[gridLines.length - 1] < Y_MAX) gridLines.push(Y_MAX);
+
   const xAt = (i: number) => n < 2 ? PAD_L + pw / 2 : PAD_L + (i * pw / (n - 1));
   const yAt = (v: number) => PAD_T + (1 - v / Y_MAX) * ph;
 
@@ -108,7 +118,7 @@ export function RankingChart({ history }: Props) {
       <ScrollWrap>
         <ChartWrap>
           <svg viewBox={`0 0 ${W} ${Ht}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
-            {[0, 10, 20, 30, 40].map(v => <line key={v} x1={PAD_L} y1={yAt(v)} x2={W - PAD_R} y2={yAt(v)} stroke="#ededdf" strokeWidth={1} />)}
+            {gridLines.map(v => <line key={v} x1={PAD_L} y1={yAt(v)} x2={W - PAD_R} y2={yAt(v)} stroke="#ededdf" strokeWidth={1} />)}
             {history.map((h, i) => h.l !== '' ? <line key={i} x1={xAt(i)} y1={PAD_T} x2={xAt(i)} y2={PAD_T + ph} stroke="#f4f4ea" strokeWidth={1} /> : null)}
             {history[n - 1]?.p && (
               <>
@@ -124,7 +134,7 @@ export function RankingChart({ history }: Props) {
             <circle cx={sP[n - 1].x} cy={sP[n - 1].y} r={3.2} fill="#fff" stroke={theme.singles} strokeWidth={1.4} />
           </svg>
           <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-            {[0, 10, 20, 30, 40].map(v => (
+            {gridLines.map(v => (
               <div key={v} style={{ ...monoBase, left: pX(PAD_L - 9), top: pY(yAt(v)), fontSize: '11.5px', color: '#aeaea4' }}>{v}</div>
             ))}
             {history.map((h, i) => h.l !== '' ? (

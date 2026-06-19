@@ -76,7 +76,7 @@ export function TournamentResults({ singles, doubles }: Props) {
       </Grid>
       <FootNote>
         <HollowDot />
-        Hollow markers are unplayed rounds in the draw. Faded cards were not counted toward the ranking calculation.
+        Hollow markers are unplayed rounds in the draw.
       </FootNote>
     </Section>
   );

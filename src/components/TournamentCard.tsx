@@ -145,9 +145,10 @@ export function TournamentCard({ result: r }: Props) {
   const theme = useTheme();
   const sel = r.selected === 1;
 
-  const cardStyle = sel
-    ? { borderRadius: 16, padding: '18px 18px 16px', border: `1.5px solid ${theme.singles}`, background: '#fff', boxShadow: `0 1px 2px ${hexA(theme.singles, 0.1)}` }
-    : { borderRadius: 16, padding: '18px 18px 16px', border: '1px solid #e6e6df', background: '#fbfbf8' };
+  const cardStyle = {
+    borderRadius: 16, padding: '18px 18px 16px', background: '#fff',
+    border: sel ? `1.5px solid ${theme.singles}` : '1px solid #e6e6df',
+  };
 
   return (
     <div style={cardStyle}>

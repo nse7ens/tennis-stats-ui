@@ -88,7 +88,7 @@ Returns a JSON blob — not a REST API but a single page-load payload. Example p
 
 | Field | Type | Notes |
 |---|---|---|
-| `current_rank` | number | Current rank (lower = better; scale: 3 5 10 15 20 25 30 35 40 50) |
+| `current_rank` | number | Current rank (lower = better; scale: 3 5 10 15 20 25 30 35 40 50 55 65 75 85 95 105 115) |
 | `predicted_rank` | number | Predicted next-period rank |
 | `elo_rank` | number | ELO score |
 | `sub_category` | string | e.g. "M" for men |
@@ -184,7 +184,7 @@ The reference design is at `C:\Users\sevensn\Downloads\tennisstats_player_profil
 
 **History tab** shows horizontal bar chart:
 - One bar per year label where `l` is non-empty (skip `""` entries except for end-of-season display)
-- Bars use rank value inversely (lower rank = longer bar; scale against max rank of 50)
+- Bars use rank value inversely (lower rank = longer bar; scale against max rank of 115)
 - Predicted year (`p: true`) rendered in lighter blue with asterisk label
 
 ### Design tokens

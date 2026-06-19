@@ -94,9 +94,8 @@ const OppBlock = styled.div`
 
 const OppRow = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px;
 `;
 
 const OppNameBold = styled.span`
@@ -113,12 +112,6 @@ const RankChip = styled.span`
   background: #efefe7;
   padding: 1px 6px;
   border-radius: 5px;
-`;
-
-const RoundLabel = styled.div`
-  font-size: 11px;
-  color: #a3a399;
-  margin-top: 2px;
 `;
 
 const ScorePill = styled.span`
@@ -174,7 +167,6 @@ export function RecentForm({ singles, doubles }: Props) {
                   </span>
                 ))}
               </OppRow>
-              {m.round && <RoundLabel>{m.round}</RoundLabel>}
             </OppBlock>
             <ScorePill>{m.score}</ScorePill>
           </MatchItem>

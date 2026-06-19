@@ -182,15 +182,36 @@ function transformDisc(d: RawDisc): UIDisc {
   };
 }
 
-function fmtSet(set: [number, number, number?]): string {
-  return set[2] != null ? `${set[0]}/${set[1]} (${set[2]})` : `${set[0]}/${set[1]}`;
+function fmtSetTuple(s: unknown): string | null {
+  if (s == null || typeof s !== 'object') return null;
+  let s0: unknown, s1: unknown, tb: unknown;
+  if (Array.isArray(s)) {
+    [s0, s1, tb] = s as unknown[];
+  } else {
+    const o = s as Record<string, unknown>;
+    s0 = o.score_a ?? o[0];
+    s1 = o.score_b ?? o[1];
+    tb = o.tiebreak ?? o[2];
+  }
+  // Match tie-breaker: both set scores are null, tiebreak holds the loser's points
+  if (s0 == null && s1 == null) return typeof tb === 'number' ? `10/${tb}` : null;
+  if (typeof s0 !== 'number' || typeof s1 !== 'number') return null;
+  return typeof tb === 'number' ? `${s0}/${s1} (${tb})` : `${s0}/${s1}`;
 }
 
 function transformRecent(m: RawRecentMatch): UIRecentMatch {
-  const sets = ([m.m_score?.set1, m.m_score?.set2, m.m_score?.set3] as Array<[number, number, number?] | undefined>)
-    .filter((s): s is [number, number, number?] => s != null && s[0] != null && s[1] != null)
-    .map(fmtSet).join(' - ');
-  return { title: '', cat: m.cat, date: m.date, win: (m.m_score?.winner ?? 1) === 0, score: sets, opp: [{ name: m.o_name, rank: m.o_pts }], partner: '' };
+  const ms = m.m_score;
+  const score = [ms?.set1, ms?.set2, ms?.set3]
+    .map(fmtSetTuple)
+    .filter((s): s is string => s !== null)
+    .join(' - ');
+  const opp = m.o1_name != null
+    ? [
+        { name: m.o1_name, rank: m.o1_pts ?? 0 },
+        ...(m.o2_name != null ? [{ name: m.o2_name, rank: m.o2_pts ?? 0 }] : []),
+      ]
+    : m.o_name != null ? [{ name: m.o_name, rank: m.o_pts ?? 0 }] : [];
+  return { title: m.title ?? '', cat: m.cat, round: m.rn, date: m.date, win: (ms?.winner ?? 1) === 0, score, opp, partner: m.p_name ?? '' };
 }
 
 function transformUpcoming(u: RawUpcomingMatch): UIUpcomingMatch {
