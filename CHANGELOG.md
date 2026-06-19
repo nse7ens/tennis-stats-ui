@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2026-06-19
+- **Added** Task 10: TournamentResults section with MatchRow, TournamentCard (accordion score panel, W/L dots, selected/unselected card styling), and TournamentResults (DiscToggle tab, grid layout, footnote) — wired into App.tsx after UpcomingSection
 - **Added** Task 9: UpcomingSection for displaying upcoming singles and doubles matches with yellow theme (#f9efd7 bg, #ecd49a border), merges both match types into single list with kind labels, renders null when empty
 - **Added** Task 8: PerformancePanel with RadarChart (SVG, 5-axis, 4 rings, singles+doubles polygons) and RecentForm (strip + match list with DiscToggle) — wired into App.tsx after RankingChart
 - **Added** Task 6: PlayerHeader component with styled title block (eyebrow, name, club) and ranking cards grid (2-col auto-fit, 14px gap) — wired App.tsx with fetchPlayer(1606891), theme context provider (Clay court default), and Loading state
