@@ -1,73 +1,31 @@
-# React + TypeScript + Vite
+# Tennis Stats
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Alternative UI for [tennisstats.be](https://tennisstats.be) — React + TypeScript + Vite SPA consuming Tennis Vlaanderen match data.
 
-Currently, two official plugins are available:
+## Sections
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Section                      | Audience               | Contents                         |
+| ---------------------------- | ---------------------- | -------------------------------- |
+| [ADR](.docs/adr/README.md)         | Developers / AI agents | Architecture Decision Records    |
+| [Specs](.docs/specs/README.md)     | Developers / AI agents | Feature design specs             |
+| [Dev](.docs/dev/README.md)         | Developers             | Setup, architecture, data schema |
+| [User guide](.docs/user/README.md) | End-users              | How to use the app               |
 
-## React Compiler
+## Key files
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [`CLAUDE.md`](./CLAUDE.md) — AI-agent-optimised project context and API schema
+- [`CHANGELOG.md`](./CHANGELOG.md) — reverse-chronological change log
 
-## Expanding the ESLint configuration
+## Documentation rules
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+These apply after every task — no need to be asked:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Trigger                                                     | Action                                                                  |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Any change, no exceptions                                   | Add a `CHANGELOG.md` entry (one line minimum)                           |
+| Tech or architectural decision (library, approach, pattern) | New ADR in `.docs/adr/` + update the ADR index                          |
+| Component structure, data flow, or dev setup changes        | Update `.docs/dev/architecture.md` or `getting-started.md`              |
+| API schema or data behaviour discovered/confirmed           | Update `CLAUDE.md` schema tables AND `.docs/dev/data-schema.md`         |
+| User-facing feature added or changed                        | Update `.docs/user/README.md`                                           |
+| New brainstormed feature spec                               | Save to `.docs/specs/YYYY-MM-DD-<topic>-design.md` + update specs index |
+| `CLAUDE.md` itself becomes stale                            | Update it in the same commit as the code change                         |
