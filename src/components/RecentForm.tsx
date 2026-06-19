@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import styled from '@emotion/styled';
-import type { UIRecentMatch, Disc } from '../types';
-import { fmtDate } from '../utils';
-import { WLBadge } from './WLBadge';
-import { DiscToggle } from './DiscToggle';
-import { PlayerLink } from './PlayerLink';
+import styled from "@emotion/styled";
+import { useState } from "react";
+import type { Disc, UIRecentMatch } from "../types";
+import { fmtDate } from "../utils";
+import { DiscToggle } from "./DiscToggle";
+import { PlayerLink } from "./PlayerLink";
+import { WLBadge } from "./WLBadge";
 
 const Card = styled.div`
   background: #fff;
@@ -24,7 +24,7 @@ const CardHeader = styled.div`
 `;
 
 const Kicker = styled.div`
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -53,7 +53,7 @@ const StripItem = styled.div`
 `;
 
 const DateLabel = styled.span`
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 9.5px;
   color: #aeaea4;
 `;
@@ -68,6 +68,7 @@ const MatchList = styled.div`
 const MatchItem = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
   padding: 10px 12px;
   background: #fafaf6;
@@ -90,11 +91,11 @@ const OppNameBold = styled.span`
   font-size: 13.5px;
   font-weight: 600;
   color: #26261f;
+  white-space: nowrap;
 `;
 
-
 const RankChip = styled.span`
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 600;
   color: #8b8b80;
@@ -104,7 +105,7 @@ const RankChip = styled.span`
 `;
 
 const ScorePill = styled.span`
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 12.5px;
   font-weight: 600;
   color: #3a3a33;
@@ -113,13 +114,19 @@ const ScorePill = styled.span`
   padding: 4px 9px;
   border-radius: 7px;
   white-space: nowrap;
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
-interface Props { singles: UIRecentMatch[]; doubles: UIRecentMatch[]; }
+interface Props {
+  singles: UIRecentMatch[];
+  doubles: UIRecentMatch[];
+}
 
 export function RecentForm({ singles, doubles }: Props) {
-  const [disc, setDisc] = useState<Disc>('singles');
-  const rec = disc === 'singles' ? singles : doubles;
+  const [disc, setDisc] = useState<Disc>("singles");
+  const rec = disc === "singles" ? singles : doubles;
   const strip = rec.slice(0, 6);
   const list = rec.slice(0, 6);
 
@@ -149,11 +156,17 @@ export function RecentForm({ singles, doubles }: Props) {
             <OppBlock>
               <OppRow>
                 {m.opp.map((o, j) => (
-                  <span key={j} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                    {o.user_id != null
-                      ? <PlayerLink to={`/player/${o.user_id}`}><OppNameBold>{o.name}</OppNameBold></PlayerLink>
-                      : <OppNameBold>{o.name}</OppNameBold>
-                    }
+                  <span
+                    key={j}
+                    style={{ display: "flex", alignItems: "center", gap: 5 }}
+                  >
+                    {o.user_id != null ? (
+                      <PlayerLink to={`/player/${o.user_id}`}>
+                        <OppNameBold>{o.name}</OppNameBold>
+                      </PlayerLink>
+                    ) : (
+                      <OppNameBold>{o.name}</OppNameBold>
+                    )}
                     <RankChip>{o.rank}pts</RankChip>
                   </span>
                 ))}
