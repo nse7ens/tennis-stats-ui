@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- **Added** Task 8: opponent and partner names now render as router links (`/player/:id`) in MatchRow, TournamentCard, RecentForm, and UpcomingSection when a player ID is available; falls back to plain text when no ID is present
+
 - **Added** Tasks 5-6-7: react-router-dom v7 routing — App.tsx replaced with a thin BrowserRouter shell; LandingPage (player ID search form, terracotta "Search" button, chip quick-link) at `/`; PlayerPage (URL param `:id`, loading/not-found/data states, ← Back link) at `/player/:id`
 
 - **Fixed** Ranking tier scale corrected to 115 (was 50): updated `FULL_TIERS` in PredictionPanel, `Y_MAX` and grid lines in RankingChart, and CLAUDE.md schema docs
