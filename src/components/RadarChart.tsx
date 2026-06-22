@@ -86,7 +86,7 @@ export function RadarChart({ singles, doubles }: Props) {
     { t: 'Match gew.', sv: safeDiv(S.nw, S.nm),   dv: safeDiv(D.nw, D.nm) },
     { t: 'Set gew.',   sv: safeDiv(S.nsw, S.nsp), dv: safeDiv(D.nsw, D.nsp) },
     { t: 'Game gew.',  sv: safeDiv(S.ngw, S.ngp), dv: safeDiv(D.ngw, D.ngp) },
-    { t: 'Toernooiwinst', sv: safeDiv(S.ntw, S.ntp), dv: safeDiv(D.ntw, D.ntp) },
+    { t: 'Gem. prestatie', sv: singles.bestRound.score, dv: doubles.bestRound.score },
     { t: 'ELO',       sv: Math.min(1, singles.elo / 50), dv: Math.min(1, doubles.elo / 50) },
   ];
 
@@ -94,7 +94,7 @@ export function RadarChart({ singles, doubles }: Props) {
     { t: 'Match gew.',    s: pct(S.nw, S.nm) + '%',   d: pct(D.nw, D.nm) + '%' },
     { t: 'Set gew.',      s: pct(S.nsw, S.nsp) + '%',  d: pct(D.nsw, D.nsp) + '%' },
     { t: 'Game gew.',     s: pct(S.ngw, S.ngp) + '%',  d: pct(D.ngw, D.ngp) + '%' },
-    { t: 'Toernooiwinst', s: pct(S.ntw, S.ntp) + '%',  d: pct(D.ntw, D.ntp) + '%' },
+    { t: 'Gem. prestatie',    s: singles.bestRound.label,    d: doubles.bestRound.label },
     { t: 'ELO',           s: String(singles.elo),        d: String(doubles.elo) },
   ];
 

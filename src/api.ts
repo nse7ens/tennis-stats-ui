@@ -18,12 +18,25 @@ function transformResult(r: RawResult): UIResult {
   };
 }
 
+function computeBestRound(results: RawResult[]): { score: number; label: string } {
+  const scores: number[] = [];
+  for (const r of results) {
+    if (r.WL.length === 0) continue;
+    const wins = r.WL.filter(x => x === 'W').length;
+    scores.push(wins / r.WL.length);
+  }
+  if (!scores.length) return { score: 0, label: '—' };
+  const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+  return { score: avg, label: Math.round(avg * 100) + '%' };
+}
+
 function transformDisc(d: RawDisc): UIDisc {
   return {
     current: d.current_rank, predicted: d.predicted_rank, elo: d.elo_rank,
     score: d.score, mi: d.mi, ma: d.ma, factor: d.score_factor ?? null,
     stats: { nm: d.nm, nw: d.nw, ngw: d.ngw, ngp: d.ngp, nsw: d.nsw, nsp: d.nsp, ntw: d.ntw, ntp: d.ntp },
-    results: d.results.map(transformResult)
+    results: d.results.map(transformResult),
+    bestRound: computeBestRound(d.results),
   };
 }
 

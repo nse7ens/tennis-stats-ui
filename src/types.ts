@@ -102,6 +102,7 @@ export interface UIDisc {
   current: number; predicted: number; elo: number;
   score: number; mi: number; ma: number; factor: number | null;
   stats: UIStats; results: UIResult[];
+  bestRound: { score: number; label: string };
 }
 
 export interface UIHistoryEntry {
