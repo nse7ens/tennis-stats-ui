@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import type { UIPlayerData } from '../types';
 import { useTheme } from '../theme';
 import { RankingCard } from './RankingCard';
+import { useFavorites } from '../FavoritesContext';
 
 const Root = styled.header`
   display: flex;
@@ -13,6 +14,12 @@ const TitleBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+`;
+
+const NameRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
 `;
 
 const Eyebrow = styled.div`
@@ -39,21 +46,64 @@ const Club = styled.div`
   letter-spacing: 0.02em;
 `;
 
+const StarButton = styled.button<{ $active: boolean }>`
+  all: unset;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+  color: ${({ $active }) => ($active ? '#e8a020' : '#c4c4b8')};
+  flex-shrink: 0;
+  transition: color 0.15s ease, transform 0.1s ease;
+
+  &:hover {
+    color: ${({ $active }) => ($active ? '#c8881a' : '#8b8b80')};
+    transform: scale(1.15);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
 const CardsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
   gap: 14px;
 `;
 
-interface Props { data: UIPlayerData; }
+interface Props {
+  data: UIPlayerData;
+  id: number;
+}
 
-export function PlayerHeader({ data }: Props) {
+export function PlayerHeader({ data, id }: Props) {
   const theme = useTheme();
+  const { isFavorite, addFavorite, removeFavorite } = useFavorites();
+  const favorited = isFavorite(id);
+
+  function handleToggle() {
+    if (favorited) {
+      removeFavorite(id);
+    } else {
+      addFavorite({ id, name: data.player.name, club: data.player.club });
+    }
+  }
+
   return (
     <Root>
       <TitleBlock>
         <Eyebrow>Tennis Vlaanderen · Spelersprofiel</Eyebrow>
-        <Name>{data.player.name}</Name>
+        <NameRow>
+          <Name>{data.player.name}</Name>
+          <StarButton
+            $active={favorited}
+            onClick={handleToggle}
+            title={favorited ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+            aria-label={favorited ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+          >
+            <i className="ti ti-star" />
+          </StarButton>
+        </NameRow>
         <Club>{data.player.club}</Club>
       </TitleBlock>
       <CardsGrid>

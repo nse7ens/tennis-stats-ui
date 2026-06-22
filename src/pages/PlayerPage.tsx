@@ -146,7 +146,7 @@ export function PlayerPage() {
     <Page>
       <Inner>
         <BackLink to="/">← Terug</BackLink>
-        <PlayerHeader data={data} />
+        <PlayerHeader data={data} id={Number(id!)} />
         <SeasonSelector
           season={season}
           onChange={tag => setSearchParams({ s: tag })}
