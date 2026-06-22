@@ -24,7 +24,6 @@ const Card = styled.div`
   border: 1px solid #e8e8e0;
   border-radius: 12px;
   padding: 10px 20px 14px;
-  margin-bottom: 16px;
 `;
 
 const ChevronRow = styled.div`
