@@ -11,13 +11,14 @@ import { PerformancePanel } from '../components/PerformancePanel';
 import { UpcomingSection } from '../components/UpcomingSection';
 import { TournamentResults } from '../components/TournamentResults';
 import { SeasonSelector } from '../components/SeasonSelector';
+import { Footer } from '../components/Footer';
 
 const Page = styled.div`
   background: #f3f3ee;
   min-height: 100vh;
   font-family: 'Archivo', system-ui, sans-serif;
   color: #1a1a17;
-  padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) 64px;
+  padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) 32px;
   -webkit-font-smoothing: antialiased;
 `;
 
@@ -169,6 +170,7 @@ export function PlayerPage() {
           </>
         )}
       </Inner>
+      <Footer />
     </Page>
   );
 }

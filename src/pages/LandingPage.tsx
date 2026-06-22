@@ -4,15 +4,22 @@ import { usePlayerSearch } from '../usePlayerSearch';
 import { PlayerSearchInput } from '../components/PlayerSearchInput';
 import { FavoritesList } from '../components/FavoritesList';
 import { useFavorites } from '../FavoritesContext';
+import { Footer } from '../components/Footer';
 
 const Shell = styled.div`
   background: #edede5;
   min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   font-family: 'Archivo', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+`;
+
+const ContentArea = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 32px 16px;
 `;
 
@@ -57,24 +64,27 @@ export function LandingPage() {
 
   return (
     <Shell>
-      <PageContent>
-        <div>
-          <Kicker>Tennis Vlaanderen</Kicker>
-          <Heading>Zoek een speler</Heading>
-          <Subtitle>
-            Zoek op naam of club om het spelersprofiel te openen — punten,
-            evolutie, recentste vorm en volledige toernooigeschiedenis.
-          </Subtitle>
-          <PlayerSearchInput
-            query={query}
-            setQuery={setQuery}
-            results={results}
-            loading={loading}
-            onSelect={id => navigate(`/player/${id}`)}
-          />
-        </div>
-        {favorites.length > 0 && <FavoritesList />}
-      </PageContent>
+      <ContentArea>
+        <PageContent>
+          <div>
+            <Kicker>Tennis Vlaanderen</Kicker>
+            <Heading>Zoek een speler</Heading>
+            <Subtitle>
+              Zoek op naam of club om het spelersprofiel te openen — punten,
+              evolutie, recentste vorm en volledige toernooigeschiedenis.
+            </Subtitle>
+            <PlayerSearchInput
+              query={query}
+              setQuery={setQuery}
+              results={results}
+              loading={loading}
+              onSelect={id => navigate(`/player/${id}`)}
+            />
+          </div>
+          {favorites.length > 0 && <FavoritesList />}
+        </PageContent>
+      </ContentArea>
+      <Footer />
     </Shell>
   );
 }
