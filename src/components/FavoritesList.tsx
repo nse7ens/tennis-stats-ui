@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   DndContext,
   closestCenter,
@@ -35,6 +35,11 @@ const Row = styled.li`
   border-radius: 10px;
   padding: 10px 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  cursor: pointer;
+
+  &:hover {
+    background: #f9f9f6;
+  }
 `;
 
 const DragHandle = styled.button`
@@ -45,6 +50,8 @@ const DragHandle = styled.button`
   line-height: 1;
   flex-shrink: 0;
   touch-action: none;
+  position: relative;
+  z-index: 1;
 
   &:active {
     cursor: grabbing;
@@ -59,18 +66,13 @@ const PlayerInfo = styled.div`
   gap: 1px;
 `;
 
-const PlayerName = styled(Link)`
+const PlayerName = styled.span`
   font-weight: 700;
   font-size: 14px;
   color: #1a1a17;
-  text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 const ClubName = styled.span`
@@ -89,6 +91,8 @@ const RemoveButton = styled.button`
   font-size: 16px;
   line-height: 1;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
   transition: color 0.12s ease;
 
   &:hover {
@@ -98,6 +102,7 @@ const RemoveButton = styled.button`
 
 function SortableRow({ fav }: { fav: FavoritedPlayer }) {
   const { removeFavorite } = useFavorites();
+  const navigate = useNavigate();
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: fav.id });
 
   const style = {
@@ -107,16 +112,21 @@ function SortableRow({ fav }: { fav: FavoritedPlayer }) {
   };
 
   return (
-    <Row ref={setNodeRef} style={style}>
-      <DragHandle {...attributes} {...listeners} title="Versleep om te herordenen">
+    <Row ref={setNodeRef} style={style} onClick={() => navigate(`/player/${fav.id}`)}>
+      <DragHandle
+        {...attributes}
+        {...listeners}
+        title="Versleep om te herordenen"
+        onClick={e => e.stopPropagation()}
+      >
         <i className="ti ti-grip-vertical" />
       </DragHandle>
       <PlayerInfo>
-        <PlayerName to={`/player/${fav.id}`}>{fav.name}</PlayerName>
+        <PlayerName>{fav.name}</PlayerName>
         <ClubName>{fav.club}</ClubName>
       </PlayerInfo>
       <RemoveButton
-        onClick={() => removeFavorite(fav.id)}
+        onClick={e => { e.stopPropagation(); removeFavorite(fav.id); }}
         title="Verwijder uit favorieten"
         aria-label={`Verwijder ${fav.name} uit favorieten`}
       >
