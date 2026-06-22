@@ -2,6 +2,10 @@
 
 Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Added**, **Fixed**, **Changed**, **Refactored**, or **Docs**.
 
+## 2026-06-22
+
+- **Changed** UI language: all labels, headings, and copy translated to Dutch (Flemish) — "Singles/Doubles" → "Enkel/Dubbel", "Find a player" → "Zoek een speler", ranking/tournament/stats labels, navigation and error messages all in Dutch
+
 ## 2026-06-19
 
 - **Added** Favicon: tennis ball SVG (yellow-green circle with two white seam arcs) added to `public/favicon.svg` and linked in `index.html`

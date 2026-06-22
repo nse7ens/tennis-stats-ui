@@ -127,7 +127,7 @@ export function RankingCard({ disc, label, color }: Props) {
       <AccentBar color={color} />
       <Header>
         <Label>{label}</Label>
-        <RankingLabel>Ranking</RankingLabel>
+        <RankingLabel>Ranglijst</RankingLabel>
       </Header>
       <RankRow>
         <BigRank>{disc.current}</BigRank>
@@ -136,14 +136,14 @@ export function RankingCard({ disc, label, color }: Props) {
           <span style={{ color: arrowColor, fontSize: 19, fontWeight: 700, lineHeight: 1 }}>{arrow}</span>
           <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.05 }}>
             <PredValue>{disc.predicted}</PredValue>
-            <PredLabel>predicted</PredLabel>
+            <PredLabel>voorspeld</PredLabel>
           </div>
         </PredGroup>
       </RankRow>
       <StatsRow>
         {[
           { lbl: 'ELO', val: fmtNum(disc.elo) },
-          { lbl: 'W–L', val: `${disc.stats.nw}–${losses}` },
+          { lbl: 'G–V', val: `${disc.stats.nw}–${losses}` },
           { lbl: 'Score', val: fmtNum(disc.score) },
         ].map(({ lbl, val }) => (
           <StatItem key={lbl}>

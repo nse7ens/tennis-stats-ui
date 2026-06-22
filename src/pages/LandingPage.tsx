@@ -53,7 +53,7 @@ export function LandingPage() {
     <Shell>
       <Card>
         <Kicker>Tennis Vlaanderen</Kicker>
-        <Heading>Find a player</Heading>
+        <Heading>Zoek een speler</Heading>
         <Subtitle>
           Zoek op naam of club om het spelersprofiel te openen — punten,
           evolutie, recentste vorm en volledige toernooigeschiedenis.

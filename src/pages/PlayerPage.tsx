@@ -80,14 +80,14 @@ export function PlayerPage() {
   }, [id]);
 
   if (data === 'loading') {
-    return <Loading>Loading…</Loading>;
+    return <Loading>Laden…</Loading>;
   }
 
   if (data === null) {
     return (
       <NotFound>
-        <span>Player not found.</span>
-        <SearchLink to="/">← Search for another player</SearchLink>
+        <span>Speler niet gevonden.</span>
+        <SearchLink to="/">← Zoek een andere speler</SearchLink>
       </NotFound>
     );
   }
@@ -95,7 +95,7 @@ export function PlayerPage() {
   return (
     <Page>
       <Inner>
-        <BackLink to="/">← Back</BackLink>
+        <BackLink to="/">← Terug</BackLink>
         <PlayerHeader data={data} />
         <RankingChart history={data.history} />
         <PerformancePanel

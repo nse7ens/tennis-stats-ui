@@ -66,8 +66,8 @@ export function TournamentResults({ singles, doubles }: Props) {
     <Section>
       <SectionHeader>
         <div>
-          <Kicker>Match by match</Kicker>
-          <Title>Tournament results</Title>
+          <Kicker>Wedstrijd per wedstrijd</Kicker>
+          <Title>Toernooiresultaten</Title>
         </div>
         <DiscToggle value={disc} onChange={setDisc} variant="outlined" size="md" />
       </SectionHeader>
@@ -76,7 +76,7 @@ export function TournamentResults({ singles, doubles }: Props) {
       </Grid>
       <FootNote>
         <HollowDot />
-        Hollow markers are unplayed rounds in the draw.
+        Holle markers zijn niet-gespeelde rondes in het schema.
       </FootNote>
     </Section>
   );
