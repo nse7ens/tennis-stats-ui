@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import type { UIUpcomingMatch } from '../types';
+import { fmtDateFull } from '../utils';
 import { PlayerLink } from './PlayerLink';
 
 const Section = styled.section`
@@ -100,7 +101,10 @@ export function UpcomingSection({ singles, doubles }: Props) {
           <Item key={i}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 180, flex: 1 }}>
               <ItemTitle>{u.title}</ItemTitle>
-              <ItemSub>{u.kind} · {u.rn}</ItemSub>
+              <ItemSub>
+                {u.kind} · {u.rn}
+                {u.planned && <> · {fmtDateFull(u.planned)}</>}
+              </ItemSub>
             </div>
             <CatBadge>{u.cat.toUpperCase()}</CatBadge>
             {u.p_name && (

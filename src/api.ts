@@ -67,6 +67,7 @@ function transformRecent(m: RawRecentMatch): UIRecentMatch {
 
 function transformUpcoming(u: RawUpcomingMatch): UIUpcomingMatch {
   return { tid: u.tid, sid: u.sid, rn: u.rn, cat: u.cat, title: u.title,
+           planned: u.planned ?? null,
            p_name: u.p_name ?? '', p_pts: u.p_pts ?? 0, my_pts: u.my_pts,
            url: u.url, p_id: u.p_id };
 }

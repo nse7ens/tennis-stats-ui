@@ -116,6 +116,7 @@ export interface UIRecentMatch {
 
 export interface UIUpcomingMatch {
   tid: number; sid: number; rn: string; cat: string; title: string;
+  planned: string | null;
   p_name: string; p_pts: number; my_pts: number; url?: string; p_id?: number;
 }
 

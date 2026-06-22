@@ -12,6 +12,16 @@ export const fmtDate = (iso: string) => {
   return `${dt.getDate()} ${MONTHS[dt.getMonth()]}`;
 };
 
+const MONTHS_NL = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+export const fmtDateFull = (iso: string) => {
+  const dt = new Date(iso);
+  if (isNaN(dt.getTime())) return '';
+  const date = `${dt.getDate()} ${MONTHS_NL[dt.getMonth()]}`;
+  if (!iso.includes('T')) return date;
+  const time = `${String(dt.getHours()).padStart(2, '0')}:${String(dt.getMinutes()).padStart(2, '0')}`;
+  return `${date} · ${time}`;
+};
+
 export const pct = (a: number, b: number) => (b ? Math.round(a / b * 100) : 0);
 
 export const hexA = (hex: string, a: number): string => {
