@@ -46,36 +46,17 @@ const Club = styled.div`
   letter-spacing: 0.02em;
 `;
 
-const StarButton = styled.button`
+const StarButton = styled.button<{ $active: boolean }>`
   all: unset;
   cursor: pointer;
   font-size: 28px;
   line-height: 1;
-  color: #e8a020;
+  color: ${({ $active }) => ($active ? '#e8a020' : '#c4c4b8')};
   flex-shrink: 0;
   transition: color 0.15s ease, transform 0.1s ease;
 
   &:hover {
-    color: #c8881a;
-    transform: scale(1.15);
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-`;
-
-const AddFavoriteButton = styled.button`
-  all: unset;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-  color: #c4c4b8;
-  flex-shrink: 0;
-  transition: color 0.15s ease, transform 0.1s ease;
-
-  &:hover {
-    color: #e8a020;
+    color: ${({ $active }) => ($active ? '#c8881a' : '#8b8b80')};
     transform: scale(1.15);
   }
 
@@ -114,23 +95,14 @@ export function PlayerHeader({ data, id }: Props) {
         <Eyebrow>Tennis Vlaanderen · Spelersprofiel</Eyebrow>
         <NameRow>
           <Name>{data.player.name}</Name>
-          {favorited ? (
-            <StarButton
-              onClick={handleToggle}
-              title="Verwijder uit favorieten"
-              aria-label="Verwijder uit favorieten"
-            >
-              <i className="ti ti-star-filled" />
-            </StarButton>
-          ) : (
-            <AddFavoriteButton
-              onClick={handleToggle}
-              title="Voeg toe aan favorieten"
-              aria-label="Voeg toe aan favorieten"
-            >
-              <i className="ti ti-star" />
-            </AddFavoriteButton>
-          )}
+          <StarButton
+            $active={favorited}
+            onClick={handleToggle}
+            title={favorited ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+            aria-label={favorited ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+          >
+            <i className="ti ti-star" />
+          </StarButton>
         </NameRow>
         <Club>{data.player.club}</Club>
       </TitleBlock>
