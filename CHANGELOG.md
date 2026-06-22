@@ -4,6 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-22
 
+- **Changed** Prestatieprofiel radaras "Toernooiwinst" vervangen door "Gem. prestatie": gemiddelde win/loss ratio over alle resultaten (tornooien én interclub, selected én niet-selected), genormaliseerd als wins/WL.length per resultaat; berekend in `api.ts` als `UIDisc.bestRound`
+
 - **Added** Favorite players — bookmark players from their profile page; favorites appear on the landing page with alphabetical insertion and drag-to-reorder; persisted in localStorage
 
 - **Added** Planned match date and time displayed in upcoming matches: `planned` field surfaced through `UIUpcomingMatch` and rendered in the card subtitle (e.g. "Enkel · 1e ronde · 25 jun · 14:30"); date-only values show without time
