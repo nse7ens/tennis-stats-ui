@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { usePlayerSearch } from '../usePlayerSearch';
 import { PlayerSearchInput } from '../components/PlayerSearchInput';
+import { FavoritesList } from '../components/FavoritesList';
+import { useFavorites } from '../FavoritesContext';
 
 const Shell = styled.div`
   background: #edede5;
@@ -14,9 +16,12 @@ const Shell = styled.div`
   padding: 32px 16px;
 `;
 
-const Card = styled.div`
+const PageContent = styled.div`
   width: 100%;
   max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `;
 
 const Kicker = styled.p`
@@ -48,24 +53,28 @@ const Subtitle = styled.p`
 export function LandingPage() {
   const navigate = useNavigate();
   const { query, setQuery, results, loading } = usePlayerSearch();
+  const { favorites } = useFavorites();
 
   return (
     <Shell>
-      <Card>
-        <Kicker>Tennis Vlaanderen</Kicker>
-        <Heading>Zoek een speler</Heading>
-        <Subtitle>
-          Zoek op naam of club om het spelersprofiel te openen — punten,
-          evolutie, recentste vorm en volledige toernooigeschiedenis.
-        </Subtitle>
-        <PlayerSearchInput
-          query={query}
-          setQuery={setQuery}
-          results={results}
-          loading={loading}
-          onSelect={id => navigate(`/player/${id}`)}
-        />
-      </Card>
+      <PageContent>
+        <div>
+          <Kicker>Tennis Vlaanderen</Kicker>
+          <Heading>Zoek een speler</Heading>
+          <Subtitle>
+            Zoek op naam of club om het spelersprofiel te openen — punten,
+            evolutie, recentste vorm en volledige toernooigeschiedenis.
+          </Subtitle>
+          <PlayerSearchInput
+            query={query}
+            setQuery={setQuery}
+            results={results}
+            loading={loading}
+            onSelect={id => navigate(`/player/${id}`)}
+          />
+        </div>
+        {favorites.length > 0 && <FavoritesList />}
+      </PageContent>
     </Shell>
   );
 }
