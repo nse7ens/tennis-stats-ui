@@ -3,6 +3,7 @@ import type {
   RawPlayerData, RawDisc, RawResult, RawMatch, RawRecentMatch, RawUpcomingMatch,
   PlayerSearchResult
 } from './types';
+import type { SeasonTag } from './utils';
 
 function transformMatch(m: RawMatch): UIMatch {
   return { round: m.round, score: m.score, did_win: m.did_win, opp: m.opponents.map(o => ({ name: o.name, rank: o.rank, user_id: o.user_id })) };
@@ -96,9 +97,9 @@ export async function searchPlayers(query: string, signal: AbortSignal): Promise
   }
 }
 
-export async function fetchPlayer(userId: number, signal?: AbortSignal): Promise<UIPlayerData | null> {
+export async function fetchPlayer(userId: number, season: SeasonTag, signal?: AbortSignal): Promise<UIPlayerData | null> {
   try {
-    const res = await fetch(`/api/get_user_report/${userId}`, {
+    const res = await fetch(`/api/get_user_report/${userId}?s=${season}`, {
       headers: { Accept: 'application/json' },
       signal,
     });
