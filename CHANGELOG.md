@@ -4,6 +4,7 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-22
 
+- **Fixed** Season switch no longer triggers a full-page loading spinner: player data stays visible while the new season fetch runs; `prevIdRef` tracks whether the player changed (spinner) or only the season changed (silent update)
 - **Fixed** SeasonSelector redesigned with segmented timeline bar: replaced year-chip row with a position-based horizontal track where each season occupies a proportional segment derived from its `start` value; reduces component height and correctly represents the season's time period
 - **Added** Season selector wired into `PlayerPage`: reads/writes `?s=` query param via `useSearchParams`, redirects to default season when param is missing or invalid, passes `season` to `fetchPlayer`, and renders `<SeasonSelector>` above `<PlayerHeader>`
 - **Added** Season selector infrastructure: `SEASONS` constant with 8 seasons (dec2022–may2026), `SeasonTag` type, and `DEFAULT_SEASON` ('may2026') added to `src/utils.ts` for upcoming season selector feature (Step 1)

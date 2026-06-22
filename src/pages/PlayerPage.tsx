@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { fetchPlayer } from '../api';
@@ -73,6 +73,7 @@ export function PlayerPage() {
     ? (rawSeason as SeasonTag)
     : DEFAULT_SEASON;
   const [data, setData] = useState<UIPlayerData | null | 'loading'>('loading');
+  const prevIdRef = useRef<string | undefined>(undefined);
 
   useEffect(() => {
     if (!rawSeason || !SEASONS.some(s => s.tag === rawSeason)) {
@@ -86,7 +87,10 @@ export function PlayerPage() {
     if (isNaN(numId) || numId <= 0) { setData(null); return; }
 
     const controller = new AbortController();
-    setData('loading');
+    if (prevIdRef.current !== id) {
+      setData('loading');
+      prevIdRef.current = id;
+    }
     fetchPlayer(numId, season, controller.signal).then(result => {
       if (!controller.signal.aborted) setData(result);
     });
