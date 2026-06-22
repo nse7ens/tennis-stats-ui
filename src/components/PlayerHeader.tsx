@@ -18,7 +18,7 @@ const TitleBlock = styled.div`
 
 const NameRow = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
 `;
 
@@ -53,7 +53,6 @@ const StarButton = styled.button<{ $active: boolean }>`
   line-height: 1;
   color: ${({ $active }) => ($active ? '#e8a020' : '#c4c4b8')};
   flex-shrink: 0;
-  align-self: center;
   transition: color 0.15s ease, transform 0.1s ease;
 
   &:hover {
