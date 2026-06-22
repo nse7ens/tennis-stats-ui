@@ -4,6 +4,7 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-22
 
+- **Added** Season selector infrastructure: `SEASONS` constant with 8 seasons (dec2022–may2026), `SeasonTag` type, and `DEFAULT_SEASON` ('may2026') added to `src/utils.ts` for upcoming season selector feature (Step 1)
 - **Changed** UI language: all labels, headings, and copy translated to Dutch (Flemish) — "Singles/Doubles" → "Enkel/Dubbel", "Find a player" → "Zoek een speler", ranking/tournament/stats labels, navigation and error messages all in Dutch
 
 ## 2026-06-19
