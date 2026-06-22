@@ -20,3 +20,17 @@ export const hexA = (hex: string, a: number): string => {
   const n = parseInt(full, 16);
   return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
 };
+
+export const SEASONS = [
+  { tag: 'dec2022', label: 'Winterberekening 2023', start: 2022.5 },
+  { tag: 'jun2023', label: 'Zomerberekening 2023',  start: 2023   },
+  { tag: 'oct2023', label: 'Winterberekening 2024', start: 2023.5 },
+  { tag: 'may2024', label: 'Zomerberekening 2024',  start: 2024   },
+  { tag: 'oct2024', label: 'Winterberekening 2025', start: 2024.5 },
+  { tag: 'may2025', label: 'Zomerberekening 2025',  start: 2025   },
+  { tag: 'oct2025', label: 'Winterberekening 2026', start: 2025.5 },
+  { tag: 'may2026', label: 'Zomerberekening 2026',  start: 2026   },
+] as const;
+
+export type SeasonTag = typeof SEASONS[number]['tag'];
+export const DEFAULT_SEASON: SeasonTag = 'may2026';
