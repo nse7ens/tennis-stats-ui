@@ -4,6 +4,7 @@ import { usePlayerSearch } from '../usePlayerSearch';
 import { PlayerSearchInput } from '../components/PlayerSearchInput';
 import { FavoritesList } from '../components/FavoritesList';
 import { useFavorites } from '../FavoritesContext';
+import { Footer } from '../components/Footer';
 
 const Shell = styled.div`
   background: #edede5;
@@ -75,6 +76,7 @@ export function LandingPage() {
         </div>
         {favorites.length > 0 && <FavoritesList />}
       </PageContent>
+      <Footer />
     </Shell>
   );
 }

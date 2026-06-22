@@ -11,6 +11,7 @@ import { PerformancePanel } from '../components/PerformancePanel';
 import { UpcomingSection } from '../components/UpcomingSection';
 import { TournamentResults } from '../components/TournamentResults';
 import { SeasonSelector } from '../components/SeasonSelector';
+import { Footer } from '../components/Footer';
 
 const Page = styled.div`
   background: #f3f3ee;
@@ -169,6 +170,7 @@ export function PlayerPage() {
           </>
         )}
       </Inner>
+      <Footer />
     </Page>
   );
 }

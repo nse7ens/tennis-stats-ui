@@ -4,6 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-22
 
+- **Added** Footer en privacypagina: vaste footer onderaan elke pagina met attributie aan tennisstats.be en link naar `/privacy`; privacypagina verduidelijkt dat het project onofficieel en niet-commercieel is, geen data opslaat, en contactinfo voor verwijderverzoeken via GitHub Issues biedt
+
 - **Changed** Prestatieprofiel radaras "Toernooiwinst" vervangen door "Gem. prestatie": gemiddelde win/loss ratio over alle resultaten (tornooien én interclub, selected én niet-selected), genormaliseerd als wins/WL.length per resultaat; berekend in `api.ts` als `UIDisc.bestRound`
 
 - **Added** Favorite players — bookmark players from their profile page; favorites appear on the landing page with alphabetical insertion and drag-to-reorder; persisted in localStorage
