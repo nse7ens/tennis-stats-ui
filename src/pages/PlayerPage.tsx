@@ -18,7 +18,7 @@ const Page = styled.div`
   min-height: 100vh;
   font-family: 'Archivo', system-ui, sans-serif;
   color: #1a1a17;
-  padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) 64px;
+  padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) 32px;
   -webkit-font-smoothing: antialiased;
 `;
 
