@@ -84,17 +84,18 @@ const ActiveDot = styled.div<{ color: string }>`
 export function SeasonSelector({ season, onChange }: Props) {
   const theme = useTheme();
   const idx = SEASONS.findIndex(s => s.tag === season);
-  const activeLabel = SEASONS[idx].label;
+  const safeIdx = idx >= 0 ? idx : SEASONS.length - 1;
+  const activeLabel = SEASONS[safeIdx].label;
   const activeYear = activeLabel.split(' ').at(-1)!;
 
   const uniqueYears = [...new Set(SEASONS.map(s => s.label.split(' ').at(-1)!))];
 
   const handlePrev = () => {
-    if (idx > 0) onChange(SEASONS[idx - 1].tag);
+    if (safeIdx > 0) onChange(SEASONS[safeIdx - 1].tag);
   };
 
   const handleNext = () => {
-    if (idx < SEASONS.length - 1) onChange(SEASONS[idx + 1].tag);
+    if (safeIdx < SEASONS.length - 1) onChange(SEASONS[safeIdx + 1].tag);
   };
 
   const handleYearClick = (year: string) => {
@@ -105,11 +106,11 @@ export function SeasonSelector({ season, onChange }: Props) {
   return (
     <Card>
       <ChevronRow>
-        <ChevronButton type="button" disabled={idx === 0} onClick={handlePrev}>
+        <ChevronButton type="button" disabled={safeIdx === 0} onClick={handlePrev}>
           &#x2039;
         </ChevronButton>
         <SeasonLabel color={theme.singles}>{activeLabel}</SeasonLabel>
-        <ChevronButton type="button" disabled={idx === SEASONS.length - 1} onClick={handleNext}>
+        <ChevronButton type="button" disabled={safeIdx === SEASONS.length - 1} onClick={handleNext}>
           &#x203A;
         </ChevronButton>
       </ChevronRow>

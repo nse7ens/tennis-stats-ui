@@ -68,9 +68,9 @@ const SearchLink = styled(Link)`
 export function PlayerPage() {
   const { id } = useParams<{ id: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const rawSeason = searchParams.get('s') as SeasonTag | null;
-  const season: SeasonTag = SEASONS.some(s => s.tag === rawSeason)
-    ? rawSeason!
+  const rawSeason = searchParams.get('s');
+  const season: SeasonTag = rawSeason && SEASONS.some(s => s.tag === rawSeason)
+    ? (rawSeason as SeasonTag)
     : DEFAULT_SEASON;
   const [data, setData] = useState<UIPlayerData | null | 'loading'>('loading');
 
