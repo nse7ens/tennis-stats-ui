@@ -65,6 +65,15 @@ const SearchLink = styled(Link)`
   font-size: 14px;
 `;
 
+const SeasonNotice = styled.div`
+  background: #fefce8;
+  border: 1px solid #e8ddb8;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 14px;
+  color: #6b5f2e;
+`;
+
 export function PlayerPage() {
   const { id } = useParams<{ id: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -73,7 +82,9 @@ export function PlayerPage() {
     ? (rawSeason as SeasonTag)
     : DEFAULT_SEASON;
   const [data, setData] = useState<UIPlayerData | null | 'loading'>('loading');
+  const [seasonUnavailable, setSeasonUnavailable] = useState(false);
   const prevIdRef = useRef<string | undefined>(undefined);
+  const hasValidDataRef = useRef(false);
 
   useEffect(() => {
     if (!rawSeason || !SEASONS.some(s => s.tag === rawSeason)) {
@@ -87,15 +98,36 @@ export function PlayerPage() {
     if (isNaN(numId) || numId <= 0) { setData(null); return; }
 
     const controller = new AbortController();
-    if (prevIdRef.current !== id) {
+    const isNewPlayer = prevIdRef.current !== id;
+
+    if (isNewPlayer) {
       setData('loading');
+      setSeasonUnavailable(false);
       prevIdRef.current = id;
+      hasValidDataRef.current = false;
     }
+
     fetchPlayer(numId, season, controller.signal).then(result => {
-      if (!controller.signal.aborted) setData(result);
+      if (controller.signal.aborted) return;
+      if (result) {
+        hasValidDataRef.current = true;
+        setSeasonUnavailable(false);
+        setData(result);
+      } else if (!hasValidDataRef.current) {
+        // No valid data yet for this player. If we're not on the default season,
+        // try redirecting there first before declaring the player not found.
+        if (season !== DEFAULT_SEASON) {
+          setSearchParams({ s: DEFAULT_SEASON }, { replace: true });
+        } else {
+          setData(null);
+        }
+      } else {
+        // Already had valid data — this season simply has no data.
+        setSeasonUnavailable(true);
+      }
     });
     return () => controller.abort();
-  }, [id, season]);
+  }, [id, season]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (data === 'loading') {
     return <Loading>Laden…</Loading>;
@@ -114,20 +146,28 @@ export function PlayerPage() {
     <Page>
       <Inner>
         <BackLink to="/">← Terug</BackLink>
+        <PlayerHeader data={data} />
         <SeasonSelector
           season={season}
           onChange={tag => setSearchParams({ s: tag })}
         />
-        <PlayerHeader data={data} />
-        <RankingChart history={data.history} />
-        <PerformancePanel
-          singles={data.singles}
-          doubles={data.doubles}
-          recentSingles={data.recent.singles}
-          recentDoubles={data.recent.doubles}
-        />
-        <UpcomingSection singles={data.upcoming.singles} doubles={data.upcoming.doubles} />
-        <TournamentResults singles={data.singles} doubles={data.doubles} />
+        {seasonUnavailable ? (
+          <SeasonNotice>
+            Geen data beschikbaar voor dit seizoen.
+          </SeasonNotice>
+        ) : (
+          <>
+            <RankingChart history={data.history} />
+            <PerformancePanel
+              singles={data.singles}
+              doubles={data.doubles}
+              recentSingles={data.recent.singles}
+              recentDoubles={data.recent.doubles}
+            />
+            <UpcomingSection singles={data.upcoming.singles} doubles={data.upcoming.doubles} />
+            <TournamentResults singles={data.singles} doubles={data.doubles} />
+          </>
+        )}
       </Inner>
     </Page>
   );
