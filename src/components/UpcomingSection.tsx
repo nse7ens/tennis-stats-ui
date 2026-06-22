@@ -87,14 +87,14 @@ interface Props { singles: UIUpcomingMatch[]; doubles: UIUpcomingMatch[]; }
 
 export function UpcomingSection({ singles, doubles }: Props) {
   const items = [
-    ...singles.map(u => ({ ...u, kind: 'Singles' })),
-    ...doubles.map(u => ({ ...u, kind: 'Doubles' })),
+    ...singles.map(u => ({ ...u, kind: 'Enkel' })),
+    ...doubles.map(u => ({ ...u, kind: 'Dubbel' })),
   ];
   if (items.length === 0) return null;
 
   return (
     <Section>
-      <SectionLabel>Upcoming</SectionLabel>
+      <SectionLabel>Aankomende wedstrijden</SectionLabel>
       <ItemList>
         {items.map((u, i) => (
           <Item key={i}>
@@ -105,7 +105,7 @@ export function UpcomingSection({ singles, doubles }: Props) {
             <CatBadge>{u.cat.toUpperCase()}</CatBadge>
             {u.p_name && (
               <PartnerBlock>
-                <PartnerLabel>Partner</PartnerLabel>
+                <PartnerLabel>Ploegmaat</PartnerLabel>
                 <PartnerName>
                   {u.p_id != null
                     ? <PlayerLink to={`/player/${u.p_id}`}>{u.p_name}</PlayerLink>

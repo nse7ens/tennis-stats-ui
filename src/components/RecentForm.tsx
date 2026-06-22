@@ -134,8 +134,8 @@ export function RecentForm({ singles, doubles }: Props) {
     <Card>
       <CardHeader>
         <div>
-          <Kicker>Recent form</Kicker>
-          <Title>Last matches</Title>
+          <Kicker>Recente vorm</Kicker>
+          <Title>Laatste wedstrijden</Title>
         </div>
         <DiscToggle value={disc} onChange={setDisc} variant="light" size="sm" />
       </CardHeader>

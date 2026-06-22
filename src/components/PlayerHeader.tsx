@@ -52,13 +52,13 @@ export function PlayerHeader({ data }: Props) {
   return (
     <Root>
       <TitleBlock>
-        <Eyebrow>Tennis Vlaanderen · Player Profile</Eyebrow>
+        <Eyebrow>Tennis Vlaanderen · Spelersprofiel</Eyebrow>
         <Name>{data.player.name}</Name>
         <Club>{data.player.club}</Club>
       </TitleBlock>
       <CardsGrid>
-        <RankingCard disc={data.singles} label="Singles" color={theme.singles} />
-        <RankingCard disc={data.doubles} label="Doubles" color={theme.doubles} />
+        <RankingCard disc={data.singles} label="Enkel" color={theme.singles} />
+        <RankingCard disc={data.doubles} label="Dubbel" color={theme.doubles} />
       </CardsGrid>
     </Root>
   );

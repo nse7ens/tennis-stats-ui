@@ -106,19 +106,19 @@ export function RankingChart({ history }: Props) {
   const yearLabels = history.filter(h => h.l !== '').map(h => String(h.l));
   const firstYear = yearLabels[0] ?? '';
   const lastYear = yearLabels[yearLabels.length - 1] ?? '';
-  const kickerRange = firstYear && lastYear ? `${firstYear} — ${lastYear}` : 'Ranking evolution';
+  const kickerRange = firstYear && lastYear ? `${firstYear} — ${lastYear}` : 'Rankingverloop';
 
   return (
     <Section>
       <ChartHeader>
         <div>
           <Kicker>{kickerRange}</Kicker>
-          <Title>Ranking evolution</Title>
+          <Title>Rankingverloop</Title>
         </div>
         <Legend>
-          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: theme.singles, display: 'inline-block' }} />Singles</LegendItem>
-          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: theme.doubles, display: 'inline-block' }} />Doubles</LegendItem>
-          <LegendItem><span style={{ width: 22, height: 0, borderTop: '2px dashed #b7b7ad', display: 'inline-block' }} />Predicted</LegendItem>
+          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: theme.singles, display: 'inline-block' }} />Enkel</LegendItem>
+          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: theme.doubles, display: 'inline-block' }} />Dubbel</LegendItem>
+          <LegendItem><span style={{ width: 22, height: 0, borderTop: '2px dashed #b7b7ad', display: 'inline-block' }} />Verwacht</LegendItem>
         </Legend>
       </ChartHeader>
       <ScrollWrap ref={scrollRef}>

@@ -83,19 +83,19 @@ export function RadarChart({ singles, doubles }: Props) {
   const safeDiv = (a: number, b: number) => b ? a / b : 0;
 
   const axes = [
-    { t: 'Match win', sv: safeDiv(S.nw, S.nm),   dv: safeDiv(D.nw, D.nm) },
-    { t: 'Set win',   sv: safeDiv(S.nsw, S.nsp), dv: safeDiv(D.nsw, D.nsp) },
-    { t: 'Game win',  sv: safeDiv(S.ngw, S.ngp), dv: safeDiv(D.ngw, D.ngp) },
-    { t: 'Title rate', sv: safeDiv(S.ntw, S.ntp), dv: safeDiv(D.ntw, D.ntp) },
+    { t: 'Match gew.', sv: safeDiv(S.nw, S.nm),   dv: safeDiv(D.nw, D.nm) },
+    { t: 'Set gew.',   sv: safeDiv(S.nsw, S.nsp), dv: safeDiv(D.nsw, D.nsp) },
+    { t: 'Game gew.',  sv: safeDiv(S.ngw, S.ngp), dv: safeDiv(D.ngw, D.ngp) },
+    { t: 'Toernooiwinst', sv: safeDiv(S.ntw, S.ntp), dv: safeDiv(D.ntw, D.ntp) },
     { t: 'ELO',       sv: Math.min(1, singles.elo / 50), dv: Math.min(1, doubles.elo / 50) },
   ];
 
   const metricRows = [
-    { t: 'Match win',  s: pct(S.nw, S.nm) + '%',   d: pct(D.nw, D.nm) + '%' },
-    { t: 'Set win',    s: pct(S.nsw, S.nsp) + '%',  d: pct(D.nsw, D.nsp) + '%' },
-    { t: 'Game win',   s: pct(S.ngw, S.ngp) + '%',  d: pct(D.ngw, D.ngp) + '%' },
-    { t: 'Title rate', s: pct(S.ntw, S.ntp) + '%',  d: pct(D.ntw, D.ntp) + '%' },
-    { t: 'ELO',        s: String(singles.elo),        d: String(doubles.elo) },
+    { t: 'Match gew.',    s: pct(S.nw, S.nm) + '%',   d: pct(D.nw, D.nm) + '%' },
+    { t: 'Set gew.',      s: pct(S.nsw, S.nsp) + '%',  d: pct(D.nsw, D.nsp) + '%' },
+    { t: 'Game gew.',     s: pct(S.ngw, S.ngp) + '%',  d: pct(D.ngw, D.ngp) + '%' },
+    { t: 'Toernooiwinst', s: pct(S.ntw, S.ntp) + '%',  d: pct(D.ntw, D.ntp) + '%' },
+    { t: 'ELO',           s: String(singles.elo),        d: String(doubles.elo) },
   ];
 
   const poly = (key: 'sv' | 'dv') =>
@@ -110,8 +110,8 @@ export function RadarChart({ singles, doubles }: Props) {
 
   return (
     <Card>
-      <Kicker>Statistics</Kicker>
-      <Title>Performance profile</Title>
+      <Kicker>Statistieken</Kicker>
+      <Title>Prestatieprofiel</Title>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <svg viewBox="0 0 310 305" style={{ width: '100%', maxWidth: 340, height: 'auto' }}>
           {rings.map((r, i) => <polygon key={i} points={r} fill="none" stroke="#ececdf" strokeWidth={1} />)}
@@ -125,9 +125,9 @@ export function RadarChart({ singles, doubles }: Props) {
       </div>
       <MetricsTable>
         <MetricHeader>
-          <span style={{ flex: 1 }}>Metric</span>
-          <MetricVal color={theme.singles}>Singles</MetricVal>
-          <MetricVal color={theme.doubles}>Doubles</MetricVal>
+          <span style={{ flex: 1 }}>Metriek</span>
+          <MetricVal color={theme.singles}>Enkel</MetricVal>
+          <MetricVal color={theme.doubles}>Dubbel</MetricVal>
         </MetricHeader>
         {metricRows.map(m => (
           <MetricRow key={m.t}>

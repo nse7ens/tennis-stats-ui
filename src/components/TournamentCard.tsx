@@ -165,14 +165,14 @@ export function TournamentCard({ result: r }: Props) {
         {sel && r.score > 0 && (
           <PointsBlock>
             <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 20, fontWeight: 700, color: theme.singles, lineHeight: 1 }}>{fmtNum(r.score)}</div>
-            <PointsLabel>points</PointsLabel>
+            <PointsLabel>punten</PointsLabel>
           </PointsBlock>
         )}
       </CardHeader>
 
       {r.partner && (
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 11, background: hexA(theme.doubles, 0.08), border: `1px solid ${hexA(theme.doubles, 0.28)}`, padding: '4px 10px', borderRadius: 7 }}>
-          <span style={{ fontSize: '9.5px', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: hexA(theme.doubles, 0.85), fontWeight: 600 }}>With</span>
+          <span style={{ fontSize: '9.5px', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: hexA(theme.doubles, 0.85), fontWeight: 600 }}>Met</span>
           {r.p_id != null
             ? <PlayerLink to={`/player/${r.p_id}`} style={{ fontSize: '12.5px', fontWeight: 600, color: theme.doubles }}>{r.partner}</PlayerLink>
             : <span style={{ fontSize: '12.5px', fontWeight: 600, color: theme.doubles }}>{r.partner}</span>
@@ -189,7 +189,7 @@ export function TournamentCard({ result: r }: Props) {
           } />
         ))}
         <TagBadge selected={sel} color={theme.singles}>
-          {sel ? 'Counts toward ranking' : 'Not counted'}
+          {sel ? 'Telt mee voor ranking' : 'Niet meegeteld'}
         </TagBadge>
       </DotsRow>
 
@@ -200,14 +200,14 @@ export function TournamentCard({ result: r }: Props) {
       {r.subscores.length > 0 && (
         <>
           <ToggleBtn type="button" onClick={() => setOpen(o => !o)} style={{ color: theme.singles }}>
-            {open ? 'Hide point calculation' : 'How these points are calculated'}
+            {open ? 'Verberg puntberekening' : 'Hoe worden deze punten berekend'}
             <span style={{ display: 'inline-block', transition: 'transform .18s', transform: open ? 'rotate(180deg)' : 'none', fontSize: 10 }}>▾</span>
           </ToggleBtn>
           {open && (
             <CalcPanel style={{ background: hexA(theme.singles, 0.04), border: `1px solid ${hexA(theme.singles, 0.18)}` }}>
               <CalcHeader style={{ borderBottom: `1px solid ${hexA(theme.singles, 0.18)}` }}>
-                <span style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8b8b80', fontWeight: 700 }}>Points calculation</span>
-                <span style={{ fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#a3a399' }}>Value</span>
+                <span style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8b8b80', fontWeight: 700 }}>Puntberekening</span>
+                <span style={{ fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#a3a399' }}>Waarde</span>
               </CalcHeader>
               {r.subscores.map((ss, i) => (
                 <CalcRow key={i}>
@@ -221,7 +221,7 @@ export function TournamentCard({ result: r }: Props) {
                 </CalcRow>
               ))}
               <CalcTotal>
-                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#1a1a17' }}>Tournament score</span>
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#1a1a17' }}>Toernooipunten</span>
                 <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 16, fontWeight: 700, color: theme.singles }}>{fmtNum(r.score)}</span>
               </CalcTotal>
             </CalcPanel>

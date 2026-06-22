@@ -96,14 +96,14 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
   return (
     <>
       <ToggleBtn type="button" onClick={() => setOpen(o => !o)} style={{ color }}>
-        {open ? 'Hide calculation' : "How it's calculated"}
+        {open ? 'Berekening verbergen' : 'Hoe het berekend wordt'}
         <Chevron open={open}>▾</Chevron>
       </ToggleBtn>
 
       {open && (
         <Body>
           <FormulaLine>
-            <span style={{ color: '#8b8b80' }}>Ranking score </span>
+            <span style={{ color: '#8b8b80' }}>Rankingscore </span>
             <span style={{ ...mono, color }}>{fmtNum(disc.score)}</span>
             <span style={{ color: '#8b8b80' }}> = </span>
             <span style={{ ...mono, color: altColor }}>{Math.round(factor * 100)}%</span>
@@ -112,7 +112,7 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
           </FormulaLine>
           <SubLine>
             <span style={{ ...mono, color: altColor }}>{Math.round(factor * 100)}%</span>
-            <span style={{ color: '#8b8b80' }}> — weighting for {sel.length} result{sel.length === 1 ? '' : 's'} with points</span>
+            <span style={{ color: '#8b8b80' }}> — weging voor {sel.length} {sel.length === 1 ? 'resultaat' : 'resultaten'} met punten</span>
           </SubLine>
           <SubLine>
             <span style={{ ...mono, color }}>{fmtNum(avg)}</span>
