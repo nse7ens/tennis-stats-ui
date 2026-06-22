@@ -138,3 +138,9 @@ export interface PlayerSearchResult {
   doubles: number;
   category: string;
 }
+
+export interface FavoritedPlayer {
+  id: number;
+  name: string;
+  club: string;
+}
