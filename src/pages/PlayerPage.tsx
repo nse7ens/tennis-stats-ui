@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { fetchPlayer } from '../api';
 import type { UIPlayerData } from '../types';
+import { SEASONS, DEFAULT_SEASON } from '../utils';
+import type { SeasonTag } from '../utils';
 import { PlayerHeader } from '../components/PlayerHeader';
 import { RankingChart } from '../components/RankingChart';
 import { PerformancePanel } from '../components/PerformancePanel';
 import { UpcomingSection } from '../components/UpcomingSection';
 import { TournamentResults } from '../components/TournamentResults';
+import { SeasonSelector } from '../components/SeasonSelector';
 
 const Page = styled.div`
   background: #f3f3ee;
@@ -64,7 +67,18 @@ const SearchLink = styled(Link)`
 
 export function PlayerPage() {
   const { id } = useParams<{ id: string }>();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawSeason = searchParams.get('s') as SeasonTag | null;
+  const season: SeasonTag = SEASONS.some(s => s.tag === rawSeason)
+    ? rawSeason!
+    : DEFAULT_SEASON;
   const [data, setData] = useState<UIPlayerData | null | 'loading'>('loading');
+
+  useEffect(() => {
+    if (!rawSeason || !SEASONS.some(s => s.tag === rawSeason)) {
+      setSearchParams({ s: DEFAULT_SEASON }, { replace: true });
+    }
+  }, [rawSeason]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!id) { setData(null); return; }
@@ -73,11 +87,11 @@ export function PlayerPage() {
 
     const controller = new AbortController();
     setData('loading');
-    fetchPlayer(numId, controller.signal).then(result => {
+    fetchPlayer(numId, season, controller.signal).then(result => {
       if (!controller.signal.aborted) setData(result);
     });
     return () => controller.abort();
-  }, [id]);
+  }, [id, season]);
 
   if (data === 'loading') {
     return <Loading>Laden…</Loading>;
@@ -96,6 +110,10 @@ export function PlayerPage() {
     <Page>
       <Inner>
         <BackLink to="/">← Terug</BackLink>
+        <SeasonSelector
+          season={season}
+          onChange={tag => setSearchParams({ s: tag })}
+        />
         <PlayerHeader data={data} />
         <RankingChart history={data.history} />
         <PerformancePanel
