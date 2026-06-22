@@ -4,9 +4,12 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-22
 
-- **Added** Footer en privacypagina: vaste footer onderaan elke pagina met attributie aan tennisstats.be en link naar `/privacy`; privacypagina verduidelijkt dat het project onofficieel en niet-commercieel is, geen data opslaat, en contactinfo voor verwijderverzoeken via GitHub Issues biedt
+- **Docs** Translated `.docs/user/README.md` from Dutch to English
+- **Docs** Translated two Dutch CHANGELOG entries (footer/privacy page, radar axis rename) to English; added language rule to `CLAUDE.md` requiring all documentation prose to be written in English (UI labels may remain in Dutch)
 
-- **Changed** Prestatieprofiel radaras "Toernooiwinst" vervangen door "Gem. prestatie": gemiddelde win/loss ratio over alle resultaten (tornooien én interclub, selected én niet-selected), genormaliseerd als wins/WL.length per resultaat; berekend in `api.ts` als `UIDisc.bestRound`
+- **Added** Footer and privacy page: fixed footer at the bottom of every page with attribution to tennisstats.be and link to `/privacy`; privacy page clarifies that the project is unofficial and non-commercial, stores no data, and provides contact info for removal requests via GitHub Issues
+
+- **Changed** Performance radar axis "Toernooiwinst" replaced with "Gem. prestatie": average win/loss ratio across all results (tournaments and interclub, selected and non-selected), normalised as wins/WL.length per result; computed in `api.ts` as `UIDisc.bestRound`
 
 - **Added** Favorite players — bookmark players from their profile page; favorites appear on the landing page with alphabetical insertion and drag-to-reorder; persisted in localStorage
 
