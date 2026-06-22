@@ -1,35 +1,35 @@
-# Gebruikershandleiding
+# User Guide
 
-## Speler zoeken
+## Search for a Player
 
-Op de startpagina kan je spelers zoeken op naam of club. Typ minstens vijf karakters om zoekresultaten te zien. De zoekresultaten tonen de spelersrankings (enkel en dubbel) waarmee je snel kan zien op welk niveau een speler speelt.
+On the home page you can search for players by name or club. Type at least five characters to see search results. Results show the player's singles and doubles rankings so you can quickly gauge their level.
 
-Klik op een zoekresultaat om naar het spelersprofiel te gaan.
+Click a result to open the player profile.
 
-## Favorieten
+## Favorites
 
-Spelers die je regelmatig raadpleegt kan je als favoriet opslaan.
+Players you consult regularly can be saved as favorites.
 
-- Open een spelersprofiel en klik op de ster naast de naam om de speler toe te voegen aan je favorieten.
-- Favorieten verschijnen op de startpagina onder de zoekbalk, gesorteerd op naam.
-- Sleep een favoriet naar een nieuwe positie om de volgorde handmatig aan te passen.
-- Klik op het × icoontje op de startpagina, of opnieuw op de ster op het spelersprofiel, om een favoriet te verwijderen.
+- Open a player profile and click the star next to the name to add the player to your favorites.
+- Favorites appear on the home page below the search bar, sorted alphabetically.
+- Drag a favorite to a new position to reorder the list manually.
+- Click the × icon on the home page, or click the star again on the player profile, to remove a favorite.
 
-Je favorieten worden lokaal opgeslagen in de browser en blijven bewaard na het sluiten van de pagina.
+Favorites are stored locally in your browser and persist after closing the page.
 
-## Spelersprofiel
+## Player Profile
 
-Op het spelersprofiel van een speler zie je:
+A player profile shows:
 
-- **Ranking en score** — huidige klassering in enkel en dubbel, voorspelde volgende klassering, en ELO-score
-- **Statistieken** — aantal gespeelde wedstrijden, gewonnen wedstrijden, spelsucces en setwerkings
-- **Klasserings-evolutie** — grafiek met de historische ontwikkeling van de klassering per seizoen
-- **Recentste vorm** — de laatste zes wedstrijden met tegenstander en uitslag
-- **Komende wedstrijden** — tabel met geplande wedstrijden (enkel en dubbel)
-- **Toernooiresultaten** — volledige geschiedenis van alle toernooien en interclub competities
+- **Ranking and score** — current singles and doubles ranking, predicted next ranking, and ELO score
+- **Statistics** — matches played, matches won, game win percentage, and sets won/played
+- **Ranking evolution** — chart of the historical ranking progression per season
+- **Recent form** — the last six matches with opponent and result
+- **Upcoming matches** — scheduled singles and doubles matches
+- **Tournament results** — full history of all tournaments and interclub competitions
 
-Je kan schakelen tussen enkel- en dubbelspel met de tabbladen bovenaan.
+Use the tabs at the top to switch between singles and doubles.
 
-### Seizoenen
+### Seasons
 
-Als een speler in meerdere seizoenen geactiveerd is, kan je boven de klassering het seizoen wijzigen. De grafiek en statistieken passen zich aan naar het geselecteerde seizoen.
+If a player has been active across multiple seasons, you can change the season above the ranking cards. The chart and statistics update to reflect the selected season.

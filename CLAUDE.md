@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Documentation
 
+**Language: all documentation must be written in English** — this includes `CHANGELOG.md` entries, ADRs, specs, dev docs, and user guides. UI copy in the app may remain in Dutch/Flemish, but any written documentation or changelog prose must be in English. When quoting Dutch UI labels in a changelog entry, keep the label itself in Dutch but write the surrounding description in English.
+
 All project documentation lives in `.docs/`:
 
 | Path | Contents |
