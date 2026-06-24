@@ -4,6 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-24
 
+- **Refactored** Completed dark mode CSS token migration across all components (tasks 3–10): removed `ThemeContext`/`useTheme`, deleted `src/theme.ts`, removed `hexA()` from utils, and migrated all 21 source files to use CSS custom properties (`var(--token)`). SVG colour attributes moved to `style={{}}` props; alpha blends use `rgba(var(--accent-*-rgb), alpha)` syntax. Enables full light/dark mode toggling without JavaScript theme state.
+
 - **Fixed** `PredictionPanel` progress bar now always includes the predicted rank with at least one tier beyond it; previously the 5-tier window was anchored to the current rank only, causing the bar to cap at 100% when predicted rank was outside the window (e.g. current=15, predicted=35)
 
 - **Docs** Added `.docs/dev/deployment-secrets-setup.md`: step-by-step guide for creating the 6 GitHub Actions secrets required by the Azure Container Apps deploy workflow
