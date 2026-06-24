@@ -4,7 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-24
 
-- **Refactored** Completed dark mode CSS token migration across all components (tasks 3–10): removed `ThemeContext`/`useTheme`, deleted `src/theme.ts`, removed `hexA()` from utils, and migrated all 21 source files to use CSS custom properties (`var(--token)`). SVG colour attributes moved to `style={{}}` props; alpha blends use `rgba(var(--accent-*-rgb), alpha)` syntax. Enables full light/dark mode toggling without JavaScript theme state.
+- **Refactored** Removed `ThemeContext`/`useTheme` and deleted `src/theme.ts`; migrated all 21 source files to CSS custom properties (`var(--token)`). SVG colour attributes moved to `style={{}}` props so CSS vars resolve correctly; alpha blends use `rgba(var(--accent-*-rgb), alpha)` syntax. Enables full light/dark mode toggling without JavaScript theme state.
+- **Fixed** RankingChart predicted-segment `<path>` strokes moved from SVG presentation attributes to `style` props so CSS custom properties resolve correctly in dark mode; page body background now uses `var(--bg-page)` and an inline `<script>` sets `data-theme` synchronously before first paint to eliminate the dark-mode flash.
 
 - **Fixed** `PredictionPanel` progress bar now always includes the predicted rank with at least one tier beyond it; previously the 5-tier window was anchored to the current rank only, causing the bar to cap at 100% when predicted rank was outside the window (e.g. current=15, predicted=35)
 
