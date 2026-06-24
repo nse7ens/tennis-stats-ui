@@ -77,7 +77,7 @@
   --text-tertiary: #c8c6bb;
   --text-muted: #b4b2a7;
   --text-faint: #a8a69b;
-  --text-placeholder: #9c9a8f;
+  --text-placeholder: #a3a196;
 
   --chart-grid: #444139;
   --chart-vline: #37342d;
@@ -86,10 +86,10 @@
   --chart-ring: #444139;
   --chart-axis: #78766d;
 
-  --accent-singles: #d4663c;
-  --accent-singles-rgb: 212,102,60;
-  --accent-doubles: #5a8fff;
-  --accent-doubles-rgb: 90,143,255;
+  --accent-singles: #ea875e;
+  --accent-singles-rgb: 234,135,94;
+  --accent-doubles: #7aa3ff;
+  --accent-doubles-rgb: 122,163,255;
 
   --win: #42cf80;
   --win-bg: rgba(66, 207, 128, 0.17);
@@ -101,7 +101,7 @@
   --rank-chip-active-bg: #4279cf;
   --rank-chip-active-text: #f5f3ec;
   --rank-chip-inactive-bg: #333a47;
-  --rank-chip-inactive-text: #8c9fc5;
+  --rank-chip-inactive-text: #94a8ce;
 
   --upcoming-bg: #3d341b;
   --upcoming-border: #65562c;
