@@ -4,6 +4,7 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-24
 
+- **Fixed** Dark mode WCAG AA contrast: `--accent-singles` lifted `#d4663c`→`#ea875e` (3.35→4.6:1), `--accent-doubles` `#5a8fff`→`#7aa3ff` (3.96→5.1:1), `--text-placeholder` `#9c9a8f`→`#a3a196` (4.32→4.6:1), `--rank-chip-inactive-text` `#8c9fc5`→`#94a8ce` (4.29→4.7:1); verified with Playwright + axe.
 - **Changed** Dark mode palette in `tokens.css` updated to a warmer brown-toned dark theme: page/card/inset backgrounds lifted to `#2d2a24`/`#383530`/`#3b3832`; text scale anchored at `#f5f3ec` down to `#9c9a8f`; borders in the `#444–#565` warm range; win/loss badges switched to semi-transparent `rgba()` overlays; amber upcoming-card refreshed; prediction rank chips updated to blue `#4279cf`/`#333a47`.
 - **Refactored** Removed `ThemeContext`/`useTheme` and deleted `src/theme.ts`; migrated all 21 source files to CSS custom properties (`var(--token)`). SVG colour attributes moved to `style={{}}` props so CSS vars resolve correctly; alpha blends use `rgba(var(--accent-*-rgb), alpha)` syntax. Enables full light/dark mode toggling without JavaScript theme state.
 - **Fixed** RankingChart predicted-segment `<path>` strokes moved from SVG presentation attributes to `style` props so CSS custom properties resolve correctly in dark mode; page body background now uses `var(--bg-page)` and an inline `<script>` sets `data-theme` synchronously before first paint to eliminate the dark-mode flash.
