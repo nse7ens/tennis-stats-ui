@@ -146,10 +146,14 @@ export function TournamentCard({ result: r }: Props) {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const sel = r.selected === 1;
+  const ongoing = r.finished === 0;
+  const borderWidth = sel ? '1.5px' : '1px';
+  const borderColor = sel ? theme.singles : '#e6e6df';
+  const borderStyle = ongoing ? 'dashed' : 'solid';
 
   const cardStyle = {
     borderRadius: 16, padding: '18px 18px 16px', background: '#fff',
-    border: sel ? `1.5px solid ${theme.singles}` : '1px solid #e6e6df',
+    border: `${borderWidth} ${borderStyle} ${borderColor}`,
   };
 
   return (
