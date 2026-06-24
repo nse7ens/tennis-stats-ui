@@ -2,6 +2,10 @@
 
 Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Added**, **Fixed**, **Changed**, **Refactored**, or **Docs**.
 
+## 2026-06-24
+
+- **Added** `finished` field surfaced through `UIResult` and transform pipeline; ongoing tournaments (`finished: 0`) can now be visually distinguished in the results tab
+
 ## 2026-06-22
 
 - **Docs** Translated `.docs/user/README.md` from Dutch to English

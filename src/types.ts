@@ -89,7 +89,7 @@ export interface UISubscore {
 
 export interface UIResult {
   title: string; series: string; subtitle: string;
-  score: number; WL: string[]; selected: 0 | 1;
+  score: number; WL: string[]; selected: 0 | 1; finished: 0 | 1;
   partner: string; p_id?: number; matches: UIMatch[]; subscores: UISubscore[];
 }
 
