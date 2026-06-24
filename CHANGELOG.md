@@ -4,6 +4,7 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-24
 
+- **Docs** Added `.docs/dev/deployment-secrets-setup.md`: step-by-step guide for creating the 6 GitHub Actions secrets required by the Azure Container Apps deploy workflow
 - **Refactored** `api.ts` now imports `transform` from `transforms.ts` instead of defining its own copy; removes ~95 lines of duplicated transform logic from `api.ts`
 - **Added** `finished` field surfaced through `UIResult` and transform pipeline; ongoing tournaments (`finished: 0`) can now be visually distinguished in the results tab
 - **Added** Ongoing tournament indicator (proposal 2): card border switches from solid to dashed for tournaments where `finished = 0`; width and colour follow the existing selected/unselected logic
