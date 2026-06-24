@@ -152,7 +152,10 @@ export function TournamentCard({ result: r }: Props) {
   const borderStyle = ongoing ? 'dashed' : 'solid';
 
   const cardStyle = {
-    borderRadius: 16, padding: '18px 18px 16px', background: '#fff',
+    borderRadius: 16, padding: '18px 18px 16px',
+    background: ongoing
+      ? 'linear-gradient(to bottom, rgba(217, 119, 6, 0.07) 0%, #fff 38%)'
+      : '#fff',
     border: `${borderWidth} ${borderStyle} ${borderColor}`,
   };
 
