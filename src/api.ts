@@ -12,7 +12,7 @@ function transformMatch(m: RawMatch): UIMatch {
 function transformResult(r: RawResult): UIResult {
   return {
     title: r.title, series: r.series, subtitle: r.subtitle,
-    score: r.score, WL: r.WL, selected: r.selected, partner: r.p_name ?? '', p_id: r.p_id,
+    score: r.score, WL: r.WL, selected: r.selected, finished: r.finished, partner: r.p_name ?? '', p_id: r.p_id,
     matches: r.matches.map(transformMatch),
     subscores: (r.subscores ?? []).map(ss => ({ title: ss.title, score: ss.score, literal: ss.literal }))
   };
