@@ -17,7 +17,7 @@ const ToggleBtn = styled.button`
   margin-top: 14px;
   background: transparent;
   border: none;
-  border-top: 1px solid #eeeee7;
+  border-top: 1px solid var(--border-subtle);
   padding-top: 13px;
   cursor: pointer;
   font-family: 'Archivo', sans-serif;
@@ -44,12 +44,12 @@ const Body = styled.div`
 const FormulaLine = styled.div`
   font-size: 13.5px;
   line-height: 1.5;
-  color: #54544c;
+  color: var(--text-secondary);
 `;
 
 const SubLine = styled.div`
   font-size: 12.5px;
-  color: #54544c;
+  color: var(--text-secondary);
 `;
 
 const BarWrap = styled.div`
@@ -63,7 +63,7 @@ const BarTrack = styled.div`
   left: 0; right: 0; top: 33px;
   height: 8px;
   border-radius: 4px;
-  background: #e8e8e0;
+  background: var(--bg-track);
 `;
 
 interface Props { disc: UIDisc; color: string; altColor: string; }
@@ -84,7 +84,6 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
   const safeCurrentIdx = globalCurrIdx >= 0 ? globalCurrIdx : 0;
   const safePredIdx = globalPredIdx >= 0 ? globalPredIdx : 0;
 
-  // Rules: show at least current-1, at least predicted+1, min WINDOW_SIZE, centered when close.
   const betterIdx = Math.min(safeCurrentIdx, safePredIdx);
   const worseIdx = Math.max(safeCurrentIdx, safePredIdx);
   const rawStart = Math.max(0, betterIdx - 1);
@@ -96,7 +95,6 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
     const extra = WINDOW_SIZE - rawSize;
     windowStart = Math.max(0, rawStart - Math.floor(extra / 2));
     windowEnd = Math.min(RANK_TIERS.length - 1, rawEnd + Math.ceil(extra / 2));
-    // Compensate if clamped at a boundary
     const actual = windowEnd - windowStart + 1;
     if (actual < WINDOW_SIZE) {
       if (windowStart === 0) windowEnd = Math.min(RANK_TIERS.length - 1, windowEnd + WINDOW_SIZE - actual);
@@ -120,22 +118,22 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
       {open && (
         <Body>
           <FormulaLine>
-            <span style={{ color: '#8b8b80' }}>Rankingscore </span>
+            <span style={{ color: 'var(--text-muted)' }}>Rankingscore </span>
             <span style={{ ...mono, color }}>{fmtNum(disc.score)}</span>
-            <span style={{ color: '#8b8b80' }}> = </span>
+            <span style={{ color: 'var(--text-muted)' }}> = </span>
             <span style={{ ...mono, color: altColor }}>{Math.round(factor * 100)}%</span>
-            <span style={{ color: '#8b8b80' }}> · </span>
+            <span style={{ color: 'var(--text-muted)' }}> · </span>
             <span style={{ ...mono, color }}>{fmtNum(avg)}</span>
           </FormulaLine>
           <SubLine>
             <span style={{ ...mono, color: altColor }}>{Math.round(factor * 100)}%</span>
-            <span style={{ color: '#8b8b80' }}> — weging voor {sel.length} {sel.length === 1 ? 'resultaat' : 'resultaten'} met punten</span>
+            <span style={{ color: 'var(--text-muted)' }}> — weging voor {sel.length} {sel.length === 1 ? 'resultaat' : 'resultaten'} met punten</span>
           </SubLine>
           <SubLine>
             <span style={{ ...mono, color }}>{fmtNum(avg)}</span>
-            <span style={{ color: '#8b8b80' }}> = ( </span>
-            <span style={{ fontFamily: "'JetBrains Mono',monospace", color: '#1a1a17' }}>{sel.map(fmtNum).join(' + ')}</span>
-            <span style={{ color: '#8b8b80' }}> ) / {sel.length}</span>
+            <span style={{ color: 'var(--text-muted)' }}> = ( </span>
+            <span style={{ fontFamily: "'JetBrains Mono',monospace", color: 'var(--text-primary)' }}>{sel.map(fmtNum).join(' + ')}</span>
+            <span style={{ color: 'var(--text-muted)' }}> ) / {sel.length}</span>
           </SubLine>
 
           <BarWrap>
@@ -145,15 +143,15 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
               const tx = i === 0 ? '0' : i === TIERS.length - 1 ? '-100%' : '-50%';
               const on = i <= idx;
               return (
-                <div key={t} style={{ position: 'absolute', top: 0, left: `${i * gap}%`, transform: `translateX(${tx})`, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 6, whiteSpace: 'nowrap', background: on ? '#23456f' : '#e3ebf8', color: on ? '#fff' : '#7d97c6' }}>
+                <div key={t} style={{ position: 'absolute', top: 0, left: `${i * gap}%`, transform: `translateX(${tx})`, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 6, whiteSpace: 'nowrap', background: on ? 'var(--rank-chip-active-bg)' : 'var(--rank-chip-inactive-bg)', color: on ? 'var(--rank-chip-active-text)' : 'var(--rank-chip-inactive-text)' }}>
                   {t}<PtsSuffix> pts</PtsSuffix>
                 </div>
               );
             })}
-            <div style={{ position: 'absolute', top: 17, left: `${Math.min(96, fillPct).toFixed(1)}%`, transform: 'translateX(-50%)', fontFamily: "'JetBrains Mono',monospace", fontSize: '10.5px', fontWeight: 700, color, background: '#fff', padding: '0 4px' }}>
+            <div style={{ position: 'absolute', top: 17, left: `${Math.min(96, fillPct).toFixed(1)}%`, transform: 'translateX(-50%)', fontFamily: "'JetBrains Mono',monospace", fontSize: '10.5px', fontWeight: 700, color, background: 'var(--bg-card)', padding: '0 4px' }}>
               {Math.round(within * 100)}%
             </div>
-            <div style={{ position: 'absolute', top: 46, left: `${idx * gap}%`, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#9a9a90' }}>{fmtNum(disc.mi)}</div>
+            <div style={{ position: 'absolute', top: 46, left: `${idx * gap}%`, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: 'var(--text-muted)' }}>{fmtNum(disc.mi)}</div>
             <div style={{ position: 'absolute', top: 46, left: `${Math.min(100, (idx + 1) * gap)}%`, transform: 'translateX(-50%)', fontFamily: "'JetBrains Mono',monospace", fontSize: 11, fontWeight: 600, color }}>{fmtNum(disc.ma)}</div>
           </BarWrap>
         </Body>

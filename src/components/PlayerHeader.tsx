@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import type { UIPlayerData } from '../types';
-import { useTheme } from '../theme';
 import { RankingCard } from './RankingCard';
 import { useFavorites } from '../FavoritesContext';
 
@@ -27,7 +26,7 @@ const Eyebrow = styled.div`
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #8b8b80;
+  color: var(--text-muted);
   font-weight: 600;
 `;
 
@@ -42,7 +41,7 @@ const Name = styled.h1`
 const Club = styled.div`
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
-  color: #6f6f67;
+  color: var(--text-tertiary);
   letter-spacing: 0.02em;
 `;
 
@@ -51,12 +50,12 @@ const StarButton = styled.button<{ $active: boolean }>`
   cursor: pointer;
   font-size: 28px;
   line-height: 1;
-  color: ${({ $active }) => ($active ? '#e8a020' : '#c4c4b8')};
+  color: ${({ $active }) => $active ? 'var(--star-active)' : 'var(--star-inactive)'};
   flex-shrink: 0;
   transition: color 0.15s ease, transform 0.1s ease;
 
   &:hover {
-    color: ${({ $active }) => ($active ? '#c8881a' : '#8b8b80')};
+    color: ${({ $active }) => $active ? 'var(--star-active)' : 'var(--text-muted)'};
     transform: scale(1.15);
   }
 
@@ -77,7 +76,6 @@ interface Props {
 }
 
 export function PlayerHeader({ data, id }: Props) {
-  const theme = useTheme();
   const { isFavorite, addFavorite, removeFavorite } = useFavorites();
   const favorited = isFavorite(id);
 
@@ -107,8 +105,8 @@ export function PlayerHeader({ data, id }: Props) {
         <Club>{data.player.club}</Club>
       </TitleBlock>
       <CardsGrid>
-        <RankingCard disc={data.singles} label="Enkel" color={theme.singles} />
-        <RankingCard disc={data.doubles} label="Dubbel" color={theme.doubles} />
+        <RankingCard disc={data.singles} label="Enkel" color="var(--accent-singles)" />
+        <RankingCard disc={data.doubles} label="Dubbel" color="var(--accent-doubles)" />
       </CardsGrid>
     </Root>
   );

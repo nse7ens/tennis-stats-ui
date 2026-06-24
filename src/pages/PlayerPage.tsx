@@ -14,10 +14,10 @@ import { SeasonSelector } from '../components/SeasonSelector';
 import { Footer } from '../components/Footer';
 
 const Page = styled.div`
-  background: #f3f3ee;
+  background: var(--bg-page);
   min-height: 100vh;
   font-family: 'Archivo', system-ui, sans-serif;
-  color: #1a1a17;
+  color: var(--text-primary);
   padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) 32px;
   -webkit-font-smoothing: antialiased;
 `;
@@ -35,7 +35,7 @@ const Loading = styled(Page)`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: #8b8b80;
+  color: var(--text-muted);
 `;
 
 const NotFound = styled(Page)`
@@ -45,14 +45,14 @@ const NotFound = styled(Page)`
   justify-content: center;
   gap: 16px;
   font-size: 16px;
-  color: #8b8b80;
+  color: var(--text-muted);
 `;
 
 const BackLink = styled(Link)`
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: #8b8b80;
+  color: var(--text-muted);
   text-decoration: none;
   align-self: flex-start;
 
@@ -62,17 +62,17 @@ const BackLink = styled(Link)`
 `;
 
 const SearchLink = styled(Link)`
-  color: #c8502a;
+  color: var(--accent-singles);
   font-size: 14px;
 `;
 
 const SeasonNotice = styled.div`
-  background: #fefce8;
-  border: 1px solid #e8ddb8;
+  background: var(--notice-bg);
+  border: 1px solid var(--notice-border);
   border-radius: 12px;
   padding: 14px 20px;
   font-size: 14px;
-  color: #6b5f2e;
+  color: var(--notice-text);
 `;
 
 export function PlayerPage() {

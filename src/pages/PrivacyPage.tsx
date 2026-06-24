@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 const Shell = styled.div`
-  background: #edede5;
+  background: var(--bg-page);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -23,7 +23,7 @@ const Kicker = styled.p`
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #9b9b90;
+  color: var(--text-muted);
   margin: 0 0 14px;
 `;
 
@@ -31,7 +31,7 @@ const Heading = styled.h1`
   font-size: 32px;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #1a1a17;
+  color: var(--text-primary);
   margin: 0 0 24px;
   line-height: 1.1;
 `;
@@ -39,7 +39,7 @@ const Heading = styled.h1`
 const Body = styled.p`
   font-size: 15px;
   line-height: 1.7;
-  color: #5a5a52;
+  color: var(--text-secondary);
   margin: 0 0 32px;
 `;
 
@@ -47,7 +47,7 @@ const BackLink = styled(Link)`
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: #9b9b90;
+  color: var(--text-muted);
   text-decoration: none;
 
   &:hover {
@@ -56,7 +56,7 @@ const BackLink = styled(Link)`
 `;
 
 const Anchor = styled.a`
-  color: #c8502a;
+  color: var(--accent-singles);
   text-decoration: none;
 
   &:hover {

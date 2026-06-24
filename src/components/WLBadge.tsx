@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { WIN_GREEN, LOSS_RED } from '../utils';
 
 const SIZE_MAP = {
   sm: { dim: '24px', radius: '6px', fontSize: '12px' },
@@ -10,9 +9,9 @@ const SIZE_MAP = {
 type BadgeSize = keyof typeof SIZE_MAP;
 
 const Badge = styled.div<{ $win: boolean; $dim: string; $radius: string; $fontSize: string }>`
-  background: ${p => p.$win ? '#e7f4ec' : '#fbeae9'};
-  color: ${p => p.$win ? WIN_GREEN : LOSS_RED};
-  border: 1px solid ${p => p.$win ? '#bfe3cd' : '#f0c9c6'};
+  background: ${p => p.$win ? 'var(--win-bg)' : 'var(--loss-bg)'};
+  color: ${p => p.$win ? 'var(--win)' : 'var(--loss)'};
+  border: 1px solid ${p => p.$win ? 'var(--win-border)' : 'var(--loss-border)'};
   width: ${p => p.$dim};
   height: ${p => p.$dim};
   border-radius: ${p => p.$radius};

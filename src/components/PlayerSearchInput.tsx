@@ -20,15 +20,15 @@ const TextInput = styled.input`
   box-sizing: border-box;
   font-family: 'JetBrains Mono', monospace;
   font-size: 15px;
-  color: #1a1a17;
-  background: #fff;
-  border: 1.5px solid #d4d4c8;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-input);
   border-radius: 10px;
   padding: 11px 36px 11px 14px;
   outline: none;
 
-  &::placeholder { color: #b0b0a4; }
-  &:focus { border-color: #c8502a; }
+  &::placeholder { color: var(--text-placeholder); }
+  &:focus { border-color: var(--accent-singles); }
 `;
 
 const Spinner = styled.div`
@@ -38,8 +38,8 @@ const Spinner = styled.div`
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  border: 2px solid #d4d4c8;
-  border-top-color: #c8502a;
+  border: 2px solid var(--border-input);
+  border-top-color: var(--accent-singles);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 
@@ -51,8 +51,8 @@ const Dropdown = styled.ul`
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background: #fff;
-  border: 1.5px solid #d4d4c8;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-input);
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
   margin: 0;
@@ -71,21 +71,21 @@ const ResultRow = styled.li`
   cursor: pointer;
   transition: background 0.1s;
 
-  &:hover { background: #f5f5f0; }
+  &:hover { background: var(--hover-row); }
 `;
 
 const PlayerName = styled.span`
   font-family: 'Archivo', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a17;
+  color: var(--text-primary);
   flex-shrink: 0;
 `;
 
 const ClubName = styled.span`
   font-family: 'Archivo', system-ui, sans-serif;
   font-size: 12.5px;
-  color: #7a7a70;
+  color: var(--text-tertiary);
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -96,8 +96,8 @@ const ClubName = styled.span`
 const RankPill = styled.span`
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
-  color: #c8502a;
-  background: #fdf0eb;
+  color: var(--accent-singles);
+  background: var(--search-rank-bg);
   border-radius: 6px;
   padding: 2px 7px;
   flex-shrink: 0;
@@ -107,7 +107,7 @@ const RankPill = styled.span`
 const Hint = styled.p`
   font-family: 'Archivo', system-ui, sans-serif;
   font-size: 12.5px;
-  color: #9b9b90;
+  color: var(--text-muted);
   margin: 8px 0 0;
 `;
 

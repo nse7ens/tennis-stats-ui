@@ -20,7 +20,7 @@ const Kicker = styled.div`
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #9a9a90;
+  color: var(--text-muted);
   font-weight: 600;
 `;
 
@@ -41,7 +41,7 @@ const Grid = styled.div`
 const FootNote = styled.div`
   margin-top: 14px;
   font-size: 11.5px;
-  color: #a3a399;
+  color: var(--text-faint);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -52,7 +52,7 @@ const HollowDot = styled.span`
   height: 11px;
   border-radius: 50%;
   background: transparent;
-  border: 1.5px solid #d3d3cb;
+  border: 1.5px solid var(--border-dashed);
   display: inline-block;
 `;
 

@@ -1,13 +1,12 @@
 import styled from '@emotion/styled';
 import type { UIDisc } from '../types';
-import { fmtNum, WIN_GREEN, LOSS_RED } from '../utils';
-import { useTheme } from '../theme';
+import { fmtNum } from '../utils';
 import { PredictionPanel } from './PredictionPanel';
 
 const Card = styled.div`
   position: relative;
-  background: #fff;
-  border: 1px solid #e6e6df;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 22px 22px 18px;
   overflow: hidden;
@@ -31,14 +30,14 @@ const Label = styled.span`
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #1a1a17;
+  color: var(--text-primary);
 `;
 
 const RankingLabel = styled.span`
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.1em;
-  color: #9a9a90;
+  color: var(--text-muted);
   text-transform: uppercase;
 `;
 
@@ -60,7 +59,7 @@ const BigRank = styled.span`
 const PtsSuffix = styled.span`
   font-family: 'JetBrains Mono', monospace;
   font-size: 15px;
-  color: #8b8b80;
+  color: var(--text-muted);
   margin-bottom: 7px;
 `;
 
@@ -82,7 +81,7 @@ const PredLabel = styled.span`
   font-size: 9.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a3a399;
+  color: var(--text-faint);
 `;
 
 const StatsRow = styled.div`
@@ -90,7 +89,7 @@ const StatsRow = styled.div`
   gap: 24px;
   margin-top: 18px;
   padding-top: 14px;
-  border-top: 1px solid #eeeee7;
+  border-top: 1px solid var(--border-subtle);
 `;
 
 const StatItem = styled.div`
@@ -103,7 +102,7 @@ const StatLabel = styled.span`
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a3a399;
+  color: var(--text-faint);
 `;
 
 const StatValue = styled.span`
@@ -115,11 +114,10 @@ const StatValue = styled.span`
 interface Props { disc: UIDisc; label: string; color: string; }
 
 export function RankingCard({ disc, label, color }: Props) {
-  const theme = useTheme();
-  const altColor = color === theme.singles ? theme.doubles : theme.singles;
+  const altColor = color === 'var(--accent-singles)' ? 'var(--accent-doubles)' : 'var(--accent-singles)';
   const delta = disc.predicted - disc.current;
   const arrow = delta < 0 ? '↓' : delta > 0 ? '↑' : '→';
-  const arrowColor = delta < 0 ? LOSS_RED : delta > 0 ? WIN_GREEN : '#9a9a90';
+  const arrowColor = delta < 0 ? 'var(--loss)' : delta > 0 ? 'var(--win)' : 'var(--text-muted)';
   const losses = disc.stats.nm - disc.stats.nw;
 
   return (

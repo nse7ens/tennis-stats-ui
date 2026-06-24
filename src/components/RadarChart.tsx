@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import type { UIDisc } from '../types';
-import { pct, hexA } from '../utils';
-import { useTheme } from '../theme';
+import { pct } from '../utils';
 
 const Card = styled.div`
-  background: #fff;
-  border: 1px solid #e6e6df;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: clamp(18px, 3vw, 26px);
 `;
@@ -15,7 +14,7 @@ const Kicker = styled.div`
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #9a9a90;
+  color: var(--text-muted);
   font-weight: 600;
 `;
 
@@ -40,7 +39,7 @@ const MetricHeader = styled.div`
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #a3a399;
+  color: var(--text-faint);
 `;
 
 const MetricRow = styled.div`
@@ -48,14 +47,14 @@ const MetricRow = styled.div`
   align-items: center;
   gap: 10px;
   padding: 7px 4px;
-  border-top: 1px solid #f0f0e8;
+  border-top: 1px solid var(--border-subtle);
 `;
 
 const MetricName = styled.span`
   flex: 1;
   font-size: 13px;
   font-weight: 500;
-  color: #3a3a33;
+  color: var(--text-secondary);
 `;
 
 const MetricVal = styled.span<{ color: string }>`
@@ -77,7 +76,6 @@ const pt = (i: number, v: number) => [
 interface Props { singles: UIDisc; doubles: UIDisc; }
 
 export function RadarChart({ singles, doubles }: Props) {
-  const theme = useTheme();
   const S = singles.stats, D = doubles.stats;
 
   const safeDiv = (a: number, b: number) => b ? a / b : 0;
@@ -114,26 +112,26 @@ export function RadarChart({ singles, doubles }: Props) {
       <Title>Prestatieprofiel</Title>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <svg viewBox="0 0 310 305" style={{ width: '100%', maxWidth: 340, height: 'auto' }}>
-          {rings.map((r, i) => <polygon key={i} points={r} fill="none" stroke="#ececdf" strokeWidth={1} />)}
-          {svgAxes.map((a, i) => <line key={i} x1={CX} y1={CY} x2={a.x2} y2={a.y2} stroke="#e2e2d6" strokeWidth={1} />)}
-          <polygon points={poly('dv')} fill={hexA(theme.doubles, 0.13)} stroke={theme.doubles} strokeWidth={2} strokeLinejoin="round" />
-          <polygon points={poly('sv')} fill={hexA(theme.singles, 0.14)} stroke={theme.singles} strokeWidth={2} strokeLinejoin="round" />
+          {rings.map((r, i) => <polygon key={i} points={r} fill="none" style={{ stroke: 'var(--chart-ring)' }} strokeWidth={1} />)}
+          {svgAxes.map((a, i) => <line key={i} x1={CX} y1={CY} x2={a.x2} y2={a.y2} style={{ stroke: 'var(--chart-axis)' }} strokeWidth={1} />)}
+          <polygon points={poly('dv')} style={{ fill: 'rgba(var(--accent-doubles-rgb), 0.13)', stroke: 'var(--accent-doubles)' }} strokeWidth={2} strokeLinejoin="round" />
+          <polygon points={poly('sv')} style={{ fill: 'rgba(var(--accent-singles-rgb), 0.14)', stroke: 'var(--accent-singles)' }} strokeWidth={2} strokeLinejoin="round" />
           {labels.map((lb, i) => (
-            <text key={i} x={lb.x} y={lb.y} textAnchor={lb.anchor as 'middle' | 'start' | 'end'} dominantBaseline="middle" fontSize={11} fontWeight={600} fill="#74746b" fontFamily="Archivo, sans-serif">{lb.t}</text>
+            <text key={i} x={lb.x} y={lb.y} textAnchor={lb.anchor as 'middle' | 'start' | 'end'} dominantBaseline="middle" fontSize={11} fontWeight={600} style={{ fill: 'var(--text-tertiary)' }} fontFamily="Archivo, sans-serif">{lb.t}</text>
           ))}
         </svg>
       </div>
       <MetricsTable>
         <MetricHeader>
           <span style={{ flex: 1 }}>Metriek</span>
-          <MetricVal color={theme.singles}>Enkel</MetricVal>
-          <MetricVal color={theme.doubles}>Dubbel</MetricVal>
+          <MetricVal color="var(--accent-singles)">Enkel</MetricVal>
+          <MetricVal color="var(--accent-doubles)">Dubbel</MetricVal>
         </MetricHeader>
         {metricRows.map(m => (
           <MetricRow key={m.t}>
             <MetricName>{m.t}</MetricName>
-            <MetricVal color={theme.singles}>{m.s}</MetricVal>
-            <MetricVal color={theme.doubles}>{m.d}</MetricVal>
+            <MetricVal color="var(--accent-singles)">{m.s}</MetricVal>
+            <MetricVal color="var(--accent-doubles)">{m.d}</MetricVal>
           </MetricRow>
         ))}
       </MetricsTable>

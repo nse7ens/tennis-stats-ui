@@ -7,7 +7,7 @@ import { useFavorites } from '../FavoritesContext';
 import { Footer } from '../components/Footer';
 
 const Shell = styled.div`
-  background: #edede5;
+  background: var(--bg-page);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ const Kicker = styled.p`
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #9b9b90;
+  color: var(--text-muted);
   margin: 0 0 14px;
 `;
 
@@ -45,7 +45,7 @@ const Heading = styled.h1`
   font-size: 48px;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #1a1a17;
+  color: var(--text-primary);
   margin: 0 0 14px;
   line-height: 1.05;
 `;
@@ -53,7 +53,7 @@ const Heading = styled.h1`
 const Subtitle = styled.p`
   font-size: 15px;
   line-height: 1.6;
-  color: #5a5a52;
+  color: var(--text-secondary);
   margin: 0 0 28px;
 `;
 

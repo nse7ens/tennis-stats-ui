@@ -6,15 +6,15 @@ type Size = 'sm' | 'md';
 
 const Wrapper = styled.div<{ variant: Variant }>`
   display: flex;
-  background: ${p => p.variant === 'light' ? '#f1f1ea' : '#fff'};
-  border: ${p => p.variant === 'outlined' ? '1px solid #e6e6df' : 'none'};
+  background: ${p => p.variant === 'light' ? 'var(--bg-inset)' : 'var(--bg-card)'};
+  border: ${p => p.variant === 'outlined' ? '1px solid var(--border)' : 'none'};
   border-radius: ${p => p.variant === 'outlined' ? '10px' : '9px'};
   padding: 3px;
 `;
 
 const Tab = styled.button<{ active: boolean; size: Size }>`
-  background: ${p => p.active ? '#1a1a17' : 'transparent'};
-  color: ${p => p.active ? '#fff' : '#74746b'};
+  background: ${p => p.active ? 'var(--text-primary)' : 'transparent'};
+  color: ${p => p.active ? 'var(--bg-page)' : 'var(--text-tertiary)'};
   border: none;
   cursor: pointer;
   font-family: 'Archivo', sans-serif;

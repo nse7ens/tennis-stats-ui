@@ -1,12 +1,11 @@
 import { useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import type { UIHistoryEntry } from '../types';
-import { useTheme } from '../theme';
 import { RANK_TIERS } from '../utils';
 
 const Section = styled.section`
-  background: #fff;
-  border: 1px solid #e6e6df;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: clamp(13px, 2.2vw, 18px) clamp(14px, 2.4vw, 20px);
 `;
@@ -25,7 +24,7 @@ const Kicker = styled.div`
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #9a9a90;
+  color: var(--text-muted);
   font-weight: 600;
 `;
 
@@ -47,7 +46,7 @@ const LegendItem = styled.div`
   align-items: center;
   gap: 7px;
   font-size: 12.5px;
-  color: #54544c;
+  color: var(--text-secondary);
   font-weight: 600;
 `;
 
@@ -64,11 +63,9 @@ const ChartWrap = styled.div`
 const W = 1000, PAD_L = 44, PAD_R = 70, PAD_T = 30, PAD_B = 40, Ht = 240;
 const pw = W - PAD_L - PAD_R, ph = Ht - PAD_T - PAD_B;
 
-
 interface Props { history: UIHistoryEntry[]; }
 
 export function RankingChart({ history }: Props) {
-  const theme = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
@@ -100,7 +97,8 @@ export function RankingChart({ history }: Props) {
 
   const pX = (x: number) => `${(x / W * 100).toFixed(2)}%`;
   const pY = (y: number) => `${(y / Ht * 100).toFixed(2)}%`;
-  const halo = '0 1px 2px #fff,0 -1px 2px #fff,1px 0 2px #fff,-1px 0 2px #fff';
+  const halo = 'var(--chart-halo)';
+  const haloShadow = `0 1px 2px ${halo},0 -1px 2px ${halo},1px 0 2px ${halo},-1px 0 2px ${halo}`;
   const monoBase = { fontFamily: "'JetBrains Mono',monospace", whiteSpace: 'nowrap' as const, position: 'absolute' as const, transform: 'translate(-50%,-50%)' };
 
   const yearLabels = history.filter(h => h.l !== '').map(h => String(h.l));
@@ -116,43 +114,43 @@ export function RankingChart({ history }: Props) {
           <Title>Rankingverloop</Title>
         </div>
         <Legend>
-          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: theme.singles, display: 'inline-block' }} />Enkel</LegendItem>
-          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: theme.doubles, display: 'inline-block' }} />Dubbel</LegendItem>
-          <LegendItem><span style={{ width: 22, height: 0, borderTop: '2px dashed #b7b7ad', display: 'inline-block' }} />Verwacht</LegendItem>
+          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: 'var(--accent-singles)', display: 'inline-block' }} />Enkel</LegendItem>
+          <LegendItem><span style={{ width: 22, height: 3, borderRadius: 2, background: 'var(--accent-doubles)', display: 'inline-block' }} />Dubbel</LegendItem>
+          <LegendItem><span style={{ width: 22, height: 0, borderTop: '2px dashed var(--chart-expected)', display: 'inline-block' }} />Verwacht</LegendItem>
         </Legend>
       </ChartHeader>
       <ScrollWrap ref={scrollRef}>
         <ChartWrap>
           <svg viewBox={`0 0 ${W} ${Ht}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
-            {gridLines.map(v => <line key={v} x1={PAD_L} y1={yAt(v)} x2={W - PAD_R} y2={yAt(v)} stroke="#ededdf" strokeWidth={1} />)}
-            {history.map((h, i) => h.l !== '' ? <line key={i} x1={xAt(i)} y1={PAD_T} x2={xAt(i)} y2={PAD_T + ph} stroke="#f4f4ea" strokeWidth={1} /> : null)}
+            {gridLines.map(v => <line key={v} x1={PAD_L} y1={yAt(v)} x2={W - PAD_R} y2={yAt(v)} style={{ stroke: 'var(--chart-grid)' }} strokeWidth={1} />)}
+            {history.map((h, i) => h.l !== '' ? <line key={i} x1={xAt(i)} y1={PAD_T} x2={xAt(i)} y2={PAD_T + ph} style={{ stroke: 'var(--chart-vline)' }} strokeWidth={1} /> : null)}
             {history[n - 1]?.p && (
               <>
-                <path d={seg(dP[lastSolid], dP[n - 1])} fill="none" stroke={theme.doubles} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
-                <path d={seg(sP[lastSolid], sP[n - 1])} fill="none" stroke={theme.singles} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
+                <path d={seg(dP[lastSolid], dP[n - 1])} fill="none" stroke={'var(--accent-doubles)'} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
+                <path d={seg(sP[lastSolid], sP[n - 1])} fill="none" stroke={'var(--accent-singles)'} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
               </>
             )}
-            <path d={path(dP.slice(0, lastSolid + 1))} fill="none" stroke={theme.doubles} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
-            <path d={path(sP.slice(0, lastSolid + 1))} fill="none" stroke={theme.singles} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
-            {dP.slice(0, lastSolid + 1).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={2.4} fill={theme.doubles} />)}
-            {sP.slice(0, lastSolid + 1).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={2.4} fill={theme.singles} />)}
-            <circle cx={dP[n - 1].x} cy={dP[n - 1].y} r={3.2} fill="#fff" stroke={theme.doubles} strokeWidth={1.4} />
-            <circle cx={sP[n - 1].x} cy={sP[n - 1].y} r={3.2} fill="#fff" stroke={theme.singles} strokeWidth={1.4} />
+            <path d={path(dP.slice(0, lastSolid + 1))} fill="none" stroke={'var(--accent-doubles)'} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
+            <path d={path(sP.slice(0, lastSolid + 1))} fill="none" stroke={'var(--accent-singles)'} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
+            {dP.slice(0, lastSolid + 1).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={2.4} style={{ fill: 'var(--accent-doubles)' }} />)}
+            {sP.slice(0, lastSolid + 1).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={2.4} style={{ fill: 'var(--accent-singles)' }} />)}
+            <circle cx={dP[n - 1].x} cy={dP[n - 1].y} r={3.2} style={{ fill: 'var(--bg-card)', stroke: 'var(--accent-doubles)', strokeWidth: 1.4 }} />
+            <circle cx={sP[n - 1].x} cy={sP[n - 1].y} r={3.2} style={{ fill: 'var(--bg-card)', stroke: 'var(--accent-singles)', strokeWidth: 1.4 }} />
           </svg>
           <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
             {gridLines.map(v => (
-              <div key={v} style={{ ...monoBase, left: pX(PAD_L - 9), top: pY(yAt(v)), fontSize: '11.5px', color: '#aeaea4' }}>{v}</div>
+              <div key={v} style={{ ...monoBase, left: pX(PAD_L - 9), top: pY(yAt(v)), fontSize: '11.5px', color: 'var(--text-faint)' }}>{v}</div>
             ))}
             {history.map((h, i) => h.l !== '' ? (
-              <div key={i} style={{ ...monoBase, left: pX(xAt(i)), top: pY(Ht - 11), fontSize: '12.5px', fontWeight: 600, color: '#8b8b80' }}>{h.l}</div>
+              <div key={i} style={{ ...monoBase, left: pX(xAt(i)), top: pY(Ht - 11), fontSize: '12.5px', fontWeight: 600, color: 'var(--text-muted)' }}>{h.l}</div>
             ) : null)}
             {sP.map((p, i) => {
               const above = p.v >= dP[i].v;
-              return <div key={i} style={{ ...monoBase, left: pX(p.x), top: pY(p.y + (above ? -9 : 16)), fontSize: '12.5px', fontWeight: 700, color: theme.singles, textShadow: halo }}>{p.v}</div>;
+              return <div key={i} style={{ ...monoBase, left: pX(p.x), top: pY(p.y + (above ? -9 : 16)), fontSize: '12.5px', fontWeight: 700, color: 'var(--accent-singles)', textShadow: haloShadow }}>{p.v}</div>;
             })}
             {dP.map((p, i) => {
               const sAbove = sP[i].v >= p.v;
-              return <div key={i} style={{ ...monoBase, left: pX(p.x), top: pY(p.y + (sAbove ? 16 : -9)), fontSize: '12.5px', fontWeight: 700, color: theme.doubles, textShadow: halo }}>{p.v}</div>;
+              return <div key={i} style={{ ...monoBase, left: pX(p.x), top: pY(p.y + (sAbove ? 16 : -9)), fontSize: '12.5px', fontWeight: 700, color: 'var(--accent-doubles)', textShadow: haloShadow }}>{p.v}</div>;
             })}
           </div>
         </ChartWrap>

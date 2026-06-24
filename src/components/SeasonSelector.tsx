@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useTheme } from '../theme';
 import { SEASONS } from '../utils';
 import type { SeasonTag } from '../utils';
 
@@ -20,8 +19,8 @@ const YEAR_POSITIONS = [...new Set(SEASONS.map(s => s.label.split(' ').at(-1)!))
 }));
 
 const Card = styled.div`
-  background: #fff;
-  border: 1px solid #e8e8e0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 10px 20px 14px;
 `;
@@ -36,7 +35,7 @@ const ChevronRow = styled.div`
 const ChevronBtn = styled.button<{ disabled: boolean }>`
   width: 24px;
   height: 24px;
-  background: #f1f1ea;
+  background: var(--bg-inset);
   border: none;
   border-radius: 50%;
   cursor: ${p => p.disabled ? 'default' : 'pointer'};
@@ -47,18 +46,18 @@ const ChevronBtn = styled.button<{ disabled: boolean }>`
   justify-content: center;
   opacity: ${p => p.disabled ? 0.3 : 1};
   pointer-events: ${p => p.disabled ? 'none' : 'auto'};
-  color: #555;
+  color: var(--text-tertiary);
   transition: background 0.12s;
 
   &:hover {
-    background: ${p => p.disabled ? '#f1f1ea' : '#e4e4dc'};
+    background: ${p => p.disabled ? 'var(--bg-inset)' : 'var(--bg-track)'};
   }
 `;
 
-const SeasonLabel = styled.span<{ color: string }>`
+const SeasonLabel = styled.span`
   font-size: 15px;
   font-weight: 600;
-  color: ${p => p.color};
+  color: var(--accent-singles);
 `;
 
 const TimelineWrap = styled.div`
@@ -68,17 +67,17 @@ const TimelineWrap = styled.div`
 const Track = styled.div`
   position: relative;
   height: 8px;
-  background: #e4e4dc;
+  background: var(--bg-track);
   border-radius: 4px;
 `;
 
-const ActiveSegment = styled.div<{ left: string; width: string; color: string }>`
+const ActiveSegment = styled.div<{ left: string; width: string }>`
   position: absolute;
   top: 0;
   left: ${p => p.left};
   width: ${p => p.width};
   height: 100%;
-  background: ${p => p.color};
+  background: var(--accent-singles);
   border-radius: 4px;
   transition: left 0.2s, width 0.2s;
 `;
@@ -89,14 +88,14 @@ const LabelsRow = styled.div`
   margin-top: 3px;
 `;
 
-const YearLabel = styled.button<{ left: string; active: boolean; color: string }>`
+const YearLabel = styled.button<{ left: string; active: boolean }>`
   position: absolute;
   left: ${p => p.left};
   transform: translateX(-50%);
   font-family: 'Archivo', sans-serif;
   font-size: 11px;
   font-weight: ${p => p.active ? 700 : 400};
-  color: ${p => p.active ? p.color : '#aaa'};
+  color: ${p => p.active ? 'var(--accent-singles)' : 'var(--text-muted)'};
   background: none;
   border: none;
   cursor: pointer;
@@ -104,12 +103,11 @@ const YearLabel = styled.button<{ left: string; active: boolean; color: string }
   line-height: 18px;
 
   &:hover {
-    color: ${p => p.active ? p.color : '#555'};
+    color: ${p => p.active ? 'var(--accent-singles)' : 'var(--text-tertiary)'};
   }
 `;
 
 export function SeasonSelector({ season, onChange }: Props) {
-  const theme = useTheme();
   const idx = SEASONS.findIndex(s => s.tag === season);
   const safeIdx = idx >= 0 ? idx : SEASONS.length - 1;
   const current = SEASONS[safeIdx];
@@ -136,7 +134,7 @@ export function SeasonSelector({ season, onChange }: Props) {
         >
           &#x2039;
         </ChevronBtn>
-        <SeasonLabel color={theme.singles}>{current.label}</SeasonLabel>
+        <SeasonLabel>{current.label}</SeasonLabel>
         <ChevronBtn
           type="button"
           disabled={safeIdx === SEASONS.length - 1}
@@ -147,7 +145,7 @@ export function SeasonSelector({ season, onChange }: Props) {
       </ChevronRow>
       <TimelineWrap>
         <Track>
-          <ActiveSegment left={segLeft} width={segWidth} color={theme.singles} />
+          <ActiveSegment left={segLeft} width={segWidth} />
         </Track>
         <LabelsRow>
           {YEAR_POSITIONS.map(({ year, pct }) => (
@@ -156,7 +154,6 @@ export function SeasonSelector({ season, onChange }: Props) {
               type="button"
               left={pct}
               active={year === activeYear}
-              color={theme.singles}
               onClick={() => handleYearClick(year)}
             >
               {year}

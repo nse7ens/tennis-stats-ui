@@ -7,20 +7,12 @@ import { PlayerLink } from "./PlayerLink";
 import { WLBadge } from "./WLBadge";
 
 const Card = styled.div`
-  background: #fff;
-  border: 1px solid #e6e6df;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: clamp(18px, 3vw, 26px);
   display: flex;
   flex-direction: column;
-`;
-
-const CardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
-  flex-wrap: wrap;
 `;
 
 const Kicker = styled.div`
@@ -28,7 +20,7 @@ const Kicker = styled.div`
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #9a9a90;
+  color: var(--text-muted);
   font-weight: 600;
 `;
 
@@ -55,7 +47,7 @@ const StripItem = styled.div`
 const DateLabel = styled.span`
   font-family: "JetBrains Mono", monospace;
   font-size: 9.5px;
-  color: #aeaea4;
+  color: var(--text-faint);
 `;
 
 const MatchList = styled.div`
@@ -71,26 +63,15 @@ const MatchItem = styled.div`
   flex-wrap: wrap;
   gap: 12px;
   padding: 10px 12px;
-  background: #fafaf6;
-  border: 1px solid #eeeee7;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: 11px;
-`;
-
-const OppBlock = styled.div`
-  flex: 1;
-  min-width: 0;
-`;
-
-const OppRow = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 `;
 
 const OppNameBold = styled.span`
   font-size: 13.5px;
   font-weight: 600;
-  color: #26261f;
+  color: var(--text-primary);
   white-space: nowrap;
 `;
 
@@ -98,8 +79,8 @@ const RankChip = styled.span`
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 600;
-  color: #8b8b80;
-  background: #efefe7;
+  color: var(--text-muted);
+  background: var(--bg-inset);
   padding: 1px 6px;
   border-radius: 5px;
 `;
@@ -108,9 +89,9 @@ const ScorePill = styled.span`
   font-family: "JetBrains Mono", monospace;
   font-size: 12.5px;
   font-weight: 600;
-  color: #3a3a33;
-  background: #fff;
-  border: 1px solid #e6e6df;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   padding: 4px 9px;
   border-radius: 7px;
   white-space: nowrap;
@@ -132,13 +113,13 @@ export function RecentForm({ singles, doubles }: Props) {
 
   return (
     <Card>
-      <CardHeader>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 10, flexWrap: 'wrap' }}>
         <div>
           <Kicker>Recente vorm</Kicker>
           <Title>Laatste wedstrijden</Title>
         </div>
         <DiscToggle value={disc} onChange={setDisc} variant="light" size="sm" />
-      </CardHeader>
+      </div>
 
       <Strip>
         {strip.map((m, i) => (
@@ -153,13 +134,10 @@ export function RecentForm({ singles, doubles }: Props) {
         {list.map((m, i) => (
           <MatchItem key={i}>
             <WLBadge win={m.win} size="md" />
-            <OppBlock>
-              <OppRow>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {m.opp.map((o, j) => (
-                  <span
-                    key={j}
-                    style={{ display: "flex", alignItems: "center", gap: 5 }}
-                  >
+                  <span key={j} style={{ display: "flex", alignItems: "center", gap: 5 }}>
                     {o.user_id != null ? (
                       <PlayerLink to={`/player/${o.user_id}`}>
                         <OppNameBold>{o.name}</OppNameBold>
@@ -170,8 +148,8 @@ export function RecentForm({ singles, doubles }: Props) {
                     <RankChip>{o.rank}pts</RankChip>
                   </span>
                 ))}
-              </OppRow>
-            </OppBlock>
+              </div>
+            </div>
             <ScorePill>{m.score}</ScorePill>
           </MatchItem>
         ))}

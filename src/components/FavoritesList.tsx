@@ -31,21 +31,21 @@ const Row = styled.li`
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 10px;
   padding: 10px 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.07);
   cursor: pointer;
 
   &:hover {
-    background: #f9f9f6;
+    background: var(--hover-row);
   }
 `;
 
 const DragHandle = styled.button`
   all: unset;
   cursor: grab;
-  color: #c4c4b8;
+  color: var(--star-inactive);
   font-size: 16px;
   line-height: 1;
   flex-shrink: 0;
@@ -69,7 +69,7 @@ const PlayerInfo = styled.div`
 const PlayerName = styled.span`
   font-weight: 700;
   font-size: 14px;
-  color: #1a1a17;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,7 +78,7 @@ const PlayerName = styled.span`
 const ClubName = styled.span`
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  color: #8b8b80;
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -87,7 +87,7 @@ const ClubName = styled.span`
 const RemoveButton = styled.button`
   all: unset;
   cursor: pointer;
-  color: #c4c4b8;
+  color: var(--star-inactive);
   font-size: 16px;
   line-height: 1;
   flex-shrink: 0;
@@ -96,7 +96,7 @@ const RemoveButton = styled.button`
   transition: color 0.12s ease;
 
   &:hover {
-    color: #c8502a;
+    color: var(--accent-singles);
   }
 `;
 

@@ -6,12 +6,12 @@ const Bar = styled.footer`
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.08em;
-  color: #9b9b90;
+  color: var(--text-muted);
   text-align: center;
 `;
 
 const FooterLink = styled(Link)`
-  color: #9b9b90;
+  color: var(--text-muted);
   text-decoration: none;
 
   &:hover {
@@ -20,7 +20,7 @@ const FooterLink = styled(Link)`
 `;
 
 const ExternalLink = styled.a`
-  color: #9b9b90;
+  color: var(--text-muted);
   text-decoration: none;
 
   &:hover {

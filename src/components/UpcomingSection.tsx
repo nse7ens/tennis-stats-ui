@@ -4,8 +4,8 @@ import { fmtDateFull } from '../utils';
 import { PlayerLink } from './PlayerLink';
 
 const Section = styled.section`
-  background: #f9efd7;
-  border: 1px solid #ecd49a;
+  background: var(--upcoming-bg);
+  border: 1px solid var(--upcoming-border);
   border-radius: 18px;
   padding: clamp(18px, 3vw, 24px);
 `;
@@ -15,7 +15,7 @@ const SectionLabel = styled.div`
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #b07d22;
+  color: var(--upcoming-label);
   font-weight: 700;
   margin-bottom: 12px;
 `;
@@ -31,8 +31,8 @@ const Item = styled.div`
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 16px;
-  background: #fff;
-  border: 1px solid #ecd49a;
+  background: var(--upcoming-item-bg);
+  border: 1px solid var(--upcoming-border);
   border-radius: 13px;
   padding: 16px 18px;
 `;
@@ -40,49 +40,42 @@ const Item = styled.div`
 const ItemTitle = styled.span`
   font-size: 16px;
   font-weight: 700;
-  color: #3a2d0e;
+  color: var(--upcoming-text-primary);
 `;
 
 const ItemSub = styled.span`
   font-size: 12.5px;
-  color: #9a7c34;
+  color: var(--upcoming-text-secondary);
 `;
 
 const CatBadge = styled.span`
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
   font-weight: 600;
-  color: #b07d22;
-  background: #f9efd7;
+  color: var(--upcoming-label);
+  background: var(--upcoming-bg);
   padding: 4px 10px;
   border-radius: 7px;
-`;
-
-const PartnerBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 `;
 
 const PartnerLabel = styled.span`
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #b69753;
+  color: var(--upcoming-text-secondary);
 `;
 
 const PartnerName = styled.span`
   font-size: 13.5px;
   font-weight: 600;
-  color: #3a2d0e;
+  color: var(--upcoming-text-primary);
 `;
 
 const PartnerPts = styled.span`
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
-  color: #9a7c34;
+  color: var(--upcoming-text-secondary);
 `;
-
 
 interface Props { singles: UIUpcomingMatch[]; doubles: UIUpcomingMatch[]; }
 
@@ -108,7 +101,7 @@ export function UpcomingSection({ singles, doubles }: Props) {
             </div>
             <CatBadge>{u.cat.toUpperCase()}</CatBadge>
             {u.p_name && (
-              <PartnerBlock>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <PartnerLabel>Ploegmaat</PartnerLabel>
                 <PartnerName>
                   {u.p_id != null
@@ -117,7 +110,7 @@ export function UpcomingSection({ singles, doubles }: Props) {
                   }
                   {' '}<PartnerPts>{u.p_pts}pts</PartnerPts>
                 </PartnerName>
-              </PartnerBlock>
+              </div>
             )}
           </Item>
         ))}
