@@ -79,15 +79,32 @@ export function PredictionPanel({ disc, color, altColor }: Props) {
   const range = disc.ma - disc.mi;
   const within = range > 0 ? Math.max(0, Math.min(1, (disc.score - disc.mi) / range)) : 0;
 
-  // Show a 5-tier window: start one tier below the better of current/predicted
-  const minRank = Math.min(disc.current, disc.predicted);
-  const minRankIdx = RANK_TIERS.findIndex(t => t >= minRank);
-  const baseIdx = minRankIdx < 0 ? 0 : minRankIdx;
-  const windowStart = Math.max(0, Math.min(baseIdx > 0 ? baseIdx - 1 : 0, RANK_TIERS.length - WINDOW_SIZE));
-  const TIERS = RANK_TIERS.slice(windowStart, windowStart + WINDOW_SIZE);
-
   const globalPredIdx = RANK_TIERS.indexOf(disc.predicted);
-  const idx = Math.max(0, globalPredIdx < 0 ? 0 : globalPredIdx - windowStart);
+  const globalCurrIdx = RANK_TIERS.indexOf(disc.current);
+  const safeCurrentIdx = globalCurrIdx >= 0 ? globalCurrIdx : 0;
+  const safePredIdx = globalPredIdx >= 0 ? globalPredIdx : 0;
+
+  // Rules: show at least current-1, at least predicted+1, min WINDOW_SIZE, centered when close.
+  const betterIdx = Math.min(safeCurrentIdx, safePredIdx);
+  const worseIdx = Math.max(safeCurrentIdx, safePredIdx);
+  const rawStart = Math.max(0, betterIdx - 1);
+  const rawEnd = Math.min(RANK_TIERS.length - 1, worseIdx + 1);
+  const rawSize = rawEnd - rawStart + 1;
+  let windowStart = rawStart;
+  let windowEnd = rawEnd;
+  if (rawSize < WINDOW_SIZE) {
+    const extra = WINDOW_SIZE - rawSize;
+    windowStart = Math.max(0, rawStart - Math.floor(extra / 2));
+    windowEnd = Math.min(RANK_TIERS.length - 1, rawEnd + Math.ceil(extra / 2));
+    // Compensate if clamped at a boundary
+    const actual = windowEnd - windowStart + 1;
+    if (actual < WINDOW_SIZE) {
+      if (windowStart === 0) windowEnd = Math.min(RANK_TIERS.length - 1, windowEnd + WINDOW_SIZE - actual);
+      else windowStart = Math.max(0, windowStart - (WINDOW_SIZE - actual));
+    }
+  }
+  const TIERS = RANK_TIERS.slice(windowStart, windowEnd + 1);
+  const idx = Math.max(0, safePredIdx - windowStart);
   const gap = 100 / (TIERS.length - 1);
   const fillPct = Math.min(100, idx * gap + within * gap);
 

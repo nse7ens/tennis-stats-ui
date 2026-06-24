@@ -4,6 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-24
 
+- **Fixed** `PredictionPanel` progress bar now always includes the predicted rank with at least one tier beyond it; previously the 5-tier window was anchored to the current rank only, causing the bar to cap at 100% when predicted rank was outside the window (e.g. current=15, predicted=35)
+
 - **Docs** Added `.docs/dev/deployment-secrets-setup.md`: step-by-step guide for creating the 6 GitHub Actions secrets required by the Azure Container Apps deploy workflow
 - **Refactored** `api.ts` now imports `transform` from `transforms.ts` instead of defining its own copy; removes ~95 lines of duplicated transform logic from `api.ts`
 - **Added** `finished` field surfaced through `UIResult` and transform pipeline; ongoing tournaments (`finished: 0`) can now be visually distinguished in the results tab
