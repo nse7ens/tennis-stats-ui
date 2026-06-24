@@ -12,9 +12,10 @@
     <style>
       *, *::before, *::after { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; overflow-x: hidden; }
-      body { background: #f3f3ee; -webkit-font-smoothing: antialiased; }
+      body { background: var(--bg-page, #f3f3ee); -webkit-font-smoothing: antialiased; }
       ::selection { background: #2f6bed; color: #fff; }
     </style>
+    <script>if(window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark';</script>
   </head>
   <body>
     <div id="root"></div>

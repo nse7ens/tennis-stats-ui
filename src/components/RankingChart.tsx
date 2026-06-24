@@ -126,12 +126,12 @@ export function RankingChart({ history }: Props) {
             {history.map((h, i) => h.l !== '' ? <line key={i} x1={xAt(i)} y1={PAD_T} x2={xAt(i)} y2={PAD_T + ph} style={{ stroke: 'var(--chart-vline)' }} strokeWidth={1} /> : null)}
             {history[n - 1]?.p && (
               <>
-                <path d={seg(dP[lastSolid], dP[n - 1])} fill="none" stroke={'var(--accent-doubles)'} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
-                <path d={seg(sP[lastSolid], sP[n - 1])} fill="none" stroke={'var(--accent-singles)'} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
+                <path d={seg(dP[lastSolid], dP[n - 1])} fill="none" style={{ stroke: 'var(--accent-doubles)' }} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
+                <path d={seg(sP[lastSolid], sP[n - 1])} fill="none" style={{ stroke: 'var(--accent-singles)' }} strokeWidth={1.4} strokeDasharray="2 7" strokeLinecap="round" />
               </>
             )}
-            <path d={path(dP.slice(0, lastSolid + 1))} fill="none" stroke={'var(--accent-doubles)'} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
-            <path d={path(sP.slice(0, lastSolid + 1))} fill="none" stroke={'var(--accent-singles)'} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
+            <path d={path(dP.slice(0, lastSolid + 1))} fill="none" style={{ stroke: 'var(--accent-doubles)' }} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
+            <path d={path(sP.slice(0, lastSolid + 1))} fill="none" style={{ stroke: 'var(--accent-singles)' }} strokeWidth={1.7} strokeLinejoin="round" strokeLinecap="round" />
             {dP.slice(0, lastSolid + 1).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={2.4} style={{ fill: 'var(--accent-doubles)' }} />)}
             {sP.slice(0, lastSolid + 1).map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={2.4} style={{ fill: 'var(--accent-singles)' }} />)}
             <circle cx={dP[n - 1].x} cy={dP[n - 1].y} r={3.2} style={{ fill: 'var(--bg-card)', stroke: 'var(--accent-doubles)', strokeWidth: 1.4 }} />
