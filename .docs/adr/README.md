@@ -12,6 +12,7 @@ Decisions are recorded using the [Nygard format](https://cognitect.com/blog/2011
 | [0004](0004-player-profile-component-architecture.md) | Player Profile Component Architecture | Accepted | 2026-06-18 |
 | [0005](0005-routing-react-router-dom.md) | Use react-router-dom v7 for client-side routing | Accepted | 2026-06-19 |
 | [0006](0006-deployment-azure-container-apps.md) | Deploy via Azure Container Apps + GitHub Actions | Accepted | 2026-06-19 |
+| [0007](0007-tabler-icons-react-svg-components.md) | Use @tabler/icons-react SVG components instead of webfont CDN | Accepted | 2026-06-25 |
 
 ## Template
 

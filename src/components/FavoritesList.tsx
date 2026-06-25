@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { IconGripVertical, IconX } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import {
   DndContext,
@@ -119,7 +120,7 @@ function SortableRow({ fav }: { fav: FavoritedPlayer }) {
         title="Versleep om te herordenen"
         onClick={e => e.stopPropagation()}
       >
-        <i className="ti ti-grip-vertical" />
+        <IconGripVertical size={16} />
       </DragHandle>
       <PlayerInfo>
         <PlayerName>{fav.name}</PlayerName>
@@ -130,7 +131,7 @@ function SortableRow({ fav }: { fav: FavoritedPlayer }) {
         title="Verwijder uit favorieten"
         aria-label={`Verwijder ${fav.name} uit favorieten`}
       >
-        <i className="ti ti-x" />
+        <IconX size={16} />
       </RemoveButton>
     </Row>
   );

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { IconStar } from '@tabler/icons-react';
 import type { UIPlayerData } from '../types';
 import { RankingCard } from './RankingCard';
 import { useFavorites } from '../FavoritesContext';
@@ -99,7 +100,7 @@ export function PlayerHeader({ data, id }: Props) {
             title={favorited ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
             aria-label={favorited ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
           >
-            <i className="ti ti-star" />
+            <IconStar size={28} />
           </StarButton>
         </NameRow>
         <Club>{data.player.club}</Club>

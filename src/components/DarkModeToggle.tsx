@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { IconSun, IconMoon } from '@tabler/icons-react';
 
 const Btn = styled.button`
   position: fixed;
@@ -35,7 +36,7 @@ export function DarkModeToggle({ dark, onToggle }: Props) {
       title={dark ? 'Schakel naar lichtmodus' : 'Schakel naar donkere modus'}
       aria-label={dark ? 'Schakel naar lichtmodus' : 'Schakel naar donkere modus'}
     >
-      <i className={dark ? 'ti ti-sun' : 'ti ti-moon'} />
+      {dark ? <IconSun size={17} /> : <IconMoon size={17} />}
     </Btn>
   );
 }

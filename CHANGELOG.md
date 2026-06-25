@@ -4,6 +4,7 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-25
 
+- **Changed** Replaced Tabler Icons CDN webfont (`@tabler/icons-webfont` via jsDelivr) with `@tabler/icons-react` SVG components; eliminates Edge/Safari Tracking Prevention console warnings and reduces icon transfer from ~350 KB (full webfont) to ~3 KB (5 tree-shaken SVGs). All 5 icon usages updated across `DarkModeToggle`, `FavoritesList`, and `PlayerHeader`.
 - **Added** Application Insights analytics (`@microsoft/applicationinsights-web`): cookieless (`isCookieUseDisabled: true`), no consent banner required; disabled auto-route tracking in favour of manual `trackPageView` calls that normalise `/player/:id` paths; initialised only when `VITE_APPINSIGHTS_CONNECTION_STRING` is set (no-op in local dev); connection string injected at Docker build time via `ARG`/`ENV` and passed from the `APPINSIGHTS_CONNECTION_STRING` GitHub Actions secret.
 - **Refactored** `App.tsx` split into `AppContent` inner component so `useAppInsights` (which calls `useLocation`) is rendered inside `<BrowserRouter>`.
 
