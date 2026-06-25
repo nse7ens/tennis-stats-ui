@@ -2,6 +2,11 @@
 
 Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Added**, **Fixed**, **Changed**, **Refactored**, or **Docs**.
 
+## 2026-06-25
+
+- **Added** Application Insights analytics (`@microsoft/applicationinsights-web`): cookieless (`isCookieUseDisabled: true`), no consent banner required; disabled auto-route tracking in favour of manual `trackPageView` calls that normalise `/player/:id` paths; initialised only when `VITE_APPINSIGHTS_CONNECTION_STRING` is set (no-op in local dev); connection string injected at Docker build time via `ARG`/`ENV` and passed from the `APPINSIGHTS_CONNECTION_STRING` GitHub Actions secret.
+- **Refactored** `App.tsx` split into `AppContent` inner component so `useAppInsights` (which calls `useLocation`) is rendered inside `<BrowserRouter>`.
+
 ## 2026-06-24
 
 - **Fixed** Dark mode WCAG AA contrast: `--accent-singles` lifted `#d4663c`→`#ea875e` (3.35→4.6:1), `--accent-doubles` `#5a8fff`→`#7aa3ff` (3.96→5.1:1), `--text-placeholder` `#9c9a8f`→`#a3a196` (4.32→4.6:1), `--rank-chip-inactive-text` `#8c9fc5`→`#94a8ce` (4.29→4.7:1); verified with Playwright + axe.
