@@ -18,6 +18,12 @@ function initAI(connectionString: string) {
   ai.loadAppInsights();
 }
 
+function pageNameFromPath(path: string): string {
+  if (path.startsWith('/player/')) return 'Player Profile';
+  if (path === '/privacy') return 'Privacy';
+  return 'Home';
+}
+
 export function useAppInsights() {
   const location = useLocation();
 
@@ -27,7 +33,9 @@ export function useAppInsights() {
 
   useEffect(() => {
     if (!CS || !ai) return;
-    const normalizedPath = location.pathname.replace(/\/player\/\d+/, '/player/:id');
-    ai.trackPageView({ uri: normalizedPath });
+    const playerIdMatch = location.pathname.match(/^\/player\/(\d+)/);
+    const normalizedPath = playerIdMatch ? '/player/:id' : location.pathname;
+    const properties = playerIdMatch ? { playerId: playerIdMatch[1] } : undefined;
+    ai.trackPageView({ uri: normalizedPath, name: pageNameFromPath(location.pathname), properties });
   }, [location]);
 }

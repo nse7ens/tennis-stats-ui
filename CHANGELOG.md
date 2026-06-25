@@ -4,6 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-25
 
+- **Changed** Application Insights page view tracking now passes an explicit `name` (Home / Player Profile / Privacy) for readable User Flow labels, and attaches a `playerId` custom property on player pages for Log Analytics queries — URI normalization to `/player/:id` is unchanged.
+
 - **Fixed** Suppressed spurious `INVALID_ANNOTATION` build warnings emitted by Rolldown for `/*#__PURE__*/` comments inside parentheses in the `@microsoft/applicationinsights-web` dist-es5 bundle; filtered via `build.rollupOptions.onwarn` in `vite.config.ts`.
 
 - **Changed** Replaced Tabler Icons CDN webfont (`@tabler/icons-webfont` via jsDelivr) with `@tabler/icons-react` SVG components; eliminates Edge/Safari Tracking Prevention console warnings and reduces icon transfer from ~350 KB (full webfont) to ~3 KB (5 tree-shaken SVGs). All 5 icon usages updated across `DarkModeToggle`, `FavoritesList`, and `PlayerHeader`.
