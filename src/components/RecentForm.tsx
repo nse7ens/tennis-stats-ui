@@ -5,6 +5,7 @@ import { fmtDate } from "../utils";
 import { DiscToggle } from "./DiscToggle";
 import { PlayerLink } from "./PlayerLink";
 import { WLBadge } from "./WLBadge";
+import { trackEvent } from "../hooks/useAppInsights";
 
 const Card = styled.div`
   background: var(--bg-card);
@@ -118,7 +119,7 @@ export function RecentForm({ singles, doubles }: Props) {
           <Kicker>Recente vorm</Kicker>
           <Title>Laatste wedstrijden</Title>
         </div>
-        <DiscToggle value={disc} onChange={setDisc} variant="light" size="sm" />
+        <DiscToggle value={disc} onChange={v => { trackEvent('disc_toggled', { view: v, context: 'recent_form' }); setDisc(v); }} variant="light" size="sm" />
       </div>
 
       <Strip>
@@ -139,7 +140,7 @@ export function RecentForm({ singles, doubles }: Props) {
                 {m.opp.map((o, j) => (
                   <span key={j} style={{ display: "flex", alignItems: "center", gap: 5 }}>
                     {o.user_id != null ? (
-                      <PlayerLink to={`/player/${o.user_id}`}>
+                      <PlayerLink to={`/player/${o.user_id}`} onClick={() => trackEvent('player_link_clicked', { context: 'opponent', target_player_id: o.user_id! })}>
                         <OppNameBold>{o.name}</OppNameBold>
                       </PlayerLink>
                     ) : (

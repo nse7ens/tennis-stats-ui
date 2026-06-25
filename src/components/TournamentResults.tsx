@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import type { UIDisc, Disc } from '../types';
 import { DiscToggle } from './DiscToggle';
 import { TournamentCard } from './TournamentCard';
+import { trackEvent } from '../hooks/useAppInsights';
 
 const Section = styled.section``;
 
@@ -69,7 +70,7 @@ export function TournamentResults({ singles, doubles }: Props) {
           <Kicker>Wedstrijd per wedstrijd</Kicker>
           <Title>Toernooiresultaten</Title>
         </div>
-        <DiscToggle value={disc} onChange={setDisc} variant="outlined" size="md" />
+        <DiscToggle value={disc} onChange={v => { trackEvent('disc_toggled', { view: v, context: 'results' }); setDisc(v); }} variant="outlined" size="md" />
       </SectionHeader>
       <Grid>
         {results.map((r, i) => <TournamentCard key={i} result={r} />)}

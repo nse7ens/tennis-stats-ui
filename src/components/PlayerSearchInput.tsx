@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import styled from '@emotion/styled';
 import type { PlayerSearchResult } from '../types';
+import { trackEvent } from '../hooks/useAppInsights';
 
 interface Props {
   query: string;
@@ -124,9 +125,14 @@ export function PlayerSearchInput({ query, setQuery, results, loading, onSelect 
     setOpen(true);
   }
 
-  function handleSelect(id: number) {
+  function handleSelect(id: number, index: number) {
     if (blurTimer.current) clearTimeout(blurTimer.current);
     setOpen(false);
+    trackEvent('search_result_selected', {
+      query_length: query.length,
+      results_shown: results.length,
+      position_clicked: index,
+    });
     onSelect(id);
   }
 
@@ -148,8 +154,8 @@ export function PlayerSearchInput({ query, setQuery, results, loading, onSelect 
       {loading && <Spinner />}
       {showDropdown && (
         <Dropdown>
-          {results.map(r => (
-            <ResultRow key={r.id} onMouseDown={() => handleSelect(r.id)}>
+          {results.map((r, i) => (
+            <ResultRow key={r.id} onMouseDown={() => handleSelect(r.id, i)}>
               <PlayerName>{r.name}</PlayerName>
               <ClubName>{r.name_club}</ClubName>
               <RankPill>E{r.singles} / D{r.doubles}</RankPill>

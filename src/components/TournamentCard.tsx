@@ -4,6 +4,7 @@ import type { UIResult } from '../types';
 import { fmtNum, WIN_GREEN, LOSS_RED } from '../utils';
 import { MatchRow } from './MatchRow';
 import { PlayerLink } from './PlayerLink';
+import { trackEvent } from '../hooks/useAppInsights';
 
 const CardTitle = styled.span`
   font-size: 16px;
@@ -120,7 +121,7 @@ export function TournamentCard({ result: r }: Props) {
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 11, background: 'rgba(var(--accent-doubles-rgb), 0.08)', border: '1px solid rgba(var(--accent-doubles-rgb), 0.28)', padding: '4px 10px', borderRadius: 7 }}>
           <span style={{ fontSize: '9.5px', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'rgba(var(--accent-doubles-rgb), 0.85)', fontWeight: 600 }}>Met</span>
           {r.p_id != null
-            ? <PlayerLink to={`/player/${r.p_id}`} style={{ fontSize: '12.5px', fontWeight: 600, color: 'var(--accent-doubles)' }}>{r.partner}</PlayerLink>
+            ? <PlayerLink to={`/player/${r.p_id}`} onClick={() => trackEvent('player_link_clicked', { context: 'partner', target_player_id: r.p_id! })} style={{ fontSize: '12.5px', fontWeight: 600, color: 'var(--accent-doubles)' }}>{r.partner}</PlayerLink>
             : <span style={{ fontSize: '12.5px', fontWeight: 600, color: 'var(--accent-doubles)' }}>{r.partner}</span>
           }
         </div>
@@ -145,7 +146,7 @@ export function TournamentCard({ result: r }: Props) {
 
       {r.subscores.length > 0 && (
         <>
-          <ToggleBtn type="button" onClick={() => setOpen(o => !o)} style={{ color: 'var(--accent-singles)' }}>
+          <ToggleBtn type="button" onClick={() => { if (!open) trackEvent('tournament_score_expanded'); setOpen(o => !o); }} style={{ color: 'var(--accent-singles)' }}>
             {open ? 'Verberg puntberekening' : 'Hoe worden deze punten berekend'}
             <span style={{ display: 'inline-block', transition: 'transform .18s', transform: open ? 'rotate(180deg)' : 'none', fontSize: 10 }}>▾</span>
           </ToggleBtn>

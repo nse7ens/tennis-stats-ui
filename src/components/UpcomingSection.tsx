@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import type { UIUpcomingMatch } from '../types';
 import { fmtDateFull } from '../utils';
 import { PlayerLink } from './PlayerLink';
+import { trackEvent } from '../hooks/useAppInsights';
 
 const Section = styled.section`
   background: var(--upcoming-bg);
@@ -105,7 +106,7 @@ export function UpcomingSection({ singles, doubles }: Props) {
                 <PartnerLabel>Ploegmaat</PartnerLabel>
                 <PartnerName>
                   {u.p_id != null
-                    ? <PlayerLink to={`/player/${u.p_id}`}>{u.p_name}</PlayerLink>
+                    ? <PlayerLink to={`/player/${u.p_id}`} onClick={() => trackEvent('player_link_clicked', { context: 'upcoming_partner', target_player_id: u.p_id! })}>{u.p_name}</PlayerLink>
                     : u.p_name
                   }
                   {' '}<PartnerPts>{u.p_pts}pts</PartnerPts>

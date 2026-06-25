@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { fetchPlayer } from '../api';
+import { trackEvent } from '../hooks/useAppInsights';
 import type { UIPlayerData } from '../types';
 import { SEASONS, DEFAULT_SEASON } from '../utils';
 import type { SeasonTag } from '../utils';
@@ -120,10 +121,12 @@ export function PlayerPage() {
         if (season !== DEFAULT_SEASON) {
           setSearchParams({ s: DEFAULT_SEASON }, { replace: true });
         } else {
+          trackEvent('player_not_found', { player_id: Number(id) });
           setData(null);
         }
       } else {
         // Already had valid data — this season simply has no data.
+        trackEvent('season_unavailable', { player_id: Number(id), season });
         setSeasonUnavailable(true);
       }
     });

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { SEASONS } from '../utils';
 import type { SeasonTag } from '../utils';
+import { trackEvent } from '../hooks/useAppInsights';
 
 interface Props {
   season: SeasonTag;
@@ -121,6 +122,7 @@ export function SeasonSelector({ season, onChange }: Props) {
 
   const handleYearClick = (year: string) => {
     const target = [...SEASONS].reverse().find(s => s.label.endsWith(year))!;
+    trackEvent('season_changed', { direction: 'jump', season: target.tag });
     onChange(target.tag);
   };
 
@@ -130,7 +132,7 @@ export function SeasonSelector({ season, onChange }: Props) {
         <ChevronBtn
           type="button"
           disabled={safeIdx === 0}
-          onClick={() => onChange(SEASONS[safeIdx - 1].tag)}
+          onClick={() => { trackEvent('season_changed', { direction: 'prev', season: SEASONS[safeIdx - 1].tag }); onChange(SEASONS[safeIdx - 1].tag); }}
         >
           &#x2039;
         </ChevronBtn>
@@ -138,7 +140,7 @@ export function SeasonSelector({ season, onChange }: Props) {
         <ChevronBtn
           type="button"
           disabled={safeIdx === SEASONS.length - 1}
-          onClick={() => onChange(SEASONS[safeIdx + 1].tag)}
+          onClick={() => { trackEvent('season_changed', { direction: 'next', season: SEASONS[safeIdx + 1].tag }); onChange(SEASONS[safeIdx + 1].tag); }}
         >
           &#x203A;
         </ChevronBtn>

@@ -24,6 +24,11 @@ function pageNameFromPath(path: string): string {
   return 'Home';
 }
 
+export function trackEvent(name: string, properties?: Record<string, string | number | boolean>) {
+  if (!CS || !ai) return;
+  ai.trackEvent({ name }, properties);
+}
+
 export function useAppInsights() {
   const location = useLocation();
 
