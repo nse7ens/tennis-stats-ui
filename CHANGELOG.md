@@ -4,6 +4,8 @@ Entries are grouped by date (YYYY-MM-DD), newest first. Each line is tagged **Ad
 
 ## 2026-06-25
 
+- **Changed** Page title and Privacy page kicker renamed from "Tennis Stats" to "TennisRanking.be" to match the production domain.
+
 - **Added** Application Insights custom event tracking across all major user interactions: `search_result_selected` (query length, results shown, position), `favorite_added` / `favorite_removed` / `favorite_reordered` (player id, count), `disc_toggled` (view + context: results or recent_form), `season_changed` (direction: prev/next/jump, season tag), `player_link_clicked` (context: opponent/partner/upcoming_partner, target player id), `tournament_score_expanded`, `player_not_found`, and `season_unavailable`. Exposed a `trackEvent` utility from `useAppInsights.ts` for use across components.
 
 - **Changed** Application Insights page view tracking now passes an explicit `name` (Home / Player Profile / Privacy) for readable User Flow labels, and attaches a `playerId` custom property on player pages for Log Analytics queries — URI normalization to `/player/:id` is unchanged.

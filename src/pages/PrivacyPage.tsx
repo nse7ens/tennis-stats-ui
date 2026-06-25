@@ -68,7 +68,7 @@ export function PrivacyPage() {
   return (
     <Shell>
       <Card>
-        <Kicker>Tennis Stats</Kicker>
+        <Kicker>TennisRanking.be</Kicker>
         <Heading>Privacy & disclaimer</Heading>
         <Body>
           Dit is een onofficieel, niet-commercieel project zonder affiliatie met{' '}

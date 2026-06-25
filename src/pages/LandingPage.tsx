@@ -67,7 +67,7 @@ export function LandingPage() {
       <ContentArea>
         <PageContent>
           <div>
-            <Kicker>Tennis Vlaanderen</Kicker>
+            <Kicker>TennisRanking.be</Kicker>
             <Heading>Zoek een speler</Heading>
             <Subtitle>
               Zoek op naam of club om het spelersprofiel te openen — punten,
